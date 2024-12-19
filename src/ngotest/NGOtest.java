@@ -3,18 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package ngotest;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
  * @author Marcusss
  */
 public class NGOtest {
-
-    /**
-     * @param args the command line arguments
-     */
+    
+    private static InfDB idb;
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        try{
+            idb = new InfDB("ngotest", "3306", "dbAdmin2024", "dbAdmin2024PW");
+            // new Inloggning(idb).setVisible(true);
+            System.out.println("funkar");}
+        
+     catch (InfException ex){
+         System.out.println(ex.getMessage());
+        }
+        
     }
     
 }
