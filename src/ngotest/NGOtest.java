@@ -13,11 +13,13 @@ import oru.inf.InfException;
 public class NGOtest {
     
     private static InfDB idb;
+    private static String aid;
     
     public static void main(String[] args) {
         try{
             idb = new InfDB("ngo_2024", "3306", "dbAdmin2024", "dbAdmin2024PW");
-            new Inloggningssida(idb).setVisible(true);
+            new Inloggningssida(idb, aid).setVisible(true);
+           // new VisaForNamnFonster(idb).setVisible(false);
             System.out.println("funkar!");}
         
      catch (InfException ex){
