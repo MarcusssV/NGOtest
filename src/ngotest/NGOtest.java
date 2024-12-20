@@ -18,7 +18,7 @@ public class NGOtest {
         try{
             idb = new InfDB("ngo_2024", "3306", "dbAdmin2024", "dbAdmin2024PW");
             new Inloggningssida(idb).setVisible(true);
-            System.out.println("funkar");}
+            System.out.println("funkar!");}
         
      catch (InfException ex){
          System.out.println(ex.getMessage());
