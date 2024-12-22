@@ -5,6 +5,8 @@
 package ngotest;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Marcu
@@ -18,6 +20,7 @@ public class InfoRuta extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.aid = aid;
+       
     }
 private static InfDB idb;
 private String aid;
@@ -33,6 +36,8 @@ private String aid;
 
         TESTINFO = new javax.swing.JTextField();
         Testknapp = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        hallbarhetsKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,25 +55,47 @@ private String aid;
             }
         });
 
+        jTextField1.setText("VÄLKOMMEN");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        hallbarhetsKnapp.setText("Hållbarhetsmål");
+        hallbarhetsKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hallbarhetsKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Testknapp)
-                    .addComponent(TESTINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(221, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(112, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hallbarhetsKnapp)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Testknapp)
+                        .addGap(39, 39, 39)
+                        .addComponent(TESTINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(103, 103, 103))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(TESTINFO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(Testknapp)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(hallbarhetsKnapp)
+                .addGap(146, 146, 146)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TESTINFO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Testknapp))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -88,6 +115,16 @@ private String aid;
         // TODO add your handling code here:
     }//GEN-LAST:event_TestknappActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void hallbarhetsKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hallbarhetsKnappActionPerformed
+ 
+        new VisaAllaHallbarhetsmål(idb).setVisible(true);
+    }//GEN-LAST:event_hallbarhetsKnappActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -126,5 +163,7 @@ private String aid;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TESTINFO;
     private javax.swing.JButton Testknapp;
+    private javax.swing.JButton hallbarhetsKnapp;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
