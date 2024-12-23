@@ -26,12 +26,15 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="112" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="hallbarhetsKnapp" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField1" min="-2" pref="99" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="Testknapp" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="TESTINFO" min="-2" pref="71" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="VisaPersonal" alignment="0" max="32767" attributes="0"/>
+                      <Component id="hallbarhetsKnapp" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
@@ -45,7 +48,9 @@
               <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="hallbarhetsKnapp" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="VisaPersonal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="TESTINFO" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Testknapp" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -86,6 +91,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hallbarhetsKnappActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="VisaPersonal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Personal p&#xe5; min avdelning"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VisaPersonalActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

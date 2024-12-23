@@ -38,6 +38,7 @@ private String aid;
         Testknapp = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         hallbarhetsKnapp = new javax.swing.JButton();
+        VisaPersonal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +70,13 @@ private String aid;
             }
         });
 
+        VisaPersonal.setText("Personal på min avdelning");
+        VisaPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VisaPersonalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,12 +84,14 @@ private String aid;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(112, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hallbarhetsKnapp)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Testknapp)
                         .addGap(39, 39, 39)
-                        .addComponent(TESTINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TESTINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(VisaPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(hallbarhetsKnapp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(103, 103, 103))
         );
         layout.setVerticalGroup(
@@ -91,7 +101,9 @@ private String aid;
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(hallbarhetsKnapp)
-                .addGap(146, 146, 146)
+                .addGap(18, 18, 18)
+                .addComponent(VisaPersonal)
+                .addGap(105, 105, 105)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TESTINFO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Testknapp))
@@ -123,6 +135,12 @@ private String aid;
  
         new VisaAllaHallbarhetsmål(idb).setVisible(true);
     }//GEN-LAST:event_hallbarhetsKnappActionPerformed
+
+    private void VisaPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisaPersonalActionPerformed
+               new SeAllaPersonalAvdelning(idb, aid).setVisible(true);
+
+       // TODO add your handling code here:
+    }//GEN-LAST:event_VisaPersonalActionPerformed
 
     
     /**
@@ -163,6 +181,7 @@ private String aid;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TESTINFO;
     private javax.swing.JButton Testknapp;
+    private javax.swing.JButton VisaPersonal;
     private javax.swing.JButton hallbarhetsKnapp;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
