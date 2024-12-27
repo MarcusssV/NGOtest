@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ngotest;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author eriks
@@ -20,6 +23,8 @@ public class Inloggningssida extends javax.swing.JFrame {
         this.idb = idb;
         this.aid = aid;
         initComponents();
+        Image i = new ImageIcon(ClassLoader.getSystemResource("Image/UNLOGO.png")).getImage();
+        setIconImage(i); //Den här koden ändrar Iconen i de övrevänstrahörnet.
     }
 
     /**
