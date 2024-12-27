@@ -34,34 +34,17 @@ private String aid;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TESTINFO = new javax.swing.JTextField();
-        Testknapp = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         hallbarhetsKnapp = new javax.swing.JButton();
         VisaPersonal = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        SeMittKontoKnapp = new javax.swing.JButton();
+        SeMinaProjektKnapp = new javax.swing.JButton();
+        SeAllaProjektKnapp = new javax.swing.JButton();
+        SökHandläggareKnapp = new javax.swing.JButton();
+        SökProjektKnapp = new javax.swing.JButton();
+        LoggaUtKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        TESTINFO.setText("jTextField1");
-        TESTINFO.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TESTINFOActionPerformed(evt);
-            }
-        });
-
-        Testknapp.setText("jButton1");
-        Testknapp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TestknappActionPerformed(evt);
-            }
-        });
-
-        jTextField1.setText("VÄLKOMMEN");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         hallbarhetsKnapp.setText("Hållbarhetsmål");
         hallbarhetsKnapp.addActionListener(new java.awt.event.ActionListener() {
@@ -77,63 +60,107 @@ private String aid;
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("Välkommen");
+
+        SeMittKontoKnapp.setText("Konto");
+        SeMittKontoKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeMittKontoKnappActionPerformed(evt);
+            }
+        });
+
+        SeMinaProjektKnapp.setText("Mina projekt");
+        SeMinaProjektKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeMinaProjektKnappActionPerformed(evt);
+            }
+        });
+
+        SeAllaProjektKnapp.setText("Alla projekt");
+
+        SökHandläggareKnapp.setText("Sök handläggare");
+
+        SökProjektKnapp.setText("Sök projekt");
+
+        LoggaUtKnapp.setText("Logga ut");
+        LoggaUtKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoggaUtKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(103, 103, 103))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(SeAllaProjektKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Testknapp)
-                        .addGap(39, 39, 39)
-                        .addComponent(TESTINFO, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(VisaPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(hallbarhetsKnapp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(103, 103, 103))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(SökProjektKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addComponent(SeMittKontoKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(VisaPersonal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SeMinaProjektKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(SökHandläggareKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LoggaUtKnapp)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(hallbarhetsKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(hallbarhetsKnapp)
-                .addGap(18, 18, 18)
-                .addComponent(VisaPersonal)
-                .addGap(105, 105, 105)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TESTINFO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Testknapp))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(SeMittKontoKnapp)
+                    .addComponent(SökProjektKnapp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VisaPersonal)
+                    .addComponent(SeMinaProjektKnapp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SeAllaProjektKnapp)
+                    .addComponent(SökHandläggareKnapp))
+                .addGap(33, 33, 33)
+                .addComponent(hallbarhetsKnapp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(LoggaUtKnapp)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TESTINFOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TESTINFOActionPerformed
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TESTINFOActionPerformed
-
     
     
-    private void TestknappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TestknappActionPerformed
-
-        TESTINFO.setText(aid);
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TestknappActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void hallbarhetsKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hallbarhetsKnappActionPerformed
  
-        new VisaAllaHallbarhetsmål(idb).setVisible(true);
+        setVisible(false);
+        new VisaAllaHallbarhetsmål(idb, aid).setVisible(true);
     }//GEN-LAST:event_hallbarhetsKnappActionPerformed
 
     private void VisaPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisaPersonalActionPerformed
@@ -141,6 +168,23 @@ private String aid;
 
        // TODO add your handling code here:
     }//GEN-LAST:event_VisaPersonalActionPerformed
+
+    private void SeMittKontoKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeMittKontoKnappActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SeMittKontoKnappActionPerformed
+
+    private void SeMinaProjektKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeMinaProjektKnappActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new MinaProjekt(idb, aid).setVisible(true);
+        
+    }//GEN-LAST:event_SeMinaProjektKnappActionPerformed
+
+    private void LoggaUtKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoggaUtKnappActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new Inloggningssida(idb, aid).setVisible(true);
+    }//GEN-LAST:event_LoggaUtKnappActionPerformed
 
     
     /**
@@ -179,10 +223,14 @@ private String aid;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TESTINFO;
-    private javax.swing.JButton Testknapp;
+    private javax.swing.JButton LoggaUtKnapp;
+    private javax.swing.JButton SeAllaProjektKnapp;
+    private javax.swing.JButton SeMinaProjektKnapp;
+    private javax.swing.JButton SeMittKontoKnapp;
+    private javax.swing.JButton SökHandläggareKnapp;
+    private javax.swing.JButton SökProjektKnapp;
     private javax.swing.JButton VisaPersonal;
     private javax.swing.JButton hallbarhetsKnapp;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

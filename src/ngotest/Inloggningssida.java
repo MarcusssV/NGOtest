@@ -154,6 +154,7 @@ public class Inloggningssida extends javax.swing.JFrame {
         String aid = idb.fetchSingle(fraga);
         if (aid != null){
         new InfoRuta(idb, aid).setVisible(true);
+        setVisible(false);
           }
         else{
             JOptionPane.showMessageDialog(null, "Användaren saknas!");
