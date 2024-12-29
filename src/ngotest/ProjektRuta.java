@@ -44,7 +44,7 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
         MinaProjektKnapp = new javax.swing.JButton();
         AllaProjektKnapp = new javax.swing.JButton();
         AvdelningsProjektKnapp = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        StatusDropDown = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,7 +97,12 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla", "Pågående", "Planerade", "Avslutat" }));
+        StatusDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla", "Pågående", "Planerade", "Avslutat" }));
+        StatusDropDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StatusDropDownActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,7 +127,7 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
                                     .addGap(18, 18, 18)
                                     .addComponent(MinaProjektKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(StatusDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(95, 95, 95))))
         );
         layout.setVerticalGroup(
@@ -135,7 +140,7 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
                     .addComponent(AllaProjektKnapp)
                     .addComponent(AvdelningsProjektKnapp)
                     .addComponent(MinaProjektKnapp)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(StatusDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
@@ -169,6 +174,12 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
         hamtaAvdelningsData();
         fyllAvdelningsTabel();
     }//GEN-LAST:event_AvdelningsProjektKnappActionPerformed
+
+    private void StatusDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusDropDownActionPerformed
+        
+        String valtAlternativ = StatusDropDown.getSelectedItem().toString();
+        
+    }//GEN-LAST:event_StatusDropDownActionPerformed
 
     public void hamtaAvdelning(){
         try {
@@ -307,8 +318,8 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
     private javax.swing.JButton AvdelningsProjektKnapp;
     private javax.swing.JButton MinaProjektKnapp;
     private javax.swing.JTable MinaProjektTabel;
+    private javax.swing.JComboBox<String> StatusDropDown;
     private javax.swing.JButton TillbakaKnapp;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
