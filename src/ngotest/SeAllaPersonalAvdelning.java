@@ -47,7 +47,7 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
           }catch (InfException A){
             JOptionPane.showMessageDialog(this, "Fel i databasen" + A.getMessage());
         }
-    
+    }
     
     
     /**
