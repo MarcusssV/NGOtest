@@ -3,28 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ngotest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Marcu
  */
 public class MinaProjekt extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SinaProjekt
-     */
+ArrayList<HashMap<String, String>> projektUppgifter = new ArrayList<>();
+
     public MinaProjekt(InfDB idb, String aid) {
         initComponents();
         this.idb = idb;
         this.aid = aid;
+        hamtaData();
+        fyllTabel();
     }
     
     private static InfDB idb;
     private static String aid;
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,6 +38,8 @@ public class MinaProjekt extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         TillbakaKnapp = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        MinaProjektTabel = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +53,24 @@ public class MinaProjekt extends javax.swing.JFrame {
             }
         });
 
+        MinaProjektTabel.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ProjektNamn", "ProjektChef", "Prioritet", "StartDatum"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(MinaProjektTabel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -57,15 +79,22 @@ public class MinaProjekt extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(TillbakaKnapp))
-                .addContainerGap(154, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TillbakaKnapp)))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TillbakaKnapp)
                 .addContainerGap())
         );
@@ -79,6 +108,33 @@ public class MinaProjekt extends javax.swing.JFrame {
         new InfoRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_TillbakaKnappActionPerformed
 
+    public void hamtaData (){
+        try{
+          
+        String fraga = ("SELECT projektnamn, projektchef, prioritet, startdatum FROM ngo_2024.projekt");
+        projektUppgifter = idb.fetchRows(fraga);
+        
+        }
+        catch (InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        
+    }
+      
+    public void fyllTabel(){
+        
+        DefaultTableModel model1 = (DefaultTableModel) MinaProjektTabel.getModel();
+        for(HashMap<String, String> projekt : projektUppgifter){
+            String[] data = new String [model1.getColumnCount()];
+            data[0] = projekt.get("projektnamn");
+            data[1] = projekt.get("projektchef");
+            data[2] = projekt.get("prioritet");
+            data[3] = projekt.get("startdatum");
+            model1.addRow(data);
+        }
+        
+    }
+        
     /**
      * @param args the command line arguments
      */
@@ -110,14 +166,16 @@ public class MinaProjekt extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               // new MinaProjekt().setVisible(true);
+                //new MinaProjekt().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable MinaProjektTabel;
     private javax.swing.JButton TillbakaKnapp;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
 
