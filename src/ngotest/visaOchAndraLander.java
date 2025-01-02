@@ -28,7 +28,7 @@ public class visaOchAndraLander extends javax.swing.JFrame {
         this.aid = aid;
         hamtaLander();
         fyllTabell();
-        redigeraLand();
+        
     }
 
     
@@ -59,9 +59,19 @@ public void fyllTabell() {
 }
 
 public void redigeraLand(){
-    if(!aid.equals("1")){
+    try{
+    String fraga = "Select behorighetsniva FROM admin where aid = " + aid;
+    String behorighetsniva = idb.fetchSingle(fraga);
+    
+    if(behorighetsniva == null){
         JOptionPane.showMessageDialog(this, "Du har inte behörighet att redigera länder.");
-        return;
+    }
+    else {
+         JOptionPane.showMessageDialog(this, "Du har behörighet att redigera länder.");
+    }
+   }
+    catch (InfException ex){
+            System.out.println(ex.getMessage());
     }
 }
 

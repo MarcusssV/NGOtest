@@ -17,6 +17,7 @@ public class ProjektRuta extends javax.swing.JFrame {
 ArrayList<HashMap<String, String>> allaProjektUppgifter = new ArrayList<>();
 ArrayList<HashMap<String, String>> egnaProjektUppgifter = new ArrayList<>();
 ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>();
+String status = "is not null";
 
 
     public ProjektRuta(InfDB idb, String aid) {
@@ -97,7 +98,7 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
             }
         });
 
-        StatusDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla", "Pågående", "Planerade", "Avslutat" }));
+        StatusDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla", "Pågående", "Planerat", "Avslutat" }));
         StatusDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StatusDropDownActionPerformed(evt);
@@ -177,7 +178,15 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
 
     private void StatusDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusDropDownActionPerformed
         
-        String valtAlternativ = StatusDropDown.getSelectedItem().toString();
+        String Alternativ = StatusDropDown.getSelectedItem().toString();
+        if (Alternativ.equals("Alla")){
+            Alternativ = "is not null";
+            status = Alternativ;
+        }
+        else {
+            status = "= " + "'"+ Alternativ + "'";
+        }
+        
         
     }//GEN-LAST:event_StatusDropDownActionPerformed
 
@@ -196,7 +205,7 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
 
     public void hamtaEgenData (){
         try{
-        String fraga = ("SELECT projektnamn, projektchef,beskrivning, prioritet, startdatum, slutdatum FROM ngo_2024.projekt where pid = (select pid from ans_proj where aid = " + aid + ")");
+        String fraga = ("SELECT projektnamn, projektchef,beskrivning, prioritet, startdatum, slutdatum FROM ngo_2024.projekt where pid = (select pid from ans_proj where aid = " + aid);
         egnaProjektUppgifter = idb.fetchRows(fraga);
         }
         catch (InfException ex){
@@ -209,7 +218,7 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
         try{
             String avdelningsFraga = ("Select avdelning from anstalld where aid = " + aid);
             String avdelning = idb.fetchSingle(avdelningsFraga);
-            String fraga = ("select projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum from projekt join ans_proj on projekt.pid = ans_proj.pid join anstalld on ans_proj.aid = anstalld.aid where avdelning = " + avdelning + " group by projekt.pid");
+            String fraga = ("select projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum from projekt join ans_proj on projekt.pid = ans_proj.pid join anstalld on ans_proj.aid = anstalld.aid where avdelning = " + avdelning + "group by projekt.pid");
             avdelningsProjektUppgifter = idb.fetchRows(fraga);
         }
         catch (InfException ex) {
@@ -219,7 +228,7 @@ ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>(
     
     public void hamtaAllaData(){
         try{
-            String fraga = ("SELECT projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum FROM ngo_2024.projekt");
+            String fraga = ("SELECT projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum, status FROM ngo_2024.projekt where status " + status);
             allaProjektUppgifter = idb.fetchRows(fraga);
         }
         catch (InfException ex) {
