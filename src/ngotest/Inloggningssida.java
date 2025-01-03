@@ -44,6 +44,7 @@ public class Inloggningssida extends javax.swing.JFrame {
         EmailText = new javax.swing.JTextField();
         LoggaInKnapp = new javax.swing.JButton();
         ExitKnapp = new javax.swing.JButton();
+        skipInloggKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,29 +83,41 @@ public class Inloggningssida extends javax.swing.JFrame {
             }
         });
 
+        skipInloggKnapp.setText("maria.g");
+        skipInloggKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skipInloggKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(68, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(ExitKnapp)
-                                .addGap(153, 153, 153)
-                                .addComponent(LoggaInKnapp))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(LösenordText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                                .addComponent(EmailText, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                .addGap(135, 135, 135))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(ExitKnapp)
+                                        .addGap(153, 153, 153)
+                                        .addComponent(LoggaInKnapp))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(LösenordText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                                        .addComponent(EmailText, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                        .addGap(135, 135, 135))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(skipInloggKnapp)
+                        .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +137,9 @@ public class Inloggningssida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LoggaInKnapp)
                     .addComponent(ExitKnapp))
-                .addGap(60, 60, 60))
+                .addGap(18, 18, 18)
+                .addComponent(skipInloggKnapp)
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -146,25 +161,39 @@ public class Inloggningssida extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitKnappActionPerformed
 
     private void LoggaInKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoggaInKnappActionPerformed
-        // TODO add your handling code here:
-        String email = EmailText.getText();
-        String losenord = LösenordText.getText();
-        try {
-        String fraga = ("select aid from anstalld where epost = " + "'" + email + "'" + " and losenord = " + "'" + losenord + "'");
-        String aid = idb.fetchSingle(fraga);
-        if (aid != null){
-        new InfoRuta(idb, aid).setVisible(true);
-        setVisible(false);
-          }
-        else{
-            JOptionPane.showMessageDialog(null, "Användaren saknas!");
-        }
-        }
-        catch (InfException a){
-            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-            System.out.println(a.getMessage());
+        
+        if(ValideringsKlass.textFaltHarVarde(EmailText)){
+            if(ValideringsKlass.losenordFaltHarVarde(LösenordText)){
+        
+                String email = EmailText.getText();
+                String losenord = LösenordText.getText();
+                    try {
+                    String fraga = ("select aid from anstalld where epost = " + "'" + email + "'" + " and losenord = " + "'" + losenord + "'");
+                    String aid = idb.fetchSingle(fraga);
+                        if (aid != null){
+                            new InfoRuta(idb, aid).setVisible(true);
+                            setVisible(false);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Användaren saknas!");
+                        }
+                    }
+                    catch (InfException a){
+                        JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                        System.out.println(a.getMessage());
     }//GEN-LAST:event_LoggaInKnappActionPerformed
+                }
+        
+        }
     }
+    private void skipInloggKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipInloggKnappActionPerformed
+
+        EmailText.setText("maria.g@example.com");
+        LösenordText.setText("password123");
+        
+       
+    }//GEN-LAST:event_skipInloggKnappActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -215,5 +244,6 @@ public class Inloggningssida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton skipInloggKnapp;
     // End of variables declaration//GEN-END:variables
 }

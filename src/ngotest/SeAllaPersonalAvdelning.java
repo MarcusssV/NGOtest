@@ -65,6 +65,7 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        personal.setEditable(false);
         personal.setColumns(20);
         personal.setRows(5);
         jScrollPane1.setViewportView(personal);
