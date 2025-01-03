@@ -34,11 +34,9 @@
                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="varaLander" pref="200" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="SökHandläggareKnapp" max="32767" attributes="0"/>
-                              <Component id="VisaPersonal" alignment="1" pref="200" max="32767" attributes="0"/>
-                              <Component id="SökProjektKnapp" alignment="1" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="SökHandläggareKnapp" max="32767" attributes="0"/>
+                          <Component id="VisaPersonal" alignment="1" pref="200" max="32767" attributes="0"/>
+                          <Component id="SökProjektKnapp" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="17" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -131,6 +129,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k handl&#xe4;ggare"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="S&#xf6;kHandl&#xe4;ggareKnappActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="S&#xf6;kProjektKnapp">
       <Properties>

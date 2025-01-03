@@ -177,7 +177,8 @@ String status = "is not null";
     }//GEN-LAST:event_AvdelningsProjektKnappActionPerformed
 
     private void StatusDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusDropDownActionPerformed
-        
+        // Kontrollerar vilken status som tabellen ska visa, beroende på valt alternativ
+        // Används vid sql-frågorna för att endast hämta projekt med vald status
         String Alternativ = StatusDropDown.getSelectedItem().toString();
         if (Alternativ.equals("Alla")){
             Alternativ = "is not null";
@@ -189,23 +190,11 @@ String status = "is not null";
         
         
     }//GEN-LAST:event_StatusDropDownActionPerformed
-
-    public void hamtaAvdelning(){
-        try {
-            String fraga = ("Select avdelning from anstalld where aid = " + aid);
-            String avdelning = idb.fetchSingle(fraga);
-            
-        }
-        catch (InfException ex){
-            System.out.println(ex.getMessage());
-        }
-    
-        
-    }
-
+     
+    // Denna metod hämtar data från databasen där den anställda är delaktig
     public void hamtaEgenData (){
         try{
-        String fraga = ("SELECT projektnamn, projektchef,beskrivning, prioritet, startdatum, slutdatum FROM ngo_2024.projekt where pid = (select pid from ans_proj where aid = " + aid);
+        String fraga = ("SELECT projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum FROM ngo_2024.projekt where pid = (select pid from ans_proj where aid = " + aid + ") and status " + status);
         egnaProjektUppgifter = idb.fetchRows(fraga);
         }
         catch (InfException ex){
@@ -213,19 +202,19 @@ String status = "is not null";
         }
         
     }
-    
+    // Denna metod hämtar data från databasen om den anställdas avdelnings projekt
     public void hamtaAvdelningsData(){
         try{
             String avdelningsFraga = ("Select avdelning from anstalld where aid = " + aid);
             String avdelning = idb.fetchSingle(avdelningsFraga);
-            String fraga = ("select projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum from projekt join ans_proj on projekt.pid = ans_proj.pid join anstalld on ans_proj.aid = anstalld.aid where avdelning = " + avdelning + "group by projekt.pid");
+            String fraga = ("select projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum from projekt join ans_proj on projekt.pid = ans_proj.pid join anstalld on ans_proj.aid = anstalld.aid where avdelning = " + avdelning + " and status " + status + " group by projekt.pid");
             avdelningsProjektUppgifter = idb.fetchRows(fraga);
         }
         catch (InfException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    
+    // Denna metod hämtar data från databasen om alla projekt som finns
     public void hamtaAllaData(){
         try{
             String fraga = ("SELECT projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum, status FROM ngo_2024.projekt where status " + status);
@@ -235,6 +224,7 @@ String status = "is not null";
             System.out.println(ex.getMessage());
         }
     }
+    // Denna metod fyller Tabellen med avdelningens projekt, tillkallas vid knapptryck
      public void fyllAvdelningsTabel(){
         
         DefaultTableModel model1 = (DefaultTableModel) MinaProjektTabel.getModel();
@@ -250,6 +240,7 @@ String status = "is not null";
             model1.addRow(data);
         }
      }
+     // Denna metod fyller tabellen med alla projekt, tillkallas vid knapptryck
       public void fyllAllaTabel(){
         
         DefaultTableModel model1 = (DefaultTableModel) MinaProjektTabel.getModel();
@@ -266,7 +257,7 @@ String status = "is not null";
         }
         
     }
-    
+    // Denna metod fyller tabellen med den anställdas projekt, tillkallas med knapptryck
     public void fyllEgenTabel(){
         
         DefaultTableModel model1 = (DefaultTableModel) MinaProjektTabel.getModel();

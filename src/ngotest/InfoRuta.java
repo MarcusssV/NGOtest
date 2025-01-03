@@ -78,6 +78,11 @@ private String aid;
         });
 
         SökHandläggareKnapp.setText("Sök handläggare");
+        SökHandläggareKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SökHandläggareKnappActionPerformed(evt);
+            }
+        });
 
         SökProjektKnapp.setText("Sök projekt");
 
@@ -109,10 +114,9 @@ private String aid;
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(varaLander, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(SökHandläggareKnapp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(VisaPersonal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(SökProjektKnapp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(SökHandläggareKnapp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(VisaPersonal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(SökProjektKnapp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(SeProjektKnapp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,6 +171,9 @@ private String aid;
 
     private void SeMittKontoKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeMittKontoKnappActionPerformed
         // TODO add your handling code here:
+        setVisible(false);
+        new KontoRuta(idb, aid).setVisible(true);
+        
     }//GEN-LAST:event_SeMittKontoKnappActionPerformed
 
     private void SeProjektKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeProjektKnappActionPerformed
@@ -187,6 +194,11 @@ private String aid;
         setVisible(false);
         new visaOchAndraLander (idb, aid).setVisible(true);
     }//GEN-LAST:event_varaLanderActionPerformed
+
+    private void SökHandläggareKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SökHandläggareKnappActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_SökHandläggareKnappActionPerformed
 
     
     /**
