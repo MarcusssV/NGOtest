@@ -162,11 +162,14 @@ public class Inloggningssida extends javax.swing.JFrame {
 
     private void LoggaInKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoggaInKnappActionPerformed
         
+        String email = EmailText.getText();
+        
+        String losenord = LösenordText.getText();
+        
         if(ValideringsKlass.textFaltHarVarde(EmailText)){
             if(ValideringsKlass.losenordFaltHarVarde(LösenordText)){
-        
-                String email = EmailText.getText();
-                String losenord = LösenordText.getText();
+                if(ValideringsKlass.emailKontroll(EmailText)){
+                
                     try {
                     String fraga = ("select aid from anstalld where epost = " + "'" + email + "'" + " and losenord = " + "'" + losenord + "'");
                     String aid = idb.fetchSingle(fraga);
@@ -182,6 +185,7 @@ public class Inloggningssida extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
                         System.out.println(a.getMessage());
     }//GEN-LAST:event_LoggaInKnappActionPerformed
+                }
                 }
         
         }

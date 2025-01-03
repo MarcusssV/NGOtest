@@ -4,6 +4,7 @@
  */
 package ngotest;
 
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -36,16 +37,23 @@ public class ValideringsKlass {
         
         return resultat;
     }
+    
+    //Kontroll för email där enligt regex kontrollerar om emailen är korrekt skriven.
         public static boolean emailKontroll(JTextField rutaAttKolla){
-        
-        boolean resultat = true;
-        
-        if(rutaAttKolla.getText().contains("@")){
-            JOptionPane.showMessageDialog(null, "Saknar @");
+            
+            boolean resultat;
+            String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+            // Över har vi en string av regular expressions som jämnförs med JTextField.
+            String email = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(email).matches()){
+            resultat = true;
+            }
+            else{
+            JOptionPane.showMessageDialog(null, "Ej godkänd email"); 
             resultat = false;
-        }
-        
-        return resultat;
+            }
+            return resultat;
     }
+        
 }
 
