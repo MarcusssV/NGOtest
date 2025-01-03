@@ -20,6 +20,7 @@ public class InfoRuta extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.aid = aid;
+        valkommenTextNamn();
        
     }
 private static InfDB idb;
@@ -36,7 +37,7 @@ private String aid;
 
         hallbarhetsKnapp = new javax.swing.JButton();
         VisaPersonal = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        valkommenText = new javax.swing.JLabel();
         SeMittKontoKnapp = new javax.swing.JButton();
         SeProjektKnapp = new javax.swing.JButton();
         SökHandläggareKnapp = new javax.swing.JButton();
@@ -60,8 +61,8 @@ private String aid;
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Välkommen");
+        valkommenText.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        valkommenText.setText("Välkommen");
 
         SeMittKontoKnapp.setText("Konto");
         SeMittKontoKnapp.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +86,11 @@ private String aid;
         });
 
         SökProjektKnapp.setText("Sök projekt");
+        SökProjektKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SökProjektKnappActionPerformed(evt);
+            }
+        });
 
         LoggaUtKnapp.setText("Logga ut");
         LoggaUtKnapp.addActionListener(new java.awt.event.ActionListener() {
@@ -125,14 +131,14 @@ private String aid;
                         .addGap(65, 65, 65))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(181, 181, 181)
-                .addComponent(jLabel1)
+                .addComponent(valkommenText)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1)
+                .addComponent(valkommenText)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SeMittKontoKnapp)
@@ -200,6 +206,23 @@ private String aid;
         
     }//GEN-LAST:event_SökHandläggareKnappActionPerformed
 
+    private void SökProjektKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SökProjektKnappActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SökProjektKnappActionPerformed
+
+    private void valkommenTextNamn(){
+        try {
+        String forFraga = ("Select fornamn from anstalld where aid = " + aid);
+        String efterFraga = ("Select efternamn from anstalld where aid = " + aid);
+        String fornamn = idb.fetchSingle(forFraga);
+        String efternamn = idb.fetchSingle(efterFraga);
+        valkommenText.setText("Välkommen " + fornamn + " " + efternamn);
+        }
+        catch (InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        
+    }
     
     /**
      * @param args the command line arguments
@@ -244,7 +267,7 @@ private String aid;
     private javax.swing.JButton SökProjektKnapp;
     private javax.swing.JButton VisaPersonal;
     private javax.swing.JButton hallbarhetsKnapp;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel valkommenText;
     private javax.swing.JButton varaLander;
     // End of variables declaration//GEN-END:variables
 }
