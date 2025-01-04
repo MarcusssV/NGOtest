@@ -49,11 +49,25 @@ public class ValideringsKlass {
             resultat = true;
             }
             else{
-            JOptionPane.showMessageDialog(null, "Ej godkänd email"); 
+            JOptionPane.showMessageDialog(null, "Ej godkänd email!"); 
             resultat = false;
             }
             return resultat;
     }
         
+        public static boolean namnKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^[A-Z](?=.{1,29}$)[A-Za-z]*(?:\\h+[A-Z][A-Za-z]*)*$";
+            String namn = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(namn).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänt namn!");
+                resultat = false;
+            }
+            return resultat;
+        }
 }
 

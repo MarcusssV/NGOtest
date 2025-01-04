@@ -70,6 +70,7 @@ public class KontoRuta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Kontotabell = new javax.swing.JTable();
         TillbakaKnapp = new javax.swing.JButton();
+        andraUppgifterKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,14 +116,24 @@ public class KontoRuta extends javax.swing.JFrame {
             }
         });
 
+        andraUppgifterKnapp.setText("Ändra uppgifter");
+        andraUppgifterKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                andraUppgifterKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TillbakaKnapp)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TillbakaKnapp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(andraUppgifterKnapp))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -136,7 +147,9 @@ public class KontoRuta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(TillbakaKnapp)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TillbakaKnapp)
+                    .addComponent(andraUppgifterKnapp))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -148,6 +161,11 @@ public class KontoRuta extends javax.swing.JFrame {
         setVisible(false);
         new InfoRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_TillbakaKnappActionPerformed
+
+    private void andraUppgifterKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_andraUppgifterKnappActionPerformed
+        // TODO add your handling code here:
+        new AndraUppgifterRuta(idb, aid).setVisible(true);
+    }//GEN-LAST:event_andraUppgifterKnappActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,6 +205,7 @@ public class KontoRuta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Kontotabell;
     private javax.swing.JButton TillbakaKnapp;
+    private javax.swing.JButton andraUppgifterKnapp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
