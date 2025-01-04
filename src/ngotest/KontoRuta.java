@@ -164,6 +164,7 @@ public class KontoRuta extends javax.swing.JFrame {
 
     private void andraUppgifterKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_andraUppgifterKnappActionPerformed
         // TODO add your handling code here:
+        setVisible(false);
         new AndraUppgifterRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_andraUppgifterKnappActionPerformed
 

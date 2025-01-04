@@ -100,6 +100,7 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
 
     private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
         setVisible(false);
+        new KontoRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
     private void jAndraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAndraKnappActionPerformed
