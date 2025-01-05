@@ -91,6 +91,11 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         });
 
         jTillbakaKnapp.setText("Tillbaka");
+        jTillbakaKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTillbakaKnappActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Personal");
@@ -156,6 +161,12 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
     private void personalRubrikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personalRubrikActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_personalRubrikActionPerformed
+
+    private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
+
+        setVisible(false);
+        new InfoRuta(idb, aid).setVisible(true);
+    }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
     /**
      * @param args the command line arguments
