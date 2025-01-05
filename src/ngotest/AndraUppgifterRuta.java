@@ -107,17 +107,33 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
         // TODO add your handling code here:
         String alternativ = jValAvAndring.getSelectedItem().toString();
         if(alternativ.equals("Förnamn")){
-            AndraNamn();
+            andraNamn();
+        }
+        if(alternativ.equals("Efternamn")){
+            andraEfternamn();
+        }
+        if(alternativ.equals("Adress")){
+            andraAdress();
+        }
+        if(alternativ.equals("Telefon Nmr")){
+            andraTelefonnummer();
+        }
+        if(alternativ.equals("Epost")){
+            andraEmail();
+        }
+        if(alternativ.equals("Lösenord")){
+            andraLosenord();
         }
     }//GEN-LAST:event_jAndraKnappActionPerformed
 
-    public void AndraNamn(){
+    public void andraNamn(){
         
         String inmatning = jInmatningsFalt.getText();
         if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
             if(ValideringsKlass.namnKontroll(jInmatningsFalt)){
                 try{
                    idb.update("Update anstalld set fornamn = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
+                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
                 }
                 catch (InfException a){
                     JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
@@ -127,6 +143,88 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
         }
     }
     
+    public void andraEfternamn(){
+        
+                String inmatning = jInmatningsFalt.getText();
+        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+            if(ValideringsKlass.namnKontroll(jInmatningsFalt)){
+                try{
+                   idb.update("Update anstalld set efternamn = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
+                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                }
+                catch (InfException a){
+                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                    System.out.println(a.getMessage());
+                }
+            }
+        }
+    }
+    
+    public void andraAdress(){
+        
+                String inmatning = jInmatningsFalt.getText();
+        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+            if(ValideringsKlass.adressKontroll(jInmatningsFalt)){
+                try{
+                   idb.update("Update anstalld set adress = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
+                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                }
+                catch (InfException a){
+                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                    System.out.println(a.getMessage());
+                }
+            }
+        }
+    }
+    
+    public void andraTelefonnummer(){
+        
+                String inmatning = jInmatningsFalt.getText();
+        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+            if(ValideringsKlass.telefonnummerKontroll(jInmatningsFalt)){
+                try{
+                   idb.update("Update anstalld set telefon = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
+                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                }
+                catch (InfException a){
+                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                    System.out.println(a.getMessage());
+                }
+            }
+        }
+    }
+    
+    public void andraEmail(){
+        
+                String inmatning = jInmatningsFalt.getText();
+        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+            if(ValideringsKlass.emailKontroll(jInmatningsFalt)){
+                try{
+                   idb.update("Update anstalld set epost = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
+                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                }
+                catch (InfException a){
+                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                    System.out.println(a.getMessage());
+                }
+            }
+        }
+    }
+    
+    public void andraLosenord(){
+        
+        String inmatning = jInmatningsFalt.getText();
+        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+                try{
+                   idb.update("Update anstalld set losenord = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
+                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                }
+                catch (InfException a){
+                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                    System.out.println(a.getMessage());
+                }
+            }
+    }
     /**
      * @param args the command line arguments
      */

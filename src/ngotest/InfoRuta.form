@@ -31,14 +31,12 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace pref="64" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="varaLander" pref="200" max="32767" attributes="0"/>
-                          <Component id="SökHandläggareKnapp" max="32767" attributes="0"/>
-                          <Component id="VisaPersonal" alignment="1" pref="200" max="32767" attributes="0"/>
-                          <Component id="SökProjektKnapp" alignment="1" max="32767" attributes="0"/>
+                          <Component id="varaLander" max="32767" attributes="0"/>
+                          <Component id="VisaPersonal" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="SeProjektKnapp" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                           <Component id="hallbarhetsKnapp" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
@@ -61,23 +59,20 @@
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="valkommenText" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="SeMittKontoKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="SökProjektKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="SeMittKontoKnapp" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="SeProjektKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="varaLander" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="hallbarhetsKnapp" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="VisaPersonal" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="VisaPersonal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="SeProjektKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="SökHandläggareKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="hallbarhetsKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="varaLander" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="103" max="32767" attributes="0"/>
+              <EmptySpace pref="138" max="32767" attributes="0"/>
               <Component id="LoggaUtKnapp" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -120,25 +115,10 @@
     <Component class="javax.swing.JButton" name="SeProjektKnapp">
       <Properties>
         <Property name="text" type="java.lang.String" value="Projekt"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SeProjektKnappActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="S&#xf6;kHandl&#xe4;ggareKnapp">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xf6;k handl&#xe4;ggare"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="S&#xf6;kHandl&#xe4;ggareKnappActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="S&#xf6;kProjektKnapp">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xf6;k projekt"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="S&#xf6;kProjektKnappActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="LoggaUtKnapp">

@@ -159,13 +159,11 @@ public class Inloggningssida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LösenordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LösenordTextActionPerformed
-        // TODO add your handling code here:
-        String lösenordInput = LösenordText.getText();
+
     }//GEN-LAST:event_LösenordTextActionPerformed
 
     private void EmailTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextActionPerformed
-        // TODO add your handling code here:
-        String emailInput = EmailText.getText();
+
     }//GEN-LAST:event_EmailTextActionPerformed
 
     private void ExitKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitKnappActionPerformed

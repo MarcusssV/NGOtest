@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ProjektRuta extends javax.swing.JFrame {
 ArrayList<HashMap<String, String>> allaProjektUppgifter = new ArrayList<>();
+ArrayList<HashMap<String, String>> datumUppgifter = new ArrayList<>();
 ArrayList<HashMap<String, String>> egnaProjektUppgifter = new ArrayList<>();
 ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>();
 String status = "is not null";
@@ -46,6 +47,12 @@ String status = "is not null";
         AllaProjektKnapp = new javax.swing.JButton();
         AvdelningsProjektKnapp = new javax.swing.JButton();
         StatusDropDown = new javax.swing.JComboBox<>();
+        jStartdatumRuta = new javax.swing.JTextField();
+        jSlutdatumRuta = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jSökKnapp = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +112,31 @@ String status = "is not null";
             }
         });
 
+        jStartdatumRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStartdatumRutaActionPerformed(evt);
+            }
+        });
+
+        jSlutdatumRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSlutdatumRutaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Startdatum");
+
+        jLabel3.setText("Slutdatum");
+
+        jSökKnapp.setText("Sök");
+        jSökKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSökKnappActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Sök efter aktiva projekt på din avdelning inom viss datumram");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,6 +162,22 @@ String status = "is not null";
                                     .addGap(18, 18, 18)
                                     .addComponent(StatusDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(95, 95, 95))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jStartdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSlutdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jSökKnapp))
+                            .addComponent(jLabel3))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,8 +192,18 @@ String status = "is not null";
                     .addComponent(StatusDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(TillbakaKnapp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TillbakaKnapp)
+                    .addComponent(jStartdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSlutdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSökKnapp))
                 .addContainerGap())
         );
 
@@ -190,6 +248,21 @@ String status = "is not null";
         
         
     }//GEN-LAST:event_StatusDropDownActionPerformed
+
+    private void jStartdatumRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartdatumRutaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jStartdatumRutaActionPerformed
+
+    private void jSökKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSökKnappActionPerformed
+        
+        hamtaDatumData();
+        fyllDatumTabel();
+        
+    }//GEN-LAST:event_jSökKnappActionPerformed
+
+    private void jSlutdatumRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSlutdatumRutaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSlutdatumRutaActionPerformed
      
     // Denna metod hämtar data från databasen där den anställda är delaktig
     public void hamtaEgenData (){
@@ -274,6 +347,37 @@ String status = "is not null";
         }
         
     }
+    
+    public void hamtaDatumData(){
+        
+        String startdatum = jStartdatumRuta.getText();
+        String slutdatum = jSlutdatumRuta.getText();
+        try{
+            String avdelningsFraga = ("Select avdelning from anstalld where aid = " + aid);
+            String avdelning = idb.fetchSingle(avdelningsFraga);
+            String fraga = ("SELECT projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum from projekt join ans_proj on projekt.pid = ans_proj.pid join anstalld on ans_proj.aid = anstalld.aid WHERE startdatum >= '" + startdatum + "' AND slutdatum <= '" + slutdatum + "' and status = 'Pågående' and avdelning = '" + avdelning + "' group by projekt.pid");
+            datumUppgifter = idb.fetchRows(fraga);
+        }
+        catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    public void fyllDatumTabel(){
+        
+        DefaultTableModel model1 = (DefaultTableModel) MinaProjektTabel.getModel();
+        model1.setRowCount(0);
+        for(HashMap<String, String> projekt : datumUppgifter){
+            String[] data = new String [model1.getColumnCount()];
+            data[0] = projekt.get("projektnamn");
+            data[1] = projekt.get("projektchef");
+            data[2] = projekt.get("beskrivning");
+            data[3] = projekt.get("prioritet");
+            data[4] = projekt.get("startdatum");
+            data[5] = projekt.get("slutdatum");
+            model1.addRow(data);
+        }
+        
+    }
         
     /**
      * @param args the command line arguments
@@ -321,7 +425,13 @@ String status = "is not null";
     private javax.swing.JComboBox<String> StatusDropDown;
     private javax.swing.JButton TillbakaKnapp;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jSlutdatumRuta;
+    private javax.swing.JTextField jStartdatumRuta;
+    private javax.swing.JButton jSökKnapp;
     // End of variables declaration//GEN-END:variables
 }
 

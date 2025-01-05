@@ -3,10 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ngotest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JOptionPane;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,38 +18,51 @@ import java.util.List;
 public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         private static InfDB idb;
         private String aid;
-    /**
-     * Creates new form SeAllaPersonalAvdelning
-     */
+        ArrayList<HashMap<String, String>> personalLista = new ArrayList<>();
+        String avdelning;
+
     public SeAllaPersonalAvdelning(InfDB idb, String aid) {
        initComponents();
         this.idb = idb;
         this.aid = aid;
-        listaPersonal();
+       hamtaAvdelningsData();
+       hamtaPersonalData();
+       fyllPersonalTabel();
+    }
+        public void hamtaAvdelningsData(){
+        try{
+            String avdelningsFraga = ("Select avdelning from anstalld where aid = " + aid);
+            avdelning = idb.fetchSingle(avdelningsFraga);
+        }
+        catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
-    private void listaPersonal(){
-        try {
-            String avdelningQuery = "SELECT avdelning FROM anstalld WHERE aid = '" + aid + "'";
-            String avdelning = idb.fetchSingle(avdelningQuery);
-            
-            if(avdelning != null) {
-                String personalQuery = "SELECT fornamn FROM anstalld WHERE avdelning =" + avdelning;
-                List<String> personalLista = idb.fetchColumn(personalQuery);
-                
-                if(personalLista != null){
-                    for(String fornamn : personalLista) {
-                        personal.append(fornamn + "\n");
-                    }
-                } else {
-            JOptionPane.showMessageDialog(this, "ingen personal hittades");// varje if sats måste ha en egen else så man vet vart felet är
-                }
-            } else{
-                JOptionPane.showMessageDialog(this, "ingen avdelning hittades"); // varje if sats måste ha en egen else så man vet vart felet är
+        public void hamtaPersonalData(){
+            try{
+                String fraga = ("select aid, fornamn, efternamn, adress, epost, telefon from anstalld where avdelning = '" + avdelning + "'");
+                personalLista = idb.fetchRows(fraga);
             }
-          }catch (InfException A){
-            JOptionPane.showMessageDialog(this, "Fel i databasen" + A.getMessage());
+            catch (InfException ex) {
+                System.out.println(ex.getMessage());
+            }
+    }
+              public void fyllPersonalTabel(){
+        
+        DefaultTableModel model1 = (DefaultTableModel) jPersonalTabel.getModel();
+        model1.setRowCount(0);
+        for(HashMap<String, String> projekt : personalLista){
+            String[] data = new String [model1.getColumnCount()];
+            data[0] = projekt.get("aid");
+            data[1] = projekt.get("fornamn");
+            data[2] = projekt.get("efternamn");
+            data[3] = projekt.get("adress");
+            data[4] = projekt.get("epost");
+            data[5] = projekt.get("telefon");
+            model1.addRow(data);
         }
+        
     }
     
     
@@ -59,16 +75,13 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        personal = new javax.swing.JTextArea();
         personalRubrik = new javax.swing.JTextField();
+        jTillbakaKnapp = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPersonalTabel = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        personal.setEditable(false);
-        personal.setColumns(20);
-        personal.setRows(5);
-        jScrollPane1.setViewportView(personal);
 
         personalRubrik.setText("Här är all personal på avdelningen");
         personalRubrik.addActionListener(new java.awt.event.ActionListener() {
@@ -77,25 +90,62 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
             }
         });
 
+        jTillbakaKnapp.setText("Tillbaka");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("Personal");
+
+        jPersonalTabel.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Aid", "Förnamn", "Efternamn", "Adress", "Epost", "Telefonnummer"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jPersonalTabel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(personalRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(personalRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTillbakaKnapp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(personalRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(personalRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTillbakaKnapp, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -143,8 +193,10 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTable jPersonalTabel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea personal;
+    private javax.swing.JButton jTillbakaKnapp;
     private javax.swing.JTextField personalRubrik;
     // End of variables declaration//GEN-END:variables
 

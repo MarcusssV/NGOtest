@@ -3,10 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ngotest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JOptionPane;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author eriks
@@ -14,36 +17,39 @@ import java.util.List;
 public class VisaAllaHallbarhetsmål extends javax.swing.JFrame {
     private static InfDB idb;
     private static String aid;
-
-    /**
-     * Creates new form VisaAllaHallbarhetsmål
-     */
+    ArrayList<HashMap<String, String>> hallbarhetsMal = new ArrayList<>();
+    
     public VisaAllaHallbarhetsmål(InfDB idb, String aid) {
         initComponents();
         this.idb = idb;
         this.aid = aid;
-        listaHallbarhetsmal();
+        hamtaAllaData();
+        fyllAllaTabel();
     }
-
     
-    private void listaHallbarhetsmal(){
-       
+        public void hamtaAllaData(){
         try{
-            String query = "SELECT namn FROM hallbarhetsmal";
-            List<String> namnLista = idb.fetchColumn(query);
-            
-            if(namnLista != null){
-                for(String namn : namnLista){
-                    jTextArea1.append(namn + "\n");
-                }
-                 
-//\n används för att bryta raden alltså skriva en ny rad efter första hållbarhetsmålet.
-                
-            }
+            String fraga = ("SELECT namn, malnummer, beskrivning, prioritet from hallbarhetsmal ");
+            hallbarhetsMal = idb.fetchRows(fraga);
         }
-        catch (InfException e){
-            JOptionPane.showMessageDialog(this, "Fel i databasen" + e.getMessage());
+        catch (InfException ex) {
+            System.out.println(ex.getMessage());
         }
+    }
+        
+              public void fyllAllaTabel(){
+        
+        DefaultTableModel model1 = (DefaultTableModel) jHallbarhetsMal.getModel();
+        model1.setRowCount(0);
+        for(HashMap<String, String> projekt : hallbarhetsMal){
+            String[] data = new String [model1.getColumnCount()];
+            data[0] = projekt.get("namn");
+            data[1] = projekt.get("malnummer");
+            data[2] = projekt.get("beskrivning");
+            data[3] = projekt.get("prioritet");
+            model1.addRow(data);
+        }
+        
     }
     
     
@@ -59,17 +65,12 @@ public class VisaAllaHallbarhetsmål extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         TillbakaKnapp = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jHallbarhetsMal = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
 
         TillbakaKnapp.setText("Tillbaka");
         TillbakaKnapp.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +82,30 @@ public class VisaAllaHallbarhetsmål extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Hållbarhetsmålen");
 
+        jHallbarhetsMal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Namn", "Målnummer", "Beskrvining", "Prioritet"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jHallbarhetsMal);
+        if (jHallbarhetsMal.getColumnModel().getColumnCount() > 0) {
+            jHallbarhetsMal.getColumnModel().getColumn(2).setResizable(false);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,21 +113,24 @@ public class VisaAllaHallbarhetsmål extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TillbakaKnapp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TillbakaKnapp)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addComponent(TillbakaKnapp))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -152,8 +180,8 @@ public class VisaAllaHallbarhetsmål extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton TillbakaKnapp;
+    private javax.swing.JTable jHallbarhetsMal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

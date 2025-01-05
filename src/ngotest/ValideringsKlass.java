@@ -49,7 +49,7 @@ public class ValideringsKlass {
             resultat = true;
             }
             else{
-            JOptionPane.showMessageDialog(null, "Ej godkänd email!"); 
+            JOptionPane.showMessageDialog(null, "Ej godkänt!"); 
             resultat = false;
             }
             return resultat;
@@ -64,7 +64,37 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt namn!");
+                JOptionPane.showMessageDialog(null, "Ej godkänt!");
+                resultat = false;
+            }
+            return resultat;
+        }
+        
+        public static boolean adressKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^(\\d{3}\\s[A-Z][a-z]+\\s[A-Z][a-z]+,\\s[A-Z][a-z]+|\\d{3}\\s[A-Z][a-z]+|[A-Z][a-z]+\\s\\d{3}|[A-Z][a-z]+\\s[A-Z][a-z]+\\s\\d{3})$";
+            String adress = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(adress).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänt!");
+                resultat = false;
+            }
+            return resultat;
+        }
+                
+        public static boolean telefonnummerKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^\\d{3}-\\d{3}-\\d{4}$";
+            String telefonnummer = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(telefonnummer).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänt!");
                 resultat = false;
             }
             return resultat;
