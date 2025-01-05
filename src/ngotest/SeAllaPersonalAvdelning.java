@@ -19,6 +19,7 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         private static InfDB idb;
         private String aid;
         ArrayList<HashMap<String, String>> personalLista = new ArrayList<>();
+        ArrayList<HashMap<String, String>> handlaggareInfo = new ArrayList<>();
         String avdelning;
 
     public SeAllaPersonalAvdelning(InfDB idb, String aid) {
@@ -49,7 +50,7 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
             }
     }
               public void fyllPersonalTabel(){
-        
+        jInfoTillbakaKnapp.setVisible(false);
         DefaultTableModel model1 = (DefaultTableModel) jPersonalTabel.getModel();
         model1.setRowCount(0);
         for(HashMap<String, String> projekt : personalLista){
@@ -64,8 +65,44 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         }
         
     }
-    
-    
+    public void hamtaHandlaggareDataNamn(){
+        
+                String namn = jInmatningsRuta.getText();
+                try{
+                    String fraga = ("select anstalld.aid, fornamn, efternamn, anstalld.adress, anstalld.epost, anstalld.telefon from anstalld join handlaggare on handlaggare.aid = anstalld.aid join avdelning on avdelning.avdid = anstalld.avdelning where anstalld.avdelning = '" + avdelning + "' and fornamn = '" + namn + "'");
+                    handlaggareInfo = idb.fetchRows(fraga);
+                }
+                catch (InfException ex) {
+                System.out.println(ex.getMessage());
+            }                
+    }
+    public void hamtaHandlaggareDataEpost(){
+        
+                String epost = jInmatningsRuta.getText();
+                try{
+                    String fraga = ("select anstalld.aid, fornamn, efternamn, anstalld.adress, anstalld.epost, anstalld.telefon from anstalld join handlaggare on handlaggare.aid = anstalld.aid join avdelning on avdelning.avdid = anstalld.avdelning where anstalld.avdelning = '" + avdelning + "' and anstalld.epost = '" + epost + "'");
+                    handlaggareInfo = idb.fetchRows(fraga);
+                }
+                catch (InfException ex) {
+                System.out.println(ex.getMessage());
+            }                
+    }
+    public void fyllTabelHandlaggare(){
+        
+        DefaultTableModel model1 = (DefaultTableModel) jPersonalTabel.getModel();
+        model1.setRowCount(0);
+        for(HashMap<String, String> projekt : handlaggareInfo){
+            String[] data = new String [model1.getColumnCount()];
+            data[0] = projekt.get("aid");
+            data[1] = projekt.get("fornamn");
+            data[2] = projekt.get("efternamn");
+            data[3] = projekt.get("adress");
+            data[4] = projekt.get("epost");
+            data[5] = projekt.get("telefon");
+            model1.addRow(data);
+        
+    }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,6 +117,11 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPersonalTabel = new javax.swing.JTable();
+        jInmatningsRuta = new javax.swing.JTextField();
+        jSokKnapp = new javax.swing.JButton();
+        jAlternativRuta = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jInfoTillbakaKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,33 +163,79 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jPersonalTabel);
 
+        jInmatningsRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jInmatningsRutaActionPerformed(evt);
+            }
+        });
+
+        jSokKnapp.setText("Sök");
+        jSokKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSokKnappActionPerformed(evt);
+            }
+        });
+
+        jAlternativRuta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Namn", "Epost" }));
+        jAlternativRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAlternativRutaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Sök Handläggare via Namn eller Epost på din avdelning");
+
+        jInfoTillbakaKnapp.setText("Tillbaka");
+        jInfoTillbakaKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jInfoTillbakaKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTillbakaKnapp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1012, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(personalRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTillbakaKnapp)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jAlternativRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jInmatningsRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jSokKnapp))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(47, 47, 47)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jInfoTillbakaKnapp)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(personalRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jInmatningsRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSokKnapp)
+                        .addComponent(jAlternativRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jInfoTillbakaKnapp)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTillbakaKnapp, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -167,6 +255,41 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         setVisible(false);
         new InfoRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_jTillbakaKnappActionPerformed
+
+    private void jInmatningsRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInmatningsRutaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jInmatningsRutaActionPerformed
+
+    private void jAlternativRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAlternativRutaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jAlternativRutaActionPerformed
+
+    private void jSokKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSokKnappActionPerformed
+
+        String alternativ = jAlternativRuta.getSelectedItem().toString();
+            if(ValideringsKlass.textFaltHarVarde(jInmatningsRuta)){
+                if(alternativ.equals("Namn")){
+                    if(ValideringsKlass.namnKontroll(jInmatningsRuta)){
+                        hamtaHandlaggareDataNamn();
+                        fyllTabelHandlaggare();
+                        jInfoTillbakaKnapp.setVisible(true);
+                    }
+                }
+                if(alternativ.equals("Epost")){
+                    if(ValideringsKlass.emailKontroll(jInmatningsRuta)){
+                        hamtaHandlaggareDataEpost();
+                        fyllTabelHandlaggare();
+                        jInfoTillbakaKnapp.setVisible(true);
+                    }
+                }
+        }
+    }//GEN-LAST:event_jSokKnappActionPerformed
+
+    private void jInfoTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInfoTillbakaKnappActionPerformed
+        // TODO add your handling code here:
+        fyllPersonalTabel();
+        
+    }//GEN-LAST:event_jInfoTillbakaKnappActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,9 +327,14 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jAlternativRuta;
+    private javax.swing.JButton jInfoTillbakaKnapp;
+    private javax.swing.JTextField jInmatningsRuta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTable jPersonalTabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jSokKnapp;
     private javax.swing.JButton jTillbakaKnapp;
     private javax.swing.JTextField personalRubrik;
     // End of variables declaration//GEN-END:variables

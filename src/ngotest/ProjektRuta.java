@@ -350,16 +350,24 @@ String status = "is not null";
     
     public void hamtaDatumData(){
         
-        String startdatum = jStartdatumRuta.getText();
-        String slutdatum = jSlutdatumRuta.getText();
-        try{
-            String avdelningsFraga = ("Select avdelning from anstalld where aid = " + aid);
-            String avdelning = idb.fetchSingle(avdelningsFraga);
-            String fraga = ("SELECT projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum from projekt join ans_proj on projekt.pid = ans_proj.pid join anstalld on ans_proj.aid = anstalld.aid WHERE startdatum >= '" + startdatum + "' AND slutdatum <= '" + slutdatum + "' and status = 'Pågående' and avdelning = '" + avdelning + "' group by projekt.pid");
-            datumUppgifter = idb.fetchRows(fraga);
-        }
-        catch (InfException ex) {
-            System.out.println(ex.getMessage());
+        if(ValideringsKlass.textFaltHarVarde(jStartdatumRuta)){
+            if(ValideringsKlass.datumKontroll(jStartdatumRuta)){
+                if(ValideringsKlass.textFaltHarVarde(jSlutdatumRuta)){
+                   if(ValideringsKlass.datumKontroll(jSlutdatumRuta)){
+                        String startdatum = jStartdatumRuta.getText();
+                        String slutdatum = jSlutdatumRuta.getText();
+                            try{
+                                    String avdelningsFraga = ("Select avdelning from anstalld where aid = " + aid);
+                                    String avdelning = idb.fetchSingle(avdelningsFraga);
+                                    String fraga = ("SELECT projektnamn, projektchef, beskrivning, prioritet, startdatum, slutdatum from projekt join ans_proj on projekt.pid = ans_proj.pid join anstalld on ans_proj.aid = anstalld.aid WHERE startdatum >= '" + startdatum + "' AND slutdatum <= '" + slutdatum + "' and status = 'Pågående' and avdelning = '" + avdelning + "' group by projekt.pid");
+                                    datumUppgifter = idb.fetchRows(fraga);
+                                }
+                            catch (InfException ex) {
+                                System.out.println(ex.getMessage());
+                                }
+                    }
+                }
+            }
         }
     }
     public void fyllDatumTabel(){

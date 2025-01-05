@@ -99,5 +99,21 @@ public class ValideringsKlass {
             }
             return resultat;
         }
+        
+        public static boolean datumKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^\\d{4}-\\d{2}-\\d{2}$";
+            String datum = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(datum).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänt!");
+                resultat = false;
+            }
+            return resultat;
+        }
+        
 }
 
