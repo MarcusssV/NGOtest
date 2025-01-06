@@ -46,7 +46,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                              <Component id="redigerLander" min="-2" pref="182" max="-2" attributes="0"/>
+                              <Component id="redigeraLand" min="-2" pref="182" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="taBortLandKnapp" min="-2" pref="161" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -67,7 +67,7 @@
                       <Component id="LaggaTillLand" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="redigerLander" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="redigeraLand" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="taBortLandKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -163,12 +163,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TillbakaKnappActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="redigerLander">
+    <Component class="javax.swing.JButton" name="redigeraLand">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Redigera L&#xe4;nder"/>
+        <Property name="text" type="java.lang.String" value="Redigera Land"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="redigerLanderActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="redigeraLandActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="LaggaTillLand">

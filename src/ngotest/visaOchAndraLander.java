@@ -117,7 +117,11 @@ public void taBortLand(){
 }
 }
 
-
+public void redigeraLand(){
+    
+    
+    
+}
     
     
     
@@ -136,7 +140,7 @@ public void taBortLand(){
         landTabell = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         TillbakaKnapp = new javax.swing.JButton();
-        redigerLander = new javax.swing.JButton();
+        redigeraLand = new javax.swing.JButton();
         LaggaTillLand = new javax.swing.JButton();
         taBortLandKnapp = new javax.swing.JButton();
 
@@ -170,10 +174,10 @@ public void taBortLand(){
             }
         });
 
-        redigerLander.setText("Redigera Länder");
-        redigerLander.addActionListener(new java.awt.event.ActionListener() {
+        redigeraLand.setText("Redigera Land");
+        redigeraLand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                redigerLanderActionPerformed(evt);
+                redigeraLandActionPerformed(evt);
             }
         });
 
@@ -214,7 +218,7 @@ public void taBortLand(){
                                 .addGap(166, 166, 166))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
-                                .addComponent(redigerLander, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(redigeraLand, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(taBortLandKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())))))
@@ -228,7 +232,7 @@ public void taBortLand(){
                         .addComponent(jLabel1)
                         .addComponent(LaggaTillLand))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(redigerLander)
+                        .addComponent(redigeraLand)
                         .addComponent(taBortLandKnapp)))
                 .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,12 +249,12 @@ public void taBortLand(){
         new InfoRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_TillbakaKnappActionPerformed
 
-    private void redigerLanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigerLanderActionPerformed
+    private void redigeraLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigeraLandActionPerformed
         // TODO add your handling code here:
         
         
        
-    }//GEN-LAST:event_redigerLanderActionPerformed
+    }//GEN-LAST:event_redigeraLandActionPerformed
 
     private void LaggaTillLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaggaTillLandActionPerformed
 läggTillLand();
@@ -303,7 +307,7 @@ taBortLand();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable landTabell;
-    private javax.swing.JButton redigerLander;
+    private javax.swing.JButton redigeraLand;
     private javax.swing.JButton taBortLandKnapp;
     // End of variables declaration//GEN-END:variables
 }
