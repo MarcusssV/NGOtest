@@ -115,5 +115,49 @@ public class ValideringsKlass {
             return resultat;
         }
         
+        public static boolean valideraLand(String lid, String namn, String sprak, String valuta, String tidszon, String politiskStruktur, String ekonomi) {
+    boolean resultat = true;
+    
+if (lid == null || lid.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Lid får inte vara tomt!");
+        resultat = false;
+}
+    if (namn == null || namn.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Namn får inte vara tomt!");
+        resultat = false;
+    }
+    if (sprak == null || sprak.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Språk får inte vara tomt!");
+        resultat = false;
+    }
+    if (valuta == null || valuta.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Valuta får inte vara tomt!");
+        resultat = false;
+    }
+    if (tidszon == null || tidszon.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Tidszon får inte vara tomt!");
+        resultat = false;
+    }
+    if (politiskStruktur == null || politiskStruktur.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Politisk struktur får inte vara tomt!");
+        resultat = false;
+    }
+    if (ekonomi == null || ekonomi.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ekonomi får inte vara tomt!");
+        resultat = false;
+    }
+    return resultat;
+}
+       
+        public static boolean valideraTaBortLand(String lid){
+            boolean resultat = true;
+            
+            if(lid == null || lid.isEmpty()){
+                JOptionPane.showMessageDialog(null, "lid får inte vara tomt!");
+        resultat = false;
+            }
+                    return resultat;
+
+        }
 }
 

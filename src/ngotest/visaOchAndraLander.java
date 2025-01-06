@@ -58,7 +58,7 @@ public void fyllTabell() {
     }
 }
 
-public void redigeraLand(){
+public void Behorighet(){
     try{
     String fraga = "Select behorighetsniva FROM admin where aid = " + aid;
     String behorighetsniva = idb.fetchSingle(fraga);
@@ -73,6 +73,48 @@ public void redigeraLand(){
     catch (InfException ex){
             System.out.println(ex.getMessage());
     }
+}
+
+public void läggTillLand() {
+    Behorighet();
+
+    try {
+        String lid = JOptionPane.showInputDialog(this,"Ange landets id:");
+        String landNamn = JOptionPane.showInputDialog(this, "Ange landets namn:");
+        String språk = JOptionPane.showInputDialog(this, "Ange landets språk:");
+        String valuta = JOptionPane.showInputDialog(this, "Ange landets valuta:");
+        String tidszon = JOptionPane.showInputDialog(this, "Ange landets tidszon:");
+        String politiskStruktur = JOptionPane.showInputDialog(this, "Ange landets politiska struktur:");
+        String ekonomi = JOptionPane.showInputDialog(this, "Ange landets ekonomi:");
+
+        
+        if(ValideringsKlass.valideraLand(lid, aid, språk, valuta, tidszon, politiskStruktur, ekonomi)){
+        String sql = "INSERT INTO land (lid, namn, sprak, valuta, tidszon, politisk_struktur, ekonomi) VALUES ('" 
+                      + lid +  "', '" + landNamn + "', '" + språk + "', '" + valuta + "', '" 
+                      + tidszon + "', '" + politiskStruktur + "', '" + ekonomi + "')";
+        
+        idb.insert(sql);
+        JOptionPane.showMessageDialog(this, "Landet har lagts till i databasen!");
+        }
+    } catch (InfException ex) {
+        JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
+    }
+}
+
+public void taBortLand(){
+    Behorighet();
+    
+    try{
+        String lid =JOptionPane.showInputDialog(this,"Ange landets id som du vill ta bort:");
+        
+        if(ValideringsKlass.valideraTaBortLand(lid)){
+            String sql = "DELETE FROM land WHERE lid = '" + lid + "'";
+            idb.delete(sql);
+            JOptionPane.showMessageDialog(this, "Landet har tagits bort");
+        }
+    }catch (InfException ex) {
+        JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
+}
 }
 
 
@@ -92,9 +134,11 @@ public void redigeraLand(){
 
         jScrollPane1 = new javax.swing.JScrollPane();
         landTabell = new javax.swing.JTable();
-        redigeraLand = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         TillbakaKnapp = new javax.swing.JButton();
+        redigerLander = new javax.swing.JButton();
+        LaggaTillLand = new javax.swing.JButton();
+        taBortLandKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,13 +160,6 @@ public void redigeraLand(){
         });
         jScrollPane1.setViewportView(landTabell);
 
-        redigeraLand.setText("Redigera Land");
-        redigeraLand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                redigeraLandActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Våra länder");
 
@@ -133,6 +170,27 @@ public void redigeraLand(){
             }
         });
 
+        redigerLander.setText("Redigera Länder");
+        redigerLander.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redigerLanderActionPerformed(evt);
+            }
+        });
+
+        LaggaTillLand.setText("Lägg till land");
+        LaggaTillLand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LaggaTillLandActionPerformed(evt);
+            }
+        });
+
+        taBortLandKnapp.setText("Ta bort Land");
+        taBortLandKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                taBortLandKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,42 +198,69 @@ public void redigeraLand(){
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(TillbakaKnapp)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(TillbakaKnapp)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(redigeraLand, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LaggaTillLand, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(166, 166, 166))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(redigerLander, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(taBortLandKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(redigeraLand))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(LaggaTillLand))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(redigerLander)
+                        .addComponent(taBortLandKnapp)))
+                .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(TillbakaKnapp)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void redigeraLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigeraLandActionPerformed
-    redigeraLand();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_redigeraLandActionPerformed
-
     private void TillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TillbakaKnappActionPerformed
         setVisible(false);
         new InfoRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_TillbakaKnappActionPerformed
+
+    private void redigerLanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigerLanderActionPerformed
+        // TODO add your handling code here:
+        
+        
+       
+    }//GEN-LAST:event_redigerLanderActionPerformed
+
+    private void LaggaTillLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaggaTillLandActionPerformed
+läggTillLand();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LaggaTillLandActionPerformed
+
+    private void taBortLandKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taBortLandKnappActionPerformed
+taBortLand();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_taBortLandKnappActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,10 +298,12 @@ public void redigeraLand(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LaggaTillLand;
     private javax.swing.JButton TillbakaKnapp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable landTabell;
-    private javax.swing.JButton redigeraLand;
+    private javax.swing.JButton redigerLander;
+    private javax.swing.JButton taBortLandKnapp;
     // End of variables declaration//GEN-END:variables
 }
