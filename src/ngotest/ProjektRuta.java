@@ -25,6 +25,8 @@ String status = "is not null";
         initComponents();
         this.idb = idb;
         this.aid = aid;
+        hamtaAllaData();
+        fyllAllaTabel();
         
     }
     
@@ -208,6 +210,7 @@ String status = "is not null";
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void TillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TillbakaKnappActionPerformed

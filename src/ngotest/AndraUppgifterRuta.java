@@ -36,6 +36,7 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
         jTillbakaKnapp = new javax.swing.JButton();
         jInmatningsFalt = new javax.swing.JTextField();
         jAndraKnapp = new javax.swing.JButton();
+        jHjalpRuta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +61,8 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
             }
         });
 
+        jHjalpRuta.setText("Förnamnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,10 +70,11 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jHjalpRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jValAvAndring, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jInmatningsFalt, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                        .addComponent(jInmatningsFalt))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTillbakaKnapp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -84,7 +88,9 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jValAvAndring, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jInmatningsFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jHjalpRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTillbakaKnapp)
                     .addComponent(jAndraKnapp))
@@ -92,10 +98,30 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jValAvAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jValAvAndringActionPerformed
-        // TODO add your handling code here:
+
+                String alternativ = jValAvAndring.getSelectedItem().toString();
+        if(alternativ.equals("Förnamn")){
+            jHjalpRuta.setText("Förnamnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
+        }
+        if(alternativ.equals("Efternamn")){
+            jHjalpRuta.setText("Efteramnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
+        }
+        if(alternativ.equals("Adress")){
+            jHjalpRuta.setText("Adressen måste skrivas på följande sätt: 123 text text, text | 123 text | text 123. Måste även börja på stor bokstav.");
+        }
+        if(alternativ.equals("Telefon Nmr")){
+            jHjalpRuta.setText("Telefonnumret måste skrivas på följande sätt: XXX-XXX-XXXX. Notera att bindesträcken måste vara med.");
+        }
+        if(alternativ.equals("Epost")){
+            jHjalpRuta.setText("Eposten måste innehålla ett @ och en domän.com (kan vara se, com, co.uk. ru mm). ");
+        }
+        if(alternativ.equals("Lösenord")){
+            jHjalpRuta.setText("Lösenordet har inga krav.");
+        }
     }//GEN-LAST:event_jValAvAndringActionPerformed
 
     private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
@@ -263,6 +289,7 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAndraKnapp;
+    private javax.swing.JLabel jHjalpRuta;
     private javax.swing.JTextField jInmatningsFalt;
     private javax.swing.JButton jTillbakaKnapp;
     private javax.swing.JComboBox<String> jValAvAndring;

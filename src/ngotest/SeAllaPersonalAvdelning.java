@@ -217,7 +217,6 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(47, 47, 47)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jInfoTillbakaKnapp)))
                 .addContainerGap())
         );
@@ -243,6 +242,7 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     

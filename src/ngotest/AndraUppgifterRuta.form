@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -23,13 +23,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jHjalpRuta" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jValAvAndring" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jInmatningsFalt" pref="282" max="32767" attributes="0"/>
+                      <Component id="jInmatningsFalt" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jTillbakaKnapp" min="-2" max="-2" attributes="0"/>
@@ -49,7 +50,9 @@
                   <Component id="jValAvAndring" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jInmatningsFalt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="135" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jHjalpRuta" pref="105" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTillbakaKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jAndraKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -97,6 +100,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAndraKnappActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jHjalpRuta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="F&#xf6;rnamnet m&#xe5;ste b&#xf6;rja p&#xe5; en stor bokstav och f&#xe5;r inte inneh&#xe5;lla n&#xe5;gra specialtecken eller nummer."/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
