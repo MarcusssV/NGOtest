@@ -7,6 +7,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Marcu
@@ -42,6 +43,8 @@ private String aid;
         SeProjektKnapp = new javax.swing.JButton();
         LoggaUtKnapp = new javax.swing.JButton();
         varaLander = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        varaPartnersKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +94,15 @@ private String aid;
             }
         });
 
+        jButton1.setText("jButton1");
+
+        varaPartnersKnapp.setText("Våra Partners");
+        varaPartnersKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                varaPartnersKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +117,9 @@ private String aid;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(varaLander, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(VisaPersonal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(VisaPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jButton1)
+                            .addComponent(varaPartnersKnapp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(SeProjektKnapp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,12 +143,18 @@ private String aid;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(SeProjektKnapp)
-                            .addComponent(varaLander))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hallbarhetsKnapp))
-                    .addComponent(VisaPersonal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addComponent(LoggaUtKnapp)
+                            .addComponent(varaLander)))
+                    .addComponent(VisaPersonal)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hallbarhetsKnapp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addComponent(LoggaUtKnapp))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(varaPartnersKnapp)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -182,6 +202,12 @@ private String aid;
         setVisible(false);
         new visaOchAndraLander (idb, aid).setVisible(true);
     }//GEN-LAST:event_varaLanderActionPerformed
+
+    private void varaPartnersKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varaPartnersKnappActionPerformed
+        setVisible(false);
+        new visaOchAndraPartner (idb, aid).setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_varaPartnersKnappActionPerformed
 
     private void valkommenTextNamn(){
         try {
@@ -238,7 +264,9 @@ private String aid;
     private javax.swing.JButton SeProjektKnapp;
     private javax.swing.JButton VisaPersonal;
     private javax.swing.JButton hallbarhetsKnapp;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel valkommenText;
     private javax.swing.JButton varaLander;
+    private javax.swing.JButton varaPartnersKnapp;
     // End of variables declaration//GEN-END:variables
 }

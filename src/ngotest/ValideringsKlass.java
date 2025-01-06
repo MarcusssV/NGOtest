@@ -153,11 +153,60 @@ if (lid == null || lid.isEmpty()) {
             boolean resultat = true;
             
             if(lid == null || lid.isEmpty()){
-                JOptionPane.showMessageDialog(null, "lid får inte vara tomt!");
+                JOptionPane.showMessageDialog(null, "lid får inte vara tomt");
         resultat = false;
             }
                     return resultat;
 
         }
+        
+        public static boolean valideraPartner(String pid, String namn, String kontaktperson, String kontaktepost, String telefon, String adress, String branch, String stad) {
+    boolean resultat = true;
+    
+if (pid == null || pid.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "pid får inte vara tomt!");
+        resultat = false;
+}
+    if (namn == null || namn.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Namn får inte vara tomt!");
+        resultat = false;
+    }
+    if (kontaktperson == null || kontaktperson.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "kontaktperson får inte vara tomt!");
+        resultat = false;
+    }
+    if (kontaktepost == null || kontaktepost.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "kontaktepost får inte vara tomt!");
+        resultat = false;
+    }
+    if (telefon == null || telefon.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "telefon får inte vara tomt!");
+        resultat = false;
+    }
+    if (adress == null || adress.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "adress får inte vara tomt!");
+        resultat = false;
+    }
+    if (branch == null || branch.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "branch får inte vara tomt!");
+        resultat = false;
+    }
+    if (stad == null || stad.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "stad får inte vara tomt!");
+        resultat = false;
+    }
+    return resultat;
+}
+        
+
+public static boolean valideraTaBortPartner(String pid) {
+    if (pid.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "pid får inte vara tomt");
+        return false;
+    }
+    return true;
+}
+
+
 }
 
