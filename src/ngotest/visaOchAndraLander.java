@@ -58,62 +58,24 @@ public void fyllTabell() {
     }
 }
 
-public void Behorighet(){
-    try{
-    String fraga = "Select behorighetsniva FROM admin where aid = " + aid;
-    String behorighetsniva = idb.fetchSingle(fraga);
-    
-    if(behorighetsniva == null){
-        JOptionPane.showMessageDialog(this, "Du har inte behörighet att redigera länder.");
-    }
-    else {
-         JOptionPane.showMessageDialog(this, "Du har behörighet att redigera länder.");
-    }
-   }
-    catch (InfException ex){
-            System.out.println(ex.getMessage());
-    }
-}
 
-public void läggTillLand() {
-    Behorighet();
-
-    try {
-        String lid = JOptionPane.showInputDialog(this,"Ange landets id:");
-        String landNamn = JOptionPane.showInputDialog(this, "Ange landets namn:");
-        String språk = JOptionPane.showInputDialog(this, "Ange landets språk:");
-        String valuta = JOptionPane.showInputDialog(this, "Ange landets valuta:");
-        String tidszon = JOptionPane.showInputDialog(this, "Ange landets tidszon:");
-        String politiskStruktur = JOptionPane.showInputDialog(this, "Ange landets politiska struktur:");
-        String ekonomi = JOptionPane.showInputDialog(this, "Ange landets ekonomi:");
-
-        
-        if(ValideringsKlass.valideraLand(lid, aid, språk, valuta, tidszon, politiskStruktur, ekonomi)){
-        String sql = "INSERT INTO land (lid, namn, sprak, valuta, tidszon, politisk_struktur, ekonomi) VALUES ('" 
-                      + lid +  "', '" + landNamn + "', '" + språk + "', '" + valuta + "', '" 
-                      + tidszon + "', '" + politiskStruktur + "', '" + ekonomi + "')";
-        
-        idb.insert(sql);
-        JOptionPane.showMessageDialog(this, "Landet har lagts till i databasen!");
-        }
-    } catch (InfException ex) {
-        JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
-    }
-}
 
 public void taBortLand(){
-    Behorighet();
     
+    if(ValideringsKlass.behorighet(idb, aid)){
     try{
-        String lid =JOptionPane.showInputDialog(this,"Ange landets id som du vill ta bort:");
+        String lid = JOptionPane.showInputDialog(this,"Ange landets id som du vill ta bort:");
         
         if(ValideringsKlass.valideraTaBortLand(lid)){
             String sql = "DELETE FROM land WHERE lid = '" + lid + "'";
             idb.delete(sql);
+            hamtaLander();
+            fyllTabell();
             JOptionPane.showMessageDialog(this, "Landet har tagits bort");
         }
     }catch (InfException ex) {
         JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
+}
 }
 }
 
@@ -251,15 +213,18 @@ public void redigeraLand(){
     }//GEN-LAST:event_TillbakaKnappActionPerformed
 
     private void redigeraLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigeraLandActionPerformed
-        // TODO add your handling code here:
-        
-        
-       
+    if(ValideringsKlass.behorighet(idb, aid)){
+    new AndraLandRuta(idb, aid).setVisible(true);
+    setVisible(false);
+    }
     }//GEN-LAST:event_redigeraLandActionPerformed
 
     private void LaggaTillLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaggaTillLandActionPerformed
-läggTillLand();
-        // TODO add your handling code here:
+
+    if(ValideringsKlass.behorighet(idb, aid)){
+    new LaggTillLandRuta(idb, aid).setVisible(true);
+    setVisible(false);
+    }
     }//GEN-LAST:event_LaggaTillLandActionPerformed
 
     private void taBortLandKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taBortLandKnappActionPerformed

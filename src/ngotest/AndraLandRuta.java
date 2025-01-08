@@ -10,17 +10,17 @@ import oru.inf.InfException;
  *
  * @author Thomas
  */
-public class AndraUppgifterRuta extends javax.swing.JFrame {
+public class AndraLandRuta extends javax.swing.JFrame {
 
     /**
      * Creates new form ÄndraUppgifterRuta
      */
-    public AndraUppgifterRuta(InfDB idb, String aid) {
+    public AndraLandRuta(InfDB idb, String aid) {
         initComponents();
         this.idb = idb;
         this.aid = aid;
     }
-
+    
     public InfDB idb;
     public String aid;
     /**
@@ -37,10 +37,12 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
         jInmatningsFalt = new javax.swing.JTextField();
         jAndraKnapp = new javax.swing.JButton();
         jHjalpRuta = new javax.swing.JLabel();
+        jIdRuta = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jValAvAndring.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Förnamn", "Efternamn", "Adress", "Epost", "Telefon Nmr", "Lösenord" }));
+        jValAvAndring.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Namn", "Sprak", "Valuta", "Politisk Struktur", "Ekonomi" }));
         jValAvAndring.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jValAvAndringActionPerformed(evt);
@@ -63,28 +65,42 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
 
         jHjalpRuta.setText("Förnamnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
 
+        jLabel1.setText("ID för land");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jHjalpRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jValAvAndring, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jHjalpRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jValAvAndring, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jInmatningsFalt))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTillbakaKnapp)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jAndraKnapp))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jInmatningsFalt))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTillbakaKnapp)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jAndraKnapp)))
+                        .addComponent(jIdRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jIdRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jValAvAndring, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jInmatningsFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -126,131 +142,134 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
 
     private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
         setVisible(false);
-        new KontoRuta(idb, aid).setVisible(true);
+        new visaOchAndraLander(idb, aid).setVisible(true);
     }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
     private void jAndraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAndraKnappActionPerformed
         // TODO add your handling code here:
         String alternativ = jValAvAndring.getSelectedItem().toString();
-        if(alternativ.equals("Förnamn")){
+        if(alternativ.equals("Namn")){
             andraNamn();
         }
-        if(alternativ.equals("Efternamn")){
-            andraEfternamn();
+        if(alternativ.equals("Sprak")){
+            andraSprak();
         }
-        if(alternativ.equals("Adress")){
-            andraAdress();
+        if(alternativ.equals("Valuta")){
+            andraValuta();
         }
-        if(alternativ.equals("Telefon Nmr")){
-            andraTelefonnummer();
+        if(alternativ.equals("Politisk Struktur")){
+            andraPS();
         }
-        if(alternativ.equals("Epost")){
-            andraEmail();
-        }
-        if(alternativ.equals("Lösenord")){
-            andraLosenord();
+        if(alternativ.equals("Ekonomi")){
+            andraEkonomi();
         }
     }//GEN-LAST:event_jAndraKnappActionPerformed
 
     public void andraNamn(){
         
+        String lid = jIdRuta.getText();
         String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-            if(ValideringsKlass.namnKontroll(jInmatningsFalt)){
-                try{
-                   idb.update("Update anstalld set fornamn = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
-                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                }
-                catch (InfException a){
-                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                    System.out.println(a.getMessage());
-                }
-            }
-        }
-    }
-    
-    public void andraEfternamn(){
-        
-                String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-            if(ValideringsKlass.efternamnKontroll(jInmatningsFalt)){
-                try{
-                   idb.update("Update anstalld set efternamn = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
-                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                }
-                catch (InfException a){
-                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                    System.out.println(a.getMessage());
+        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
+            if(ValideringsKlass.idKontroll(jIdRuta));
+                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+                    if(ValideringsKlass.namnKontroll(jInmatningsFalt)){
+                        try{
+                            idb.update("Update land set namn = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
+                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                        }
+                        catch (InfException a){
+                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                            System.out.println(a.getMessage());
+                        }
+                    }
                 }
             }
-        }
     }
-    
-    public void andraAdress(){
+    public void andraSprak(){
         
-                String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-            if(ValideringsKlass.adressKontroll(jInmatningsFalt)){
-                try{
-                   idb.update("Update anstalld set adress = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
-                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                }
-                catch (InfException a){
-                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                    System.out.println(a.getMessage());
-                }
-            }
-        }
-    }
-    
-    public void andraTelefonnummer(){
-        
-                String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-            if(ValideringsKlass.telefonnummerKontroll(jInmatningsFalt)){
-                try{
-                   idb.update("Update anstalld set telefon = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
-                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                }
-                catch (InfException a){
-                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                    System.out.println(a.getMessage());
-                }
-            }
-        }
-    }
-    
-    public void andraEmail(){
-        
-                String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-            if(ValideringsKlass.emailKontroll(jInmatningsFalt)){
-                try{
-                   idb.update("Update anstalld set epost = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
-                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                }
-                catch (InfException a){
-                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                    System.out.println(a.getMessage());
-                }
-            }
-        }
-    }
-    
-    public void andraLosenord(){
-        
+        String lid = jIdRuta.getText();
         String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-                try{
-                   idb.update("Update anstalld set losenord = " + "'" + inmatning + "'" + "where aid = '" + aid + "'");
-                   JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                }
-                catch (InfException a){
-                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                    System.out.println(a.getMessage());
+        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
+            if(ValideringsKlass.idKontroll(jIdRuta));
+                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+                    if(ValideringsKlass.sprakKontroll(jInmatningsFalt)){
+                        try{
+                            idb.update("Update land set sprak = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
+                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                        }
+                        catch (InfException a){
+                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                            System.out.println(a.getMessage());
+                        }
+                    }
                 }
             }
     }
+    public void andraValuta(){
+        
+        String lid = jIdRuta.getText();
+        String inmatning = jInmatningsFalt.getText();
+        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
+            if(ValideringsKlass.idKontroll(jIdRuta));
+                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+                    if(ValideringsKlass.valutaKontroll(jInmatningsFalt)){
+                        try{
+                            idb.update("Update land set valuta = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
+                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                        }
+                        catch (InfException a){
+                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                            System.out.println(a.getMessage());
+                        }
+                    }
+                }
+            }
+    }
+    
+    public void andraPS(){
+        
+        String lid = jIdRuta.getText();
+        String inmatning = jInmatningsFalt.getText();
+        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
+            if(ValideringsKlass.idKontroll(jIdRuta));
+                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+                    if(ValideringsKlass.politiskStrukturKontroll(jInmatningsFalt)){
+                        try{
+                            idb.update("Update land set politisk_struktur = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
+                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                        }
+                        catch (InfException a){
+                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                            System.out.println(a.getMessage());
+                        }
+                    }
+                }
+            }
+    }
+  
+    public void andraEkonomi(){
+        
+        String lid = jIdRuta.getText();
+        String inmatning = jInmatningsFalt.getText();
+        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
+            if(ValideringsKlass.idKontroll(jIdRuta));
+                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
+                    if(ValideringsKlass.ekonomiKontroll(jInmatningsFalt)){
+                        try{
+                            idb.update("Update land set ekonomi = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
+                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+                        }
+                        catch (InfException a){
+                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                            System.out.println(a.getMessage());
+                        }
+                    }
+                }
+            }
+    }
+
+
+    
     /**
      * @param args the command line arguments
      */
@@ -268,14 +287,16 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AndraUppgifterRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AndraLandRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AndraUppgifterRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AndraLandRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AndraUppgifterRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AndraLandRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AndraUppgifterRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AndraLandRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -290,7 +311,9 @@ public class AndraUppgifterRuta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAndraKnapp;
     private javax.swing.JLabel jHjalpRuta;
+    private javax.swing.JTextField jIdRuta;
     private javax.swing.JTextField jInmatningsFalt;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jTillbakaKnapp;
     private javax.swing.JComboBox<String> jValAvAndring;
     // End of variables declaration//GEN-END:variables

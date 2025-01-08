@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -49,7 +51,7 @@ public class ValideringsKlass {
             resultat = true;
             }
             else{
-            JOptionPane.showMessageDialog(null, "Ej godkänt!"); 
+            JOptionPane.showMessageDialog(null, "Ej godkänd Email!"); 
             resultat = false;
             }
             return resultat;
@@ -64,12 +66,26 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt!");
+                JOptionPane.showMessageDialog(null, "Ej godkänt namn!");
                 resultat = false;
             }
             return resultat;
         }
         
+                public static boolean efternamnKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^[A-Z](?=.{1,29}$)[A-Za-z]*(?:\\h+[A-Z][A-Za-z]*)*$";
+            String namn = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(namn).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänt efternamn!");
+                resultat = false;
+            }
+            return resultat;
+        }
         public static boolean adressKontroll(JTextField rutaAttKolla){
             
             boolean resultat;
@@ -79,7 +95,7 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt!");
+                JOptionPane.showMessageDialog(null, "Ej godkänd adress!");
                 resultat = false;
             }
             return resultat;
@@ -94,7 +110,7 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt!");
+                JOptionPane.showMessageDialog(null, "Ej godkänt telefonnummer!");
                 resultat = false;
             }
             return resultat;
@@ -109,54 +125,133 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt!");
+                JOptionPane.showMessageDialog(null, "Ej godkänt datum!");
                 resultat = false;
             }
             return resultat;
         }
         
-        public static boolean valideraLand(String lid, String namn, String sprak, String valuta, String tidszon, String politiskStruktur, String ekonomi) {
-    boolean resultat = true;
+        public static boolean idKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^\\d*$";
+            String id = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(id).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänt id!");
+                resultat = false;
+            }
+            return resultat;
+        }
+        
+        public static boolean sprakKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^[A-Z][a-zA-Z]+$";
+            String inmatning = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(inmatning).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänt språk!");
+                resultat = false;
+            }
+            return resultat;
+        }
+        
+        public static boolean valutaKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^\\d+(\\.\\d{1,4})?$";
+            String inmatning = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(inmatning).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänd valuta!");
+                resultat = false;
+            }
+            return resultat;
+        }
+        
+                public static boolean tidzonKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^Tidzon \\d+$";
+            String inmatning = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(inmatning).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänd tidzon!");
+                resultat = false;
+            }
+            return resultat;
+        }
+        
+            public static boolean politiskStrukturKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^Politisk Struktur \\d+$";
+            String inmatning = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(inmatning).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänd politisk struktur!");
+                resultat = false;
+            }
+            return resultat;
+            }
+            
+            public static boolean ekonomiKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^Ekonomi \\d+$";
+            String inmatning = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(inmatning).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänd ekonomi!");
+                resultat = false;
+            }
+            return resultat;
+        }
+
+        public static boolean behorighet(InfDB idb, String aid){
+            
+            boolean resultat = false;
+            try{
+                String fraga = "Select behorighetsniva FROM admin where aid = " + aid;
+                String behorighetsniva = idb.fetchSingle(fraga);
     
-if (lid == null || lid.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Lid får inte vara tomt!");
-        resultat = false;
-}
-    if (namn == null || namn.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Namn får inte vara tomt!");
-        resultat = false;
-    }
-    if (sprak == null || sprak.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Språk får inte vara tomt!");
-        resultat = false;
-    }
-    if (valuta == null || valuta.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Valuta får inte vara tomt!");
-        resultat = false;
-    }
-    if (tidszon == null || tidszon.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Tidszon får inte vara tomt!");
-        resultat = false;
-    }
-    if (politiskStruktur == null || politiskStruktur.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Politisk struktur får inte vara tomt!");
-        resultat = false;
-    }
-    if (ekonomi == null || ekonomi.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Ekonomi får inte vara tomt!");
-        resultat = false;
-    }
-    return resultat;
-}
+                    if(behorighetsniva == null){
+                        JOptionPane.showMessageDialog(null, "Du har inte behörighet!");
+                        resultat = false;
+                    }
+                    else {
+
+                        resultat = true;
+                    }
+                }
+                catch (InfException ex){
+                    System.out.println(ex.getMessage());
+                }
+            return resultat;
+        }
+        
        
         public static boolean valideraTaBortLand(String lid){
             boolean resultat = true;
             
             if(lid == null || lid.isEmpty()){
                 JOptionPane.showMessageDialog(null, "lid får inte vara tomt");
-        resultat = false;
+                resultat = false;
             }
-                    return resultat;
+            return resultat;
 
         }
         

@@ -33,7 +33,7 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
 
     public void hamtaPartners() {
         try {
-            String fraga = "SELECT * FROM partner";
+            String fraga = "SELECT partner.pid, namn, kontaktperson, kontaktepost, telefon, adress, branch, stad FROM partner join ans_proj on partner.pid = ans_proj.pid where aid = '" + aid + "' group by pid;";
             partnerUppgifter = idb.fetchRows(fraga);
         } catch (InfException ex) {
             System.out.println(ex.getMessage());
