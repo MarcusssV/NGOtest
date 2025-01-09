@@ -103,6 +103,71 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         
     }
     }
+    
+    public void tabortAnstalld(){
+    
+    if(ValideringsKlass.behorighet(idb, aid)){
+    try{
+        String aid = JOptionPane.showInputDialog(this,"Ange den anställdes id som du vill ta bort:");
+        
+        if(ValideringsKlass.valideraTaBortAnstalld(aid)){
+            // Om den anställde är mentor måste den bli null annars kommer dess aid ligga kvar och du kan inte ta bort för då referasas fortfarande deras aid någonsatans
+            String sqlUppdateraMentor = "UPDATe handlaggare SET mentor = NULL WHERE mentor = '" + aid + "'";
+            idb.update(sqlUppdateraMentor);
+            
+            //Den anställde du försöker radera finns antagligen som en foregin key i admin tabellen o flera andra om du försöker ta bort den innnan du raderar där den refereras får du error du måste ta bort den där den refereras först
+            String sqlTaBortAdmin = "DELETE FROM admin WHERE aid = '" + aid + "'";
+            idb.delete(sqlTaBortAdmin);
+            
+            String sqlTaBortAnsProj = "Delete from ans_proj WHERE aid = '" + aid + "'";
+            idb.delete(sqlTaBortAnsProj);
+            
+            String sqlTaBortHandlaggare = "Delete from handlaggare WHERE aid = '" + aid + "'";
+            idb.delete(sqlTaBortHandlaggare);
+            
+            String sql = "DELETE FROM anstalld WHERE aid = '" + aid + "'";
+            idb.delete(sql);
+            
+            hamtaPersonalData();
+            fyllPersonalTabel();
+            JOptionPane.showMessageDialog(this, "Den anställde har tagits bort");
+        }
+    }catch (InfException ex) {
+        JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
+}
+}
+}
+    
+public void laggTillAnstalld(){
+    try {
+        String aid = JOptionPane.showInputDialog(this, "Ange ett unikt AID");
+        if(!ValideringsKlass.valideraUniktAid(idb, aid)){
+            return; 
+        }
+        
+        String fornamn = JOptionPane.showInputDialog(this, "Ange förnamn:");
+        String efternamn = JOptionPane.showInputDialog(this, "Ange efternamn:");
+        String adress = JOptionPane.showInputDialog(this, "Ange adress:");
+        String epost = JOptionPane.showInputDialog(this, "Ange epost:");
+        String telefon = JOptionPane.showInputDialog(this, "Ange telefon:");
+        String anstalldatum = JOptionPane.showInputDialog(this, "Ange anställningsdatum (YYYY-MM-DD):");
+        String losenord = JOptionPane.showInputDialog(this, "Ange lösenord:");
+        String avdelning = JOptionPane.showInputDialog(this, "Ange avdelning:");
+        
+        String sqlNyAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, adress, epost, telefon, anstallningsdatum, losenord, avdelning) " +
+                "VALUES ('" + aid + "', '" + fornamn + "', '" + efternamn + "', '" + adress + "', '" + epost + "', '" + telefon + "', '" + anstalldatum + "', '" + losenord + "', '" + avdelning + "')";
+        idb.insert(sqlNyAnstalld);
+        
+        JOptionPane.showMessageDialog(this, fornamn + "' '" + efternamn + "Har lagts till!");
+        hamtaPersonalData();
+        fyllPersonalTabel();
+    }catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + e.getMessage());
+}
+}
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,6 +187,8 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         jAlternativRuta = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jInfoTillbakaKnapp = new javax.swing.JButton();
+        laggTillPersonal = new javax.swing.JButton();
+        taBortPersonal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -192,6 +259,20 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
             }
         });
 
+        laggTillPersonal.setText("Lägg till personal");
+        laggTillPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laggTillPersonalActionPerformed(evt);
+            }
+        });
+
+        taBortPersonal.setText("Ta bort personal");
+        taBortPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                taBortPersonalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,7 +282,9 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
                 .addComponent(jTillbakaKnapp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1012, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1012, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,13 +295,18 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
                                 .addComponent(jAlternativRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jInmatningsRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSokKnapp))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSokKnapp)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jInfoTillbakaKnapp)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(laggTillPersonal))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(47, 47, 47)))
-                        .addComponent(jInfoTillbakaKnapp)))
-                .addContainerGap())
+                                .addGap(0, 278, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(taBortPersonal)
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +321,9 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
                         .addComponent(jInmatningsRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSokKnapp)
                         .addComponent(jAlternativRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jInfoTillbakaKnapp)))
+                        .addComponent(jInfoTillbakaKnapp)
+                        .addComponent(laggTillPersonal)
+                        .addComponent(taBortPersonal)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTillbakaKnapp, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -291,6 +381,16 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jInfoTillbakaKnappActionPerformed
 
+    private void taBortPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taBortPersonalActionPerformed
+        // TODO add your handling code here:
+        tabortAnstalld();
+    }//GEN-LAST:event_taBortPersonalActionPerformed
+
+    private void laggTillPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggTillPersonalActionPerformed
+        // TODO add your handling code here:
+        laggTillAnstalld();
+    }//GEN-LAST:event_laggTillPersonalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -336,7 +436,9 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jSokKnapp;
     private javax.swing.JButton jTillbakaKnapp;
+    private javax.swing.JButton laggTillPersonal;
     private javax.swing.JTextField personalRubrik;
+    private javax.swing.JButton taBortPersonal;
     // End of variables declaration//GEN-END:variables
 
     
