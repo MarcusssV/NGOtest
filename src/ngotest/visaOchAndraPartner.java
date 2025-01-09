@@ -33,7 +33,7 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
 
     public void hamtaPartners() {
         try {
-            String fraga = "SELECT partner.pid, namn, kontaktperson, kontaktepost, telefon, adress, branch, stad FROM partner join ans_proj on partner.pid = ans_proj.pid where aid = '" + aid + "' group by pid;";
+            String fraga = "SELECT * from partner";
             partnerUppgifter = idb.fetchRows(fraga);
         } catch (InfException ex) {
             System.out.println(ex.getMessage());
@@ -65,10 +65,10 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
     String behorighetsniva = idb.fetchSingle(fraga);
     
     if(behorighetsniva == null){
-        JOptionPane.showMessageDialog(this, "Du har inte behörighet att redigera länder.");
+        JOptionPane.showMessageDialog(this, "Du har inte behörighet att redigera partners.");
     }
     else {
-         JOptionPane.showMessageDialog(this, "Du har behörighet att redigera länder.");
+         JOptionPane.showMessageDialog(this, "Du har behörighet att redigera partners.");
     }
    }
     catch (InfException ex){
@@ -218,7 +218,7 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void redigeraPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigeraPartnerActionPerformed
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_redigeraPartnerActionPerformed
 
     private void laggTillPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggTillPartnerActionPerformed

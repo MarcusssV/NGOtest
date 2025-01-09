@@ -255,6 +255,19 @@ public class ValideringsKlass {
 
         }
         
+       
+        
+        public static boolean valideraTaBortAnstalld(String aid){
+            boolean resultat = true;
+            
+            if(aid == null || aid.isEmpty()){
+                JOptionPane.showMessageDialog(null, "aid får inte vara tomt");
+                resultat = false;
+            }
+            return resultat;
+
+        }
+        
         public static boolean valideraPartner(String pid, String namn, String kontaktperson, String kontaktepost, String telefon, String adress, String branch, String stad) {
     boolean resultat = true;
     
@@ -302,6 +315,22 @@ public static boolean valideraTaBortPartner(String pid) {
     return true;
 }
 
+public static boolean valideraUniktAid(InfDB idb, String aid) {
+    try {
+        String sql = "SELECT aid FROM anstalld WHERE aid = '" + aid + "'";
+        String resultat = idb.fetchSingle(sql);
+
+        if (resultat == null) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Det angivna AID:et finns redan. Välj ett annat ID.");
+            return false;
+        }
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Ett fel inträffade vid kontrollen: " + e.getMessage());
+        return false;
+    }
+}
 
 }
 
