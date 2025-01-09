@@ -77,6 +77,11 @@ private static String aid;
         });
 
         jTillbakaKnapp.setText("Tillbaka");
+        jTillbakaKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTillbakaKnappActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,6 +213,12 @@ private static String aid;
     private void jLidRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLidRutaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLidRutaActionPerformed
+
+    private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
+
+        setVisible(false);
+        new visaOchAndraLander(idb, aid).setVisible(true);
+    }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
     /**
      * @param args the command line arguments

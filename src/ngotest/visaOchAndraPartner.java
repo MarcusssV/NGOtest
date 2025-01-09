@@ -135,16 +135,15 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         partnerTabell = new javax.swing.JTable();
         redigeraPartner = new javax.swing.JButton();
         laggTillPartner = new javax.swing.JButton();
         taBortPartner = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTillbakaKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextField1.setText("Våra Partnes");
 
         partnerTabell.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -180,6 +179,16 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("Våra Partner");
+
+        jTillbakaKnapp.setText("Tillbaka");
+        jTillbakaKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTillbakaKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,16 +196,19 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113)
+                        .addComponent(jTillbakaKnapp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(167, 167, 167)
                         .addComponent(redigeraPartner)
                         .addGap(58, 58, 58)
                         .addComponent(laggTillPartner)
                         .addGap(57, 57, 57)
                         .addComponent(taBortPartner)
-                        .addGap(0, 193, Short.MAX_VALUE)))
+                        .addGap(0, 34, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -204,12 +216,16 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(redigeraPartner)
                     .addComponent(laggTillPartner)
-                    .addComponent(taBortPartner))
+                    .addComponent(taBortPartner)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTillbakaKnapp)))
                 .addContainerGap())
         );
 
@@ -230,6 +246,12 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
         // TODO add your handling code here:
         taBortPartner();
     }//GEN-LAST:event_taBortPartnerActionPerformed
+
+    private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
+
+        setVisible(false);
+        new InfoRuta(idb, aid).setVisible(true);
+    }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,8 +289,9 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jTillbakaKnapp;
     private javax.swing.JButton laggTillPartner;
     private javax.swing.JTable partnerTabell;
     private javax.swing.JButton redigeraPartner;

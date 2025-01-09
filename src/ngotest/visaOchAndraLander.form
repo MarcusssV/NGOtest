@@ -33,11 +33,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <EmptySpace pref="53" max="32767" attributes="0"/>
                       <Component id="redigeraLand" min="-2" pref="182" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="LaggaTillLand" min="-2" pref="187" max="-2" attributes="0"/>
-                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="taBortLandKnapp" min="-2" pref="161" max="-2" attributes="0"/>
                   </Group>
               </Group>

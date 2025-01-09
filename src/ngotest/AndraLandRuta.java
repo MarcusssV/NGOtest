@@ -119,25 +119,25 @@ public class AndraLandRuta extends javax.swing.JFrame {
 
     private void jValAvAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jValAvAndringActionPerformed
 
-                String alternativ = jValAvAndring.getSelectedItem().toString();
-        if(alternativ.equals("Förnamn")){
-            jHjalpRuta.setText("Förnamnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
-        }
-        if(alternativ.equals("Efternamn")){
-            jHjalpRuta.setText("Efteramnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
-        }
-        if(alternativ.equals("Adress")){
-            jHjalpRuta.setText("Adressen måste skrivas på följande sätt: 123 text text, text | 123 text | text 123. Måste även börja på stor bokstav.");
-        }
-        if(alternativ.equals("Telefon Nmr")){
-            jHjalpRuta.setText("Telefonnumret måste skrivas på följande sätt: XXX-XXX-XXXX. Notera att bindesträcken måste vara med.");
-        }
-        if(alternativ.equals("Epost")){
-            jHjalpRuta.setText("Eposten måste innehålla ett @ och en domän.com (kan vara se, com, co.uk. ru mm). ");
-        }
-        if(alternativ.equals("Lösenord")){
-            jHjalpRuta.setText("Lösenordet har inga krav.");
-        }
+                //String alternativ = jValAvAndring.getSelectedItem().toString();
+        //if(alternativ.equals("Förnamn")){
+            //jHjalpRuta.setText("Förnamnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
+        //}
+        //if(alternativ.equals("Efternamn")){
+            //jHjalpRuta.setText("Efteramnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
+        //}
+        //if(alternativ.equals("Adress")){
+            //jHjalpRuta.setText("Adressen måste skrivas på följande sätt: 123 text text, text | 123 text | text 123. Måste även börja på stor bokstav.");
+        //}
+        //if(alternativ.equals("Telefon Nmr")){
+        //    jHjalpRuta.setText("Telefonnumret måste skrivas på följande sätt: XXX-XXX-XXXX. Notera att bindesträcken måste vara med.");
+        //}
+        //if(alternativ.equals("Epost")){
+        //    jHjalpRuta.setText("Eposten måste innehålla ett @ och en domän.com (kan vara se, com, co.uk. ru mm). ");
+        //}
+        //if(alternativ.equals("Lösenord")){
+        //    jHjalpRuta.setText("Lösenordet har inga krav.");
+        //}
     }//GEN-LAST:event_jValAvAndringActionPerformed
 
     private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
