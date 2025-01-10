@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class Inloggningssida extends javax.swing.JFrame {
     private static InfDB idb;
-    private String aid;
+    private static String aid;
     /**
      * Creates new form Inloggningssida
      */
@@ -245,7 +245,7 @@ public class Inloggningssida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               //new Inloggningssida().setVisible(true);
+               new Inloggningssida(idb, aid).setVisible(true);
             }
         });
         
