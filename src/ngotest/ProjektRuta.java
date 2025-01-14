@@ -19,7 +19,7 @@ ArrayList<HashMap<String, String>> datumUppgifter = new ArrayList<>();
 ArrayList<HashMap<String, String>> egnaProjektUppgifter = new ArrayList<>();
 ArrayList<HashMap<String, String>> avdelningsProjektUppgifter = new ArrayList<>();
 String status = "is not null";
-
+String alternativ = "Alla projekt";
 
     public ProjektRuta(InfDB idb, String aid) {
         initComponents();
@@ -45,16 +45,17 @@ String status = "is not null";
         TillbakaKnapp = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         MinaProjektTabel = new javax.swing.JTable();
-        MinaProjektKnapp = new javax.swing.JButton();
-        AllaProjektKnapp = new javax.swing.JButton();
-        AvdelningsProjektKnapp = new javax.swing.JButton();
         StatusDropDown = new javax.swing.JComboBox<>();
         jStartdatumRuta = new javax.swing.JTextField();
         jSlutdatumRuta = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jSökKnapp = new javax.swing.JButton();
+        jDatumSökKnapp = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        ProjektBox = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        SökKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,27 +87,6 @@ String status = "is not null";
         });
         jScrollPane1.setViewportView(MinaProjektTabel);
 
-        MinaProjektKnapp.setText("Mina projekt");
-        MinaProjektKnapp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MinaProjektKnappActionPerformed(evt);
-            }
-        });
-
-        AllaProjektKnapp.setText("Alla projekt");
-        AllaProjektKnapp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AllaProjektKnappActionPerformed(evt);
-            }
-        });
-
-        AvdelningsProjektKnapp.setText("Avdelningens projekt");
-        AvdelningsProjektKnapp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AvdelningsProjektKnappActionPerformed(evt);
-            }
-        });
-
         StatusDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla", "Pågående", "Planerat", "Avslutat" }));
         StatusDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,14 +110,32 @@ String status = "is not null";
 
         jLabel3.setText("Slutdatum");
 
-        jSökKnapp.setText("Sök");
-        jSökKnapp.addActionListener(new java.awt.event.ActionListener() {
+        jDatumSökKnapp.setText("Sök");
+        jDatumSökKnapp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSökKnappActionPerformed(evt);
+                jDatumSökKnappActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Sök efter aktiva projekt på din avdelning inom viss datumram");
+
+        ProjektBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla Projekt", "Avdelningens Projekt", "Mina Projekt", " " }));
+        ProjektBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProjektBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Vilka Projekt");
+
+        jLabel6.setText("Vilken status");
+
+        SökKnapp.setText("Sök");
+        SökKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SökKnappActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,20 +148,25 @@ String status = "is not null";
                         .addComponent(TillbakaKnapp)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 81, Short.MAX_VALUE)
+                        .addGap(0, 68, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(AllaProjektKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(AvdelningsProjektKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(MinaProjektKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(StatusDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(95, 95, 95))))
+                                .addGap(264, 264, 264)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(ProjektBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(56, 56, 56))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(StatusDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(SökKnapp)))))
+                        .addGap(92, 92, 92))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(170, 170, 170)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +180,7 @@ String status = "is not null";
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jSlutdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(jSökKnapp))
+                                .addComponent(jDatumSökKnapp))
                             .addComponent(jLabel3))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -185,18 +188,21 @@ String status = "is not null";
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6))
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AllaProjektKnapp)
-                    .addComponent(AvdelningsProjektKnapp)
-                    .addComponent(MinaProjektKnapp)
-                    .addComponent(StatusDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(StatusDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SökKnapp)
+                    .addComponent(ProjektBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -205,7 +211,7 @@ String status = "is not null";
                     .addComponent(TillbakaKnapp)
                     .addComponent(jStartdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSlutdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSökKnapp))
+                    .addComponent(jDatumSökKnapp))
                 .addContainerGap())
         );
 
@@ -219,24 +225,6 @@ String status = "is not null";
         new InfoRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_TillbakaKnappActionPerformed
 
-    private void AllaProjektKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllaProjektKnappActionPerformed
-        // TODO add your handling code here:
-        hamtaAllaData();
-        fyllAllaTabel();
-    }//GEN-LAST:event_AllaProjektKnappActionPerformed
-
-    private void MinaProjektKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinaProjektKnappActionPerformed
-        // TODO add your handling code here:
-        hamtaEgenData();
-        fyllEgenTabel();
-    }//GEN-LAST:event_MinaProjektKnappActionPerformed
-
-    private void AvdelningsProjektKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvdelningsProjektKnappActionPerformed
-        // TODO add your handling code here:
-        hamtaAvdelningsData();
-        fyllAvdelningsTabel();
-    }//GEN-LAST:event_AvdelningsProjektKnappActionPerformed
-
     private void StatusDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusDropDownActionPerformed
         // Kontrollerar vilken status som tabellen ska visa, beroende på valt alternativ
         // Används vid sql-frågorna för att endast hämta projekt med vald status
@@ -246,7 +234,7 @@ String status = "is not null";
             status = Alternativ;
         }
         else {
-            status = "= " + "'"+ Alternativ + "'";
+            status = "= " + "'"+ Alternativ + "'"; 
         }
         
         
@@ -256,16 +244,40 @@ String status = "is not null";
         // TODO add your handling code here:
     }//GEN-LAST:event_jStartdatumRutaActionPerformed
 
-    private void jSökKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSökKnappActionPerformed
+    private void jDatumSökKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatumSökKnappActionPerformed
         
         hamtaDatumData();
         fyllDatumTabel();
         
-    }//GEN-LAST:event_jSökKnappActionPerformed
+    }//GEN-LAST:event_jDatumSökKnappActionPerformed
 
     private void jSlutdatumRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSlutdatumRutaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jSlutdatumRutaActionPerformed
+
+    private void ProjektBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProjektBoxActionPerformed
+        alternativ = ProjektBox.getSelectedItem().toString();
+
+    }//GEN-LAST:event_ProjektBoxActionPerformed
+
+    private void SökKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SökKnappActionPerformed
+                if (alternativ.equals("Alla Projekt"))
+        {
+                hamtaAllaData();
+                fyllAllaTabel();
+        }
+        if (alternativ.equals("Avdelningens Projekt"))
+        {
+            hamtaAvdelningsData();
+            fyllAvdelningsTabel();
+        }
+        
+        if (alternativ.equals("Mina Projekt"))
+        {
+            hamtaEgenData();
+            fyllEgenTabel();
+        }
+    }//GEN-LAST:event_SökKnappActionPerformed
      
     // Denna metod hämtar data från databasen där den anställda är delaktig
     public void hamtaEgenData (){
@@ -429,20 +441,21 @@ String status = "is not null";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AllaProjektKnapp;
-    private javax.swing.JButton AvdelningsProjektKnapp;
-    private javax.swing.JButton MinaProjektKnapp;
     private javax.swing.JTable MinaProjektTabel;
+    private javax.swing.JComboBox<String> ProjektBox;
     private javax.swing.JComboBox<String> StatusDropDown;
+    private javax.swing.JButton SökKnapp;
     private javax.swing.JButton TillbakaKnapp;
+    private javax.swing.JButton jDatumSökKnapp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSlutdatumRuta;
     private javax.swing.JTextField jStartdatumRuta;
-    private javax.swing.JButton jSökKnapp;
     // End of variables declaration//GEN-END:variables
 }
 
