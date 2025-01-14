@@ -119,7 +119,7 @@ String alternativ = "Alla projekt";
 
         jLabel4.setText("Sök efter aktiva projekt på din avdelning inom viss datumram");
 
-        ProjektBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla Projekt", "Avdelningens Projekt", "Mina Projekt", " " }));
+        ProjektBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla Projekt", "Avdelningens Projekt", "Mina Projekt" }));
         ProjektBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProjektBoxActionPerformed(evt);
