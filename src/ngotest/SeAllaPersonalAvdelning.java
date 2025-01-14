@@ -151,11 +151,32 @@ public void laggTillAnstalld(){
         String epost = JOptionPane.showInputDialog(this, "Ange epost:");
         String telefon = JOptionPane.showInputDialog(this, "Ange telefon:");
         String anstalldatum = JOptionPane.showInputDialog(this, "Ange anställningsdatum (YYYY-MM-DD):");
-        String losenord = JOptionPane.showInputDialog(this, "Ange lösenord:");
         String avdelning = JOptionPane.showInputDialog(this, "Ange avdelning:");
         
-        String sqlNyAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, adress, epost, telefon, anstallningsdatum, losenord, avdelning) " +
-                "VALUES ('" + aid + "', '" + fornamn + "', '" + efternamn + "', '" + adress + "', '" + epost + "', '" + telefon + "', '" + anstalldatum + "', '" + losenord + "', '" + avdelning + "')";
+            int val = JOptionPane.showOptionDialog(this, "Vill du ange ett eget lösenord eller generera ett?",
+    "Lösenord",
+    JOptionPane.DEFAULT_OPTION,
+    JOptionPane.QUESTION_MESSAGE,
+    null,
+    new String[]{"Ange själv", "Generera"},
+    "Ange själv"
+);
+            String losenord;
+            if(val == 0){
+                losenord = JOptionPane.showInputDialog(this, "Ange lösenord:");
+    } else{
+                losenord = randomLosenord.genereraLosenord();
+                JOptionPane.showMessageDialog(this, "Här är ditt lösenord: " + losenord + "Skriv upp det någonstans säkert");
+            }
+                    
+            
+            
+        
+        
+                    
+        
+        String sqlNyAnstalld = "INSERT INTO anstalld (aid, fornamn, efternamn, adress, epost, telefon, anstallningsdatum, avdelning, losenord) " +
+                "VALUES ('" + aid + "', '" + fornamn + "', '" + efternamn + "', '" + adress + "', '" + epost + "', '" + telefon + "', '" + anstalldatum + "', '" + avdelning + "', '" + losenord + "')";
         idb.insert(sqlNyAnstalld);
         
         JOptionPane.showMessageDialog(this, fornamn + "' '" + efternamn + "Har lagts till!");
