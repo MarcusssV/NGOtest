@@ -116,13 +116,48 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
 }
 
    public void redigerPartner (){
+       Behorighet();
+       try {
+       String pid = JOptionPane.showInputDialog(this, "Ange PID för den partner som du vill redigera");
+       if(!ValideringsKlass.finnsPID(idb, pid)){
+           JOptionPane.showMessageDialog(this, "PID: " + pid + " finns inte i databasen");
+           return;
+       }
        
+       int val = JOptionPane.showOptionDialog(
+            this,
+            "Vilken information vill du redigera?",
+            "Redigera Partner",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            new String[]{"Namn", "Kontaktperson", "Kontaktepost", "Telefon", "Adress", "Branch", "Stad"},
+            "Namn"
+        );
+       
+       String[] kolumner = {"namn", "kontaktperson", "kontaktpost", "telefon", "adress", "branch", "stad"};
+        String nyttVarde = JOptionPane.showInputDialog(this, "Ange nytt värde för " + kolumner[val] + ":");
+            if(nyttVarde.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Inget värde angavs. GÖr om.");
+                return;
+            }
+            
+            // Stad är foreign key måste ändra i stad tabellen  
+            if (kolumner.equals("stad")) { 
+            String stadSQL = "update stad set sid  = '" + nyttVarde + "'";
+            idb.update(stadSQL);
+            String sql = "update partner set " + kolumner[val] + " = '" + nyttVarde + "' where pid = '" + pid + "'";
+            idb.update(sql);
+        }
+        
+            String sql = "update partner set " + kolumner[val] + " = '" + nyttVarde + "' where pid = '" + pid + "'";
+            idb.update(sql);
+            JOptionPane.showMessageDialog(this, "Uppdateringen lyckades");
+   }catch (InfException ex) {
+        JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
+   }
    }
    
-
-    
-
-
 
     
 
@@ -235,6 +270,7 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
 
     private void redigeraPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigeraPartnerActionPerformed
       // TODO add your handling code here:
+      redigerPartner();
     }//GEN-LAST:event_redigeraPartnerActionPerformed
 
     private void laggTillPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggTillPartnerActionPerformed
