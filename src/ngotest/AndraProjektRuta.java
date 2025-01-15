@@ -169,7 +169,7 @@ public class AndraProjektRuta extends javax.swing.JFrame {
         jStatusBox.setVisible(true);
         jStatusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hög", "Medel", "Låg",}));
         }
-    if(alternativ.equals("Status")){
+        if(alternativ.equals("Status")){
         jInmatningsFalt.setVisible(false);
         jStatusBox.setVisible(true);
         jStatusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pågående", "Planerat", "Avslutat",}));
