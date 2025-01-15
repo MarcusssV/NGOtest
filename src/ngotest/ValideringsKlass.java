@@ -176,7 +176,7 @@ public class ValideringsKlass {
             return resultat;
         }
         
-                public static boolean tidzonKontroll(JTextField rutaAttKolla){
+        public static boolean tidzonKontroll(JTextField rutaAttKolla){
             
             boolean resultat;
             String regexPattern = "^Tidzon \\d+$";
@@ -191,7 +191,7 @@ public class ValideringsKlass {
             return resultat;
         }
         
-            public static boolean politiskStrukturKontroll(JTextField rutaAttKolla){
+        public static boolean politiskStrukturKontroll(JTextField rutaAttKolla){
             
             boolean resultat;
             String regexPattern = "^Politisk Struktur \\d+$";
@@ -206,7 +206,7 @@ public class ValideringsKlass {
             return resultat;
             }
             
-            public static boolean ekonomiKontroll(JTextField rutaAttKolla){
+        public static boolean ekonomiKontroll(JTextField rutaAttKolla){
             
             boolean resultat;
             String regexPattern = "^Ekonomi \\d+$";
@@ -220,7 +220,22 @@ public class ValideringsKlass {
             }
             return resultat;
         }
-
+        
+        public static boolean ProjektNamnKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^[a-zA-Z0-9 ]+$";
+            String inmatning = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(inmatning).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänt Projektnamn!");
+                resultat = false;
+            }
+            return resultat;
+        }
+            
         public static boolean behorighet(InfDB idb, String aid){
             
             boolean resultat = false;
@@ -242,7 +257,7 @@ public class ValideringsKlass {
                 }
             return resultat;
         }
-                public static boolean behorighetProjektChef(InfDB idb, String aid){
+        public static boolean behorighetProjektChef(InfDB idb, String aid){
             
             boolean resultat = false;
             try{
@@ -264,6 +279,20 @@ public class ValideringsKlass {
             return resultat;
         }
         
+        public static boolean KostnadKontroll(JTextField rutaAttKolla){
+            
+            boolean resultat;
+            String regexPattern = "^\\d+(\\.\\d{1,2})?$";
+            String inmatning = rutaAttKolla.getText();
+            if(Pattern.compile(regexPattern).matcher(inmatning).matches()){
+                resultat = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ej godkänd valuta!");
+                resultat = false;
+            }
+            return resultat;
+        }
        
         public static boolean valideraTaBortLand(String lid){
             boolean resultat = true;

@@ -139,78 +139,106 @@ public class AndraProjektRuta extends javax.swing.JFrame {
     private void jValAvAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jValAvAndringActionPerformed
 
     String alternativ = jValAvAndring.getSelectedItem().toString();  
-    if(alternativ.equals("Projektnamn")){
-        jInmatningsFalt.setVisible(true);
-        jStatusBox.setVisible(false); 
+        if(alternativ.equals("Projektnamn")){
+            jInmatningsFalt.setVisible(true);
+            jStatusBox.setVisible(false); 
         }
     
         if(alternativ.equals("Beskrivning")){
-        jInmatningsFalt.setVisible(true);
-        jStatusBox.setVisible(false);
+            jInmatningsFalt.setVisible(true);
+            jStatusBox.setVisible(false);
         }
         
         if(alternativ.equals("Startdatum")){
-        jInmatningsFalt.setVisible(true);
-        jStatusBox.setVisible(false);
+            jInmatningsFalt.setVisible(true);
+            jStatusBox.setVisible(false);
         }
         
         if(alternativ.equals("Slutdatum")){
-        jInmatningsFalt.setVisible(true);
-        jStatusBox.setVisible(false);
+            jInmatningsFalt.setVisible(true);
+            jStatusBox.setVisible(false);
         }
         
         if(alternativ.equals("Kostnad")){
-        jInmatningsFalt.setVisible(true);
-        jStatusBox.setVisible(false);
+            jInmatningsFalt.setVisible(true);
+            jStatusBox.setVisible(false);
         }
                 
         if(alternativ.equals("Prioritet")){
-        jInmatningsFalt.setVisible(false);
-        jStatusBox.setVisible(true);
-        jStatusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hög", "Medel", "Låg",}));
+            jInmatningsFalt.setVisible(false);
+            jStatusBox.setVisible(true);
+            jStatusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hög", "Medel", "Låg",}));
         }
         if(alternativ.equals("Status")){
-        jInmatningsFalt.setVisible(false);
-        jStatusBox.setVisible(true);
-        jStatusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pågående", "Planerat", "Avslutat",}));
+            jInmatningsFalt.setVisible(false);
+            jStatusBox.setVisible(true);
+            jStatusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pågående", "Planerat", "Avslutat",}));
         }
     
         if(alternativ.equals("Projektchef")){
-        jInmatningsFalt.setVisible(true);
-        jStatusBox.setVisible(false);
+            jInmatningsFalt.setVisible(true);
+            jStatusBox.setVisible(false);
         }
         
         if(alternativ.equals("Land")){
-        jInmatningsFalt.setVisible(true);
-        jStatusBox.setVisible(false);
+            jInmatningsFalt.setVisible(true);
+            jStatusBox.setVisible(false);
         }
     }//GEN-LAST:event_jValAvAndringActionPerformed
 
     private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
         setVisible(false);
-        new visaOchAndraLander(idb, aid).setVisible(true);
+        new ProjektRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
     private void jAndraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAndraKnappActionPerformed
         // TODO add your handling code here:
-        
         String alternativ = jValAvAndring.getSelectedItem().toString();
-        if(alternativ.equals("Namn")){
-            andraNamn();
-        }
-        if(alternativ.equals("Sprak")){
-            andraSprak();
-        }
-        if(alternativ.equals("Valuta")){
-            andraValuta();
-        }
-        if(alternativ.equals("Politisk Struktur")){
-            andraPS();
-        }
-        if(alternativ.equals("Ekonomi")){
-            andraEkonomi();
-        }
-        if(alternativ.equals("Status")){
+        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
+            if(ValideringsKlass.idKontroll(jIdRuta)){
+                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){               
+                    if(alternativ.equals("Projektnamn")){
+                        if(ValideringsKlass.ProjektNamnKontroll(jInmatningsFalt)){
+                            andraProjektNamn();
+                        }
+                    }
+                    if(alternativ.equals("Beskrivning")){
+                        andraBeskrivning();
+                    }
+                    if(alternativ.equals("Startdatum")){
+                        if(ValideringsKlass.datumKontroll(jInmatningsFalt)){
+                            andraStartDatum();
+                        }
+                    }
+                    if(alternativ.equals("Slutdatum")){
+                        if(ValideringsKlass.datumKontroll(jInmatningsFalt)){
+                            andraSlutDatum();
+                        }
+                    }
+                    if(alternativ.equals("Kostnad")){
+                        if(ValideringsKlass.KostnadKontroll(jInmatningsFalt)){
+                            andraKostnad();
+                        }
+                    }
+                    if(alternativ.equals("Projektchef")){
+                        if(ValideringsKlass.idKontroll(jInmatningsFalt)){
+                            andraProjektchef();
+                        }
+                    }
+                    if(alternativ.equals("Land")){
+                        if(ValideringsKlass.idKontroll(jInmatningsFalt)){
+                            andraLand();
+                        }
+                    }
+                }
+                
+                if(alternativ.equals("Prioritet")){ 
+                    andraPrioritet();
+                }
+                if(alternativ.equals("Status")){
+                    andraStatus();
+                }
+            }
         }
     }//GEN-LAST:event_jAndraKnappActionPerformed
 
@@ -218,111 +246,123 @@ public class AndraProjektRuta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jStatusBoxActionPerformed
 
-    public void andraNamn(){
-        
-        String lid = jIdRuta.getText();
+
+    public void andraProjektNamn(){
         String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
-            if(ValideringsKlass.idKontroll(jIdRuta));
-                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-                    if(ValideringsKlass.namnKontroll(jInmatningsFalt)){
-                        try{
-                            idb.update("Update land set namn = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
-                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                        }
-                        catch (InfException a){
-                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                            System.out.println(a.getMessage());
-                        }
-                    }
-                }
-            }
-    }
-    public void andraSprak(){
-        
-        String lid = jIdRuta.getText();
-        String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
-            if(ValideringsKlass.idKontroll(jIdRuta));
-                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-                    if(ValideringsKlass.sprakKontroll(jInmatningsFalt)){
-                        try{
-                            idb.update("Update land set sprak = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
-                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                        }
-                        catch (InfException a){
-                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                            System.out.println(a.getMessage());
-                        }
-                    }
-                }
-            }
-    }
-    public void andraValuta(){
-        
-        String lid = jIdRuta.getText();
-        String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
-            if(ValideringsKlass.idKontroll(jIdRuta));
-                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-                    if(ValideringsKlass.valutaKontroll(jInmatningsFalt)){
-                        try{
-                            idb.update("Update land set valuta = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
-                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                        }
-                        catch (InfException a){
-                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                            System.out.println(a.getMessage());
-                        }
-                    }
-                }
-            }
-    }
-    
-    public void andraPS(){
-        
-        String lid = jIdRuta.getText();
-        String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
-            if(ValideringsKlass.idKontroll(jIdRuta));
-                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-                    if(ValideringsKlass.politiskStrukturKontroll(jInmatningsFalt)){
-                        try{
-                            idb.update("Update land set politisk_struktur = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
-                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                        }
-                        catch (InfException a){
-                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                            System.out.println(a.getMessage());
-                        }
-                    }
-                }
-            }
-    }
-  
-    public void andraEkonomi(){
-        
-        String lid = jIdRuta.getText();
-        String inmatning = jInmatningsFalt.getText();
-        if(ValideringsKlass.textFaltHarVarde(jIdRuta)){
-            if(ValideringsKlass.idKontroll(jIdRuta));
-                if(ValideringsKlass.textFaltHarVarde(jInmatningsFalt)){
-                    if(ValideringsKlass.ekonomiKontroll(jInmatningsFalt)){
-                        try{
-                            idb.update("Update land set ekonomi = " + "'" + inmatning + "'" + "where lid = '" + lid + "'");
-                            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
-                        }
-                        catch (InfException a){
-                            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
-                            System.out.println(a.getMessage());
-                        }
-                    }
-                }
-            }
+        String id = jIdRuta.getText();
+        try{
+            idb.update("update projekt set projektnamn = '" + inmatning + "' where pid = '" + id + "'");
+            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+        }
+        catch (InfException a){
+            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+            System.out.println(a.getMessage());
+        }
     }
 
-
+    public void andraBeskrivning(){
+        String inmatning = jInmatningsFalt.getText();
+        String id = jIdRuta.getText();
+        try{
+            idb.update("update projekt set beskrivning = '" + inmatning + "' where pid = '" + id + "'");
+            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+        }
+        catch (InfException a){
+            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+            System.out.println(a.getMessage());
+        }
+    }
     
+    public void andraStartDatum(){
+        String inmatning = jInmatningsFalt.getText();
+        String id = jIdRuta.getText();
+        try{
+            idb.update("update projekt set startdatum = '" + inmatning + "' where pid = '" + id + "'");
+            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+        }
+        catch (InfException a){
+            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+            System.out.println(a.getMessage());
+        }
+    }
+
+    public void andraSlutDatum(){
+        String inmatning = jInmatningsFalt.getText();
+        String id = jIdRuta.getText();
+        try{
+            idb.update("update projekt set slutdatum = '" + inmatning + "' where pid = '" + id + "'");
+            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+        }
+        catch (InfException a){
+            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+            System.out.println(a.getMessage());
+        }
+    }
+    
+    public void andraKostnad(){
+        String inmatning = jInmatningsFalt.getText();
+        String id = jIdRuta.getText();
+        try{
+            idb.update("update projekt set kostnad = '" + inmatning + "' where pid = '" + id + "'");
+            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+        }
+        catch (InfException a){
+            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+            System.out.println(a.getMessage());
+        }
+    }
+    
+    public void andraStatus(){
+        String ddAlternativ = jStatusBox.getSelectedItem().toString(); //ddAlternativ står för Drop Down Alternativ.
+        String id = jIdRuta.getText();
+        try{
+            idb.update("update projekt set status = '" + ddAlternativ + "' where pid = '" + id + "'");
+            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+        }
+        catch (InfException a){
+            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+            System.out.println(a.getMessage());
+        }
+    }
+    
+    public void andraPrioritet(){
+        String ddAlternativ = jStatusBox.getSelectedItem().toString(); //ddAlternativ står för Drop Down Alternativ.
+        String id = jIdRuta.getText();
+        try{
+            idb.update("update projekt set prioritet = '" + ddAlternativ + "' where pid = '" + id + "'");
+            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+        }
+        catch (InfException a){
+            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+            System.out.println(a.getMessage());
+        }
+    }
+    
+    public void andraProjektchef(){
+        String inmatning = jInmatningsFalt.getText();
+        String id = jIdRuta.getText();
+        try{
+            idb.update("update projekt set projektchef = '" + inmatning + "' where pid = '" + id + "'");
+            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+        }
+        catch (InfException a){
+            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+            System.out.println(a.getMessage());
+        }
+    }
+    
+    public void andraLand(){
+        String inmatning = jInmatningsFalt.getText();
+        String id = jIdRuta.getText();
+        try{
+            idb.update("update projekt set land = '" + inmatning + "' where pid = '" + id + "'");
+            JOptionPane.showMessageDialog(null, "Ändringen gick igenom!");
+        }
+        catch (InfException a){
+            JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+            System.out.println(a.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
