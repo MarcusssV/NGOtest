@@ -219,7 +219,8 @@ private String aid;
     }//GEN-LAST:event_varaPartnersKnappActionPerformed
 
     private void jProjektChefKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProjektChefKnappActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
+        new ProjektchefMeny(idb, aid).setVisible(true);
     }//GEN-LAST:event_jProjektChefKnappActionPerformed
 
     private void valkommenTextNamn(){
