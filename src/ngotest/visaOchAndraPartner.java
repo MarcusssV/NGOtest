@@ -29,6 +29,7 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
         this.aid = aid;
         hamtaPartners();
         fyllTabell();
+        synlighetAdmin();
 }
 
     public void hamtaPartners() {
@@ -289,6 +290,16 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
         new InfoRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
+    private void synlighetAdmin(){
+        taBortPartner.setVisible(false);
+        laggTillPartner.setVisible(false);
+        redigeraPartner.setVisible(false);
+        if(ValideringsKlass.behorighet(idb, aid)){
+            taBortPartner.setVisible(true);
+            laggTillPartner.setVisible(true);
+            redigeraPartner.setVisible(true);
+        }
+    }
     /**
      * @param args the command line arguments
      */

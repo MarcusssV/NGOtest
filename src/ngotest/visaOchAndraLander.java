@@ -28,6 +28,7 @@ public class visaOchAndraLander extends javax.swing.JFrame {
         this.aid = aid;
         hamtaLander();
         fyllTabell();
+        synlighetAdmin();
         
     }
 
@@ -103,7 +104,7 @@ public void redigeraLand(){
         jLabel1 = new javax.swing.JLabel();
         TillbakaKnapp = new javax.swing.JButton();
         redigeraLand = new javax.swing.JButton();
-        LaggaTillLand = new javax.swing.JButton();
+        laggaTillLand = new javax.swing.JButton();
         taBortLandKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -143,10 +144,10 @@ public void redigeraLand(){
             }
         });
 
-        LaggaTillLand.setText("Lägg till land");
-        LaggaTillLand.addActionListener(new java.awt.event.ActionListener() {
+        laggaTillLand.setText("Lägg till land");
+        laggaTillLand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LaggaTillLandActionPerformed(evt);
+                laggaTillLandActionPerformed(evt);
             }
         });
 
@@ -173,7 +174,7 @@ public void redigeraLand(){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                         .addComponent(redigeraLand, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addComponent(LaggaTillLand, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(laggaTillLand, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(taBortLandKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -184,7 +185,7 @@ public void redigeraLand(){
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(LaggaTillLand)
+                    .addComponent(laggaTillLand)
                     .addComponent(redigeraLand)
                     .addComponent(taBortLandKnapp))
                 .addGap(22, 22, 22)
@@ -210,19 +211,29 @@ public void redigeraLand(){
     }
     }//GEN-LAST:event_redigeraLandActionPerformed
 
-    private void LaggaTillLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaggaTillLandActionPerformed
+    private void laggaTillLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggaTillLandActionPerformed
 
     if(ValideringsKlass.behorighet(idb, aid)){
     new LaggTillLandRuta(idb, aid).setVisible(true);
     setVisible(false);
     }
-    }//GEN-LAST:event_LaggaTillLandActionPerformed
+    }//GEN-LAST:event_laggaTillLandActionPerformed
 
     private void taBortLandKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taBortLandKnappActionPerformed
 taBortLand();
         // TODO add your handling code here:
     }//GEN-LAST:event_taBortLandKnappActionPerformed
 
+        private void synlighetAdmin(){
+        laggaTillLand.setVisible(false);
+        redigeraLand.setVisible(false);
+        taBortLandKnapp.setVisible(false);
+        if(ValideringsKlass.behorighet(idb, aid)){
+            laggaTillLand.setVisible(true);
+            redigeraLand.setVisible(true);
+            taBortLandKnapp.setVisible(true);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -259,10 +270,10 @@ taBortLand();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton LaggaTillLand;
     private javax.swing.JButton TillbakaKnapp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton laggaTillLand;
     private javax.swing.JTable landTabell;
     private javax.swing.JButton redigeraLand;
     private javax.swing.JButton taBortLandKnapp;

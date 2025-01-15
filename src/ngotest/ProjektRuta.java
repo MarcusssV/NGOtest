@@ -27,6 +27,7 @@ String alternativ = "Alla projekt";
         this.aid = aid;
         hamtaAllaData();
         fyllAllaTabel();
+        synlighetAdmin();
         
     }
     
@@ -56,6 +57,9 @@ String alternativ = "Alla projekt";
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         SökKnapp = new javax.swing.JButton();
+        jRedigeraKnapp = new javax.swing.JButton();
+        jLaggTillKnapp = new javax.swing.JButton();
+        jTaBortKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +141,17 @@ String alternativ = "Alla projekt";
             }
         });
 
+        jRedigeraKnapp.setText("Redigera");
+        jRedigeraKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRedigeraKnappActionPerformed(evt);
+            }
+        });
+
+        jLaggTillKnapp.setText("Lägg till");
+
+        jTaBortKnapp.setText("Ta bort");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,8 +196,14 @@ String alternativ = "Alla projekt";
                                 .addComponent(jSlutdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(jDatumSökKnapp))
-                            .addComponent(jLabel3))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel3))
+                        .addGap(62, 62, 62)
+                        .addComponent(jRedigeraKnapp)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLaggTillKnapp)
+                        .addGap(32, 32, 32)
+                        .addComponent(jTaBortKnapp)))
+                .addGap(0, 60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,16 +224,24 @@ String alternativ = "Alla projekt";
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TillbakaKnapp)
-                    .addComponent(jStartdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSlutdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDatumSökKnapp))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TillbakaKnapp)
+                            .addComponent(jStartdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSlutdatumRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDatumSökKnapp))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRedigeraKnapp)
+                            .addComponent(jLaggTillKnapp)
+                            .addComponent(jTaBortKnapp))
+                        .addGap(15, 15, 15))))
         );
 
         pack();
@@ -278,6 +307,11 @@ String alternativ = "Alla projekt";
             fyllEgenTabel();
         }
     }//GEN-LAST:event_SökKnappActionPerformed
+
+    private void jRedigeraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRedigeraKnappActionPerformed
+        setVisible(false);
+        new AndraProjektRuta(idb, aid).setVisible(true);
+    }//GEN-LAST:event_jRedigeraKnappActionPerformed
      
     // Denna metod hämtar data från databasen där den anställda är delaktig
     public void hamtaEgenData (){
@@ -401,6 +435,17 @@ String alternativ = "Alla projekt";
         }
         
     }
+    
+        private void synlighetAdmin(){
+        jLaggTillKnapp.setVisible(false);
+        jTaBortKnapp.setVisible(false);
+        jRedigeraKnapp.setVisible(false);
+        if(ValideringsKlass.behorighet(idb, aid)){
+            jLaggTillKnapp.setVisible(true);
+            jTaBortKnapp.setVisible(true);
+            jRedigeraKnapp.setVisible(true);
+        }
+    }
         
     /**
      * @param args the command line arguments
@@ -453,9 +498,12 @@ String alternativ = "Alla projekt";
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jLaggTillKnapp;
+    private javax.swing.JButton jRedigeraKnapp;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSlutdatumRuta;
     private javax.swing.JTextField jStartdatumRuta;
+    private javax.swing.JButton jTaBortKnapp;
     // End of variables declaration//GEN-END:variables
 }
 

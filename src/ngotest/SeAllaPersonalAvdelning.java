@@ -29,6 +29,7 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
        hamtaAvdelningsData();
        hamtaPersonalData();
        fyllPersonalTabel();
+       synlighetAdmin();
     }
         public void hamtaAvdelningsData(){
         try{
@@ -318,13 +319,13 @@ public void laggTillAnstalld(){
                                 .addComponent(jInmatningsRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jSokKnapp)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jInfoTillbakaKnapp)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(laggTillPersonal))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(0, 278, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(taBortPersonal)
                         .addGap(18, 18, 18))))
@@ -415,6 +416,14 @@ public void laggTillAnstalld(){
         laggTillAnstalld();
     }//GEN-LAST:event_laggTillPersonalActionPerformed
 
+    private void synlighetAdmin(){
+        laggTillPersonal.setVisible(false);
+        taBortPersonal.setVisible(false);
+        if(ValideringsKlass.behorighet(idb, aid)){
+            laggTillPersonal.setVisible(true);
+            taBortPersonal.setVisible(true);
+        }
+    }
     /**
      * @param args the command line arguments
      */
