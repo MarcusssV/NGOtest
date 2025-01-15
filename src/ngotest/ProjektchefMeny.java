@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ngotest;
-
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /**
  *
  * @author Thomas
@@ -13,10 +14,14 @@ public class ProjektchefMeny extends javax.swing.JFrame {
     /**
      * Creates new form ProjektchefMeny
      */
-    public ProjektchefMeny() {
+    public ProjektchefMeny(InfDB idb, String aid) {
         initComponents();
+        this.idb = idb;
+        this.aid = aid;
     }
 
+    private static InfDB idb;
+    private static String aid;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,21 +31,41 @@ public class ProjektchefMeny extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTillbakaKnapp = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTillbakaKnapp.setText("Tillbaka");
+        jTillbakaKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTillbakaKnappActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTillbakaKnapp)
+                .addContainerGap(496, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(356, Short.MAX_VALUE)
+                .addComponent(jTillbakaKnapp)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
+        setVisible(false);
+        new InfoRuta(idb, aid).setVisible(true);
+    }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
     /**
      * @param args the command line arguments
@@ -72,11 +97,12 @@ public class ProjektchefMeny extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProjektchefMeny().setVisible(true);
+                // new ProjektchefMeny().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jTillbakaKnapp;
     // End of variables declaration//GEN-END:variables
 }
