@@ -242,6 +242,27 @@ public class ValideringsKlass {
                 }
             return resultat;
         }
+                public static boolean behorighetProjektChef(InfDB idb, String aid){
+            
+            boolean resultat = false;
+            try{
+                String fraga = "SELECT projekt.projektchef FROM projekt JOIN anstalld ON projekt.projektchef = anstalld.aid where aid = '" + aid + "'";
+                String behorighetsniva = idb.fetchSingle(fraga);
+    
+                    if(behorighetsniva == null){
+                        //JOptionPane.showMessageDialog(null, "Du är inte projektchef!");
+                        resultat = false;
+                    }
+                    else {
+
+                        resultat = true;
+                    }
+                }
+                catch (InfException ex){
+                    System.out.println(ex.getMessage());
+                }
+            return resultat;
+        }
         
        
         public static boolean valideraTaBortLand(String lid){

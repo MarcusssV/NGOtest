@@ -22,6 +22,7 @@ public class InfoRuta extends javax.swing.JFrame {
         this.idb = idb;
         this.aid = aid;
         valkommenTextNamn();
+        synligProjektchef();
        
     }
 private static InfDB idb;
@@ -44,6 +45,7 @@ private String aid;
         LoggaUtKnapp = new javax.swing.JButton();
         varaLander = new javax.swing.JButton();
         varaPartnersKnapp = new javax.swing.JButton();
+        jProjektChefKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +103,14 @@ private String aid;
             }
         });
 
+        jProjektChefKnapp.setText("Projektchef Meny");
+        jProjektChefKnapp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jProjektChefKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jProjektChefKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,7 +134,8 @@ private String aid;
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(SeProjektKnapp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(hallbarhetsKnapp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(SeMittKontoKnapp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(SeMittKontoKnapp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jProjektChefKnapp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(107, 107, 107))))
         );
         layout.setVerticalGroup(
@@ -145,7 +156,9 @@ private String aid;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(hallbarhetsKnapp)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jProjektChefKnapp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                         .addComponent(LoggaUtKnapp))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(varaPartnersKnapp)
@@ -205,6 +218,10 @@ private String aid;
         // TODO add your handling code here:
     }//GEN-LAST:event_varaPartnersKnappActionPerformed
 
+    private void jProjektChefKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProjektChefKnappActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jProjektChefKnappActionPerformed
+
     private void valkommenTextNamn(){
         try {
         String forFraga = ("Select fornamn from anstalld where aid = " + aid);
@@ -219,6 +236,12 @@ private String aid;
         
     }
     
+    private void synligProjektchef(){
+        jProjektChefKnapp.setVisible(false);
+        if(ValideringsKlass.behorighetProjektChef(idb, aid)){
+            jProjektChefKnapp.setVisible(true);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -260,6 +283,7 @@ private String aid;
     private javax.swing.JButton SeProjektKnapp;
     private javax.swing.JButton VisaPersonal;
     private javax.swing.JButton hallbarhetsKnapp;
+    private javax.swing.JButton jProjektChefKnapp;
     private javax.swing.JLabel valkommenText;
     private javax.swing.JButton varaLander;
     private javax.swing.JButton varaPartnersKnapp;

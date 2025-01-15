@@ -45,6 +45,7 @@
                                   <Component id="SeProjektKnapp" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="hallbarhetsKnapp" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="SeMittKontoKnapp" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="jProjektChefKnapp" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -75,7 +76,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="hallbarhetsKnapp" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="138" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jProjektChefKnapp" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="103" max="32767" attributes="0"/>
                       <Component id="LoggaUtKnapp" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -153,6 +156,15 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="varaPartnersKnappActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jProjektChefKnapp">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Projektchef Meny"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jProjektChefKnappActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
