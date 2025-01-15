@@ -229,7 +229,7 @@ public class ValideringsKlass {
                 String behorighetsniva = idb.fetchSingle(fraga);
     
                     if(behorighetsniva == null){
-                        JOptionPane.showMessageDialog(null, "Du har inte behörighet!");
+                        //JOptionPane.showMessageDialog(null, "Du har inte behörighet!");
                         resultat = false;
                     }
                     else {
