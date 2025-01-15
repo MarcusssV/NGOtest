@@ -149,8 +149,18 @@ String alternativ = "Alla projekt";
         });
 
         jLaggTillKnapp.setText("Lägg till");
+        jLaggTillKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLaggTillKnappActionPerformed(evt);
+            }
+        });
 
         jTaBortKnapp.setText("Ta bort");
+        jTaBortKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTaBortKnappActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -312,6 +322,17 @@ String alternativ = "Alla projekt";
         setVisible(false);
         new AndraProjektRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_jRedigeraKnappActionPerformed
+
+    private void jLaggTillKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLaggTillKnappActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new LaggTillProjektRuta(idb,aid).setVisible(true);
+    }//GEN-LAST:event_jLaggTillKnappActionPerformed
+
+    private void jTaBortKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTaBortKnappActionPerformed
+        // TODO add your handling code here:
+        taBortProjekt();
+    }//GEN-LAST:event_jTaBortKnappActionPerformed
      
     // Denna metod hämtar data från databasen där den anställda är delaktig
     public void hamtaEgenData (){
@@ -436,6 +457,24 @@ String alternativ = "Alla projekt";
         
     }
     
+        public void taBortProjekt(){
+    
+    if(ValideringsKlass.behorighet(idb, aid)){
+    try{
+        String pid = JOptionPane.showInputDialog(this,"Ange projektets id som du vill ta bort:");
+        
+        if(ValideringsKlass.valideraTaBortLand(pid)){
+            String sql = "DELETE FROM projekt WHERE pid = '" + pid + "'";
+            idb.delete(sql);
+            hamtaAllaData();
+            fyllAllaTabel();
+            JOptionPane.showMessageDialog(this, "Projektet har tagits bort");
+            }
+            }catch (InfException ex) {
+            JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
+            }
+        }
+    }
         private void synlighetAdmin(){
         jLaggTillKnapp.setVisible(false);
         jTaBortKnapp.setVisible(false);

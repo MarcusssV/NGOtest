@@ -314,11 +314,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="L&#xe4;gg till"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jLaggTillKnappActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jTaBortKnapp">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ta bort"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTaBortKnappActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

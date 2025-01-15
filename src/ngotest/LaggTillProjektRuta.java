@@ -4,6 +4,7 @@
  */
 package ngotest;
 import javax.swing.JOptionPane;
+import ngotest.ValideringsKlass;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -24,13 +25,12 @@ private static String aid;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLidRuta = new javax.swing.JTextField();
-        jNamnRuta = new javax.swing.JTextField();
-        jSprakRuta = new javax.swing.JTextField();
-        jValutaRuta = new javax.swing.JTextField();
-        jTidzonRuta = new javax.swing.JTextField();
-        jPSRuta = new javax.swing.JTextField();
-        jEkonomiRuta = new javax.swing.JTextField();
+        jPIDFalt = new javax.swing.JTextField();
+        jProjektnamnFalt = new javax.swing.JTextField();
+        jBeskrivningFalt = new javax.swing.JTextField();
+        jStartdatumFalt = new javax.swing.JTextField();
+        jSlutdatumFalt = new javax.swing.JTextField();
+        jKostnadFalt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -40,34 +40,41 @@ private static String aid;
         jLabel7 = new javax.swing.JLabel();
         jKnapp = new javax.swing.JButton();
         jTillbakaKnapp = new javax.swing.JButton();
+        jStatusBox = new javax.swing.JComboBox<>();
+        jPrioritetBox = new javax.swing.JComboBox<>();
+        jProjektchefFalt = new javax.swing.JTextField();
+        jLandFalt = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLidRuta.addActionListener(new java.awt.event.ActionListener() {
+        jPIDFalt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jLidRutaActionPerformed(evt);
+                jPIDFaltActionPerformed(evt);
             }
         });
 
-        jNamnRuta.addActionListener(new java.awt.event.ActionListener() {
+        jProjektnamnFalt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNamnRutaActionPerformed(evt);
+                jProjektnamnFaltActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("LID");
+        jLabel1.setText("PID");
 
-        jLabel2.setText("Namn");
+        jLabel2.setText("Projektnamn");
 
-        jLabel3.setText("Språk");
+        jLabel3.setText("Beskrivning");
 
-        jLabel4.setText("Valuta");
+        jLabel4.setText("Startdatum");
 
-        jLabel5.setText("Tidzon");
+        jLabel5.setText("Slutdatum");
 
-        jLabel6.setText("PolitiskStruktur");
+        jLabel6.setText("Kostnad");
 
-        jLabel7.setText("Ekonomi");
+        jLabel7.setText("Status");
 
         jKnapp.setText("Kör");
         jKnapp.addActionListener(new java.awt.event.ActionListener() {
@@ -83,10 +90,26 @@ private static String aid;
             }
         });
 
+        jStatusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pågående", "Avslutad", "Planerat" }));
+
+        jPrioritetBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hög", "Medel", "Låg" }));
+
+        jLabel8.setText("Prioritet");
+
+        jLabel9.setText("Projektchef");
+
+        jLabel10.setText("Land");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTillbakaKnapp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jKnapp)
+                .addGap(243, 243, 243))
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,104 +119,126 @@ private static String aid;
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
                 .addGap(140, 140, 140)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jNamnRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
-                    .addComponent(jSprakRuta)
-                    .addComponent(jValutaRuta)
-                    .addComponent(jLidRuta)
-                    .addComponent(jTidzonRuta)
-                    .addComponent(jPSRuta)
-                    .addComponent(jEkonomiRuta))
+                    .addComponent(jLandFalt, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jProjektchefFalt, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jProjektnamnFalt, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                    .addComponent(jBeskrivningFalt)
+                    .addComponent(jStartdatumFalt)
+                    .addComponent(jPIDFalt)
+                    .addComponent(jSlutdatumFalt)
+                    .addComponent(jKostnadFalt)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPrioritetBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jStatusBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jKnapp)
-                .addGap(243, 243, 243))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTillbakaKnapp)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLidRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPIDFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jNamnRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProjektnamnFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSprakRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBeskrivningFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jValutaRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jStartdatumFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTidzonRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSlutdatumFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPSRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jKostnadFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jEkonomiRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(60, 60, 60)
-                .addComponent(jKnapp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                .addComponent(jTillbakaKnapp)
-                .addContainerGap())
+                    .addComponent(jLabel7)
+                    .addComponent(jStatusBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPrioritetBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jProjektchefFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLandFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTillbakaKnapp)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jKnapp)
+                        .addGap(22, 22, 22))))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jNamnRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNamnRutaActionPerformed
+    private void jProjektnamnFaltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProjektnamnFaltActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jNamnRutaActionPerformed
+    }//GEN-LAST:event_jProjektnamnFaltActionPerformed
 
     private void jKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jKnappActionPerformed
 
-        if(ValideringsKlass.textFaltHarVarde(jLidRuta)){
-            if(ValideringsKlass.idKontroll(jLidRuta)){
-                String lid = jLidRuta.getText();
-                if(ValideringsKlass.textFaltHarVarde(jNamnRuta)){
-                    if(ValideringsKlass.namnKontroll(jNamnRuta)){
-                        String landNamn = jNamnRuta.getText();
-                        if(ValideringsKlass.textFaltHarVarde(jSprakRuta)){
-                            if(ValideringsKlass.sprakKontroll(jSprakRuta)){
-                                String sprak = jSprakRuta.getText();
-                                if(ValideringsKlass.textFaltHarVarde(jValutaRuta)){
-                                    if(ValideringsKlass.valutaKontroll(jValutaRuta)){
-                                        String valuta = jValutaRuta.getText();
-                                        if(ValideringsKlass.textFaltHarVarde(jTidzonRuta)){
-                                            if(ValideringsKlass.tidzonKontroll(jTidzonRuta)){
-                                                String tidzon = jTidzonRuta.getText();
-                                                if(ValideringsKlass.textFaltHarVarde(jPSRuta)){
-                                                    if(ValideringsKlass.politiskStrukturKontroll(jPSRuta)){
-                                                        String PS = jPSRuta.getText();
-                                                        if(ValideringsKlass.textFaltHarVarde(jEkonomiRuta)){
-                                                            if(ValideringsKlass.ekonomiKontroll(jEkonomiRuta)){
-                                                                String ekonomi = jEkonomiRuta.getText();
-                                                                try{
-                                                                String fraga = "INSERT INTO land (lid, namn, sprak, valuta, tidszon, politisk_struktur, ekonomi) VALUES ('" 
-                                                                              + lid +  "', '" + landNamn + "', '" + sprak + "', '" + valuta + "', '" + tidzon + "', '" + PS + "', '" + ekonomi + "')";
-                                                                idb.insert(fraga);
-                                                                JOptionPane.showMessageDialog(null, "Nytt Land tillagd!");
-                                                                }
-                                                                catch (InfException ex){
-                                                                System.out.println(ex.getMessage());
-                                                                }                                                                    
+        if(ValideringsKlass.textFaltHarVarde(jPIDFalt)){
+            if(ValideringsKlass.idKontroll(jPIDFalt)){
+                String pid = jPIDFalt.getText();
+                if(ValideringsKlass.textFaltHarVarde(jProjektnamnFalt)){
+                    if(ValideringsKlass.ProjektNamnKontroll(jProjektnamnFalt)){
+                        String projektNamn = jProjektnamnFalt.getText();
+                        if(ValideringsKlass.textFaltHarVarde(jBeskrivningFalt)){
+                                String beskrivning = jBeskrivningFalt.getText();
+                                if(ValideringsKlass.textFaltHarVarde(jStartdatumFalt)){
+                                    if(ValideringsKlass.datumKontroll(jStartdatumFalt)){
+                                        String startdatum = jStartdatumFalt.getText();
+                                        if(ValideringsKlass.textFaltHarVarde(jSlutdatumFalt)){
+                                            if(ValideringsKlass.datumKontroll(jSlutdatumFalt)){
+                                                String slutdatum = jSlutdatumFalt.getText();
+                                                if(ValideringsKlass.textFaltHarVarde(jKostnadFalt)){
+                                                    if(ValideringsKlass.kostnadKontroll(jKostnadFalt)){
+                                                        String kostnad = jKostnadFalt.getText();
+                                                        if(ValideringsKlass.textFaltHarVarde(jProjektchefFalt)){
+                                                            if(ValideringsKlass.idKontroll(jProjektchefFalt)){
+                                                                String projektchef = jProjektchefFalt.getText();
+                                                                if(ValideringsKlass.textFaltHarVarde(jLandFalt)){
+                                                                    if(ValideringsKlass.idKontroll(jLandFalt)){
+                                                                        String land = jLandFalt.getText();
+                                                                        String status = jStatusBox.getSelectedItem().toString();
+                                                                        String prioritet = jPrioritetBox.getSelectedItem().toString();
+                                                                        try{
+                                                                            String fraga = "INSERT INTO projekt (pid, projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land)"
+                                                                                    + " VALUES (" + pid + ", '" + projektNamn +"', '" + beskrivning + "', '" + startdatum + "', '"+slutdatum+"', "+kostnad+", '"+status+"', '"+prioritet+"', "+projektchef+", "+land+");";
+                                                                            idb.insert(fraga);
+                                                                            JOptionPane.showMessageDialog(null, "Nytt Land tillagd!");
+                                                                            }
+                                                                            catch (InfException ex){
+                                                                            System.out.println(ex.getMessage());
+                                                                            }
+                                                                    }
+                                                                }                                                                   
                                                             }
                                                         }
                                                     }
@@ -202,22 +247,22 @@ private static String aid;
                                         }
                                     }
                                 }
-                            }
+                            
                         }
                     }
                 }
             }
-        }    
+        }       
     }//GEN-LAST:event_jKnappActionPerformed
 
-    private void jLidRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLidRutaActionPerformed
+    private void jPIDFaltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPIDFaltActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLidRutaActionPerformed
+    }//GEN-LAST:event_jPIDFaltActionPerformed
 
     private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
 
         setVisible(false);
-        new visaOchAndraLander(idb, aid).setVisible(true);
+        new ProjektRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
     /**
@@ -259,21 +304,27 @@ private static String aid;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jEkonomiRuta;
+    private javax.swing.JTextField jBeskrivningFalt;
     private javax.swing.JButton jKnapp;
+    private javax.swing.JTextField jKostnadFalt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jLidRuta;
-    private javax.swing.JTextField jNamnRuta;
-    private javax.swing.JTextField jPSRuta;
-    private javax.swing.JTextField jSprakRuta;
-    private javax.swing.JTextField jTidzonRuta;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jLandFalt;
+    private javax.swing.JTextField jPIDFalt;
+    private javax.swing.JComboBox<String> jPrioritetBox;
+    private javax.swing.JTextField jProjektchefFalt;
+    private javax.swing.JTextField jProjektnamnFalt;
+    private javax.swing.JTextField jSlutdatumFalt;
+    private javax.swing.JTextField jStartdatumFalt;
+    private javax.swing.JComboBox<String> jStatusBox;
     private javax.swing.JButton jTillbakaKnapp;
-    private javax.swing.JTextField jValutaRuta;
     // End of variables declaration//GEN-END:variables
 }

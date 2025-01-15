@@ -216,7 +216,7 @@ public class AndraProjektRuta extends javax.swing.JFrame {
                         }
                     }
                     if(alternativ.equals("Kostnad")){
-                        if(ValideringsKlass.KostnadKontroll(jInmatningsFalt)){
+                        if(ValideringsKlass.kostnadKontroll(jInmatningsFalt)){
                             andraKostnad();
                         }
                     }

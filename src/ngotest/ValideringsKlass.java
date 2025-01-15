@@ -279,7 +279,7 @@ public class ValideringsKlass {
             return resultat;
         }
         
-        public static boolean KostnadKontroll(JTextField rutaAttKolla){
+        public static boolean kostnadKontroll(JTextField rutaAttKolla){
             
             boolean resultat;
             String regexPattern = "^\\d+(\\.\\d{1,2})?$";
