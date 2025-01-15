@@ -332,5 +332,22 @@ public static boolean valideraUniktAid(InfDB idb, String aid) {
     }
 }
 
+public static boolean finnsPID(InfDB idb, String pid){
+    try {
+        String sql = "select pid from partner where pid = '" + pid + "'";
+        String resultat = idb.fetchSingle(sql);
+        
+        if(resultat == null){
+            JOptionPane.showMessageDialog(null, "Det angivna pid finns inte. Välj ett annat ID.");
+            return false;
+        } else if (resultat.equals(pid)) {
+            return true;
+        }
+    }catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Ett fel inträffade vid kontrollen: " + e.getMessage());
+        }
+            return false;
+
+    }
 }
 
