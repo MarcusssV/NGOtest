@@ -563,7 +563,98 @@ public static boolean finnsPID(InfDB idb, String pid){
                 }
             return resultat;
         }
- 
+              //RutaAttKolla2 är för att den tar in 2 olika textrutors värden vid validering
+            public static boolean KontrolleraPartner_ProjektFinns(InfDB idb, String aid, JTextField RutaAttKolla, JTextField RutaAttKolla2){
+                boolean resultat = false;
+                
+                try {
+                    String Fraga = ("select partner_pid from projekt_partner where pid = '" + RutaAttKolla.getText() +"' and partner_pid = '" + RutaAttKolla2.getText() + "'");
+                    String PPid = idb.fetchSingle(Fraga);
+                    if (PPid == null){
+                        resultat = false;
+                        JOptionPane.showMessageDialog(null, "Detta projekt har ingen partner med detta ID!");
+                        
+                    }
+                    
+                    else{
+                        resultat = true;
+                        
+                    }
+                }
+                    catch (InfException ex){
+                    System.out.println(ex.getMessage());
+                    }
+                return resultat;
+            }
+            
+            public static boolean KontrolleraPartnerFinns(InfDB idb, String aid, JTextField RutaAttKolla){
+                boolean resultat = false;
+                
+                try {
+                    String Fraga = ("Select pid from partner where pid = '" + RutaAttKolla.getText() + "'");
+                    String PartnerID = idb.fetchSingle(Fraga);
+                    if (PartnerID == null){
+                        resultat = false;
+                        JOptionPane.showMessageDialog(null, "Finns ingen partner med detta ID!");
+                        
+                    }
+                    
+                    else{
+                        resultat = true;
+                        
+                    }
+                }
+                    catch (InfException ex){
+                    System.out.println(ex.getMessage());
+                    }
+                return resultat;
+            }
+            
+             public static boolean KontrolleraHandlaggareFinns(InfDB idb, String aid, JTextField RutaAttKolla){
+                boolean resultat = false;
+                
+                try {
+                    String Fraga = ("Select aid from anstalld where aid = '" + RutaAttKolla.getText() + "'");
+                    String AID = idb.fetchSingle(Fraga);
+                    if (AID == null){
+                        resultat = false;
+                        JOptionPane.showMessageDialog(null, "Finns ingen handläggare med detta ID!");
+                        
+                    }
+                    
+                    else{
+                        resultat = true;
+                        
+                    }
+                }
+                    catch (InfException ex){
+                    System.out.println(ex.getMessage());
+                    }
+                return resultat;
+            }
+             
+             public static boolean KontrolleraAns_ProjektFinns(InfDB idb, String aid, JTextField RutaAttKolla, JTextField RutaAttKolla2){
+                boolean resultat = false;
+                
+                try {
+                    String Fraga = ("select aid from ans_proj where pid = '" + RutaAttKolla.getText() +"' and aid = '" + RutaAttKolla2.getText() + "'");
+                    String AID = idb.fetchSingle(Fraga);
+                    if (AID == null){
+                        resultat = false;
+                        JOptionPane.showMessageDialog(null, "Detta projekt har ingen handläggares med detta ID!");
+                        
+                    }
+                    
+                    else{
+                        resultat = true;
+                        
+                    }
+                }
+                    catch (InfException ex){
+                    System.out.println(ex.getMessage());
+                    }
+                return resultat;
+            }
 }
 
 

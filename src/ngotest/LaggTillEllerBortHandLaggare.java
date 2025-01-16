@@ -10,12 +10,12 @@ import oru.inf.InfException;
  *
  * @author Marcu
  */
-public class LaggTillEllerBortPartner extends javax.swing.JFrame {
+public class LaggTillEllerBortHandLaggare extends javax.swing.JFrame {
 
     /**
      * Creates new form LaggTillEllerBortPartner
      */
-    public LaggTillEllerBortPartner(InfDB idb, String aid) {
+    public LaggTillEllerBortHandLaggare(InfDB idb, String aid) {
         initComponents();
         this.idb = idb;
         this.aid = aid;
@@ -33,7 +33,7 @@ public class LaggTillEllerBortPartner extends javax.swing.JFrame {
 
         ProjektIDRuta = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        PartnerIDRuta = new javax.swing.JTextField();
+        HandlaggareIDRuta = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         LaggTillKnapp = new javax.swing.JButton();
         TaBortKnapp = new javax.swing.JButton();
@@ -43,7 +43,7 @@ public class LaggTillEllerBortPartner extends javax.swing.JFrame {
 
         jLabel1.setText("Projekt ID:");
 
-        jLabel2.setText("Partner ID:");
+        jLabel2.setText("HandLäggare:ID");
 
         LaggTillKnapp.setText("Lägg till");
         LaggTillKnapp.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +83,7 @@ public class LaggTillEllerBortPartner extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(PartnerIDRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(HandlaggareIDRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -102,7 +102,7 @@ public class LaggTillEllerBortPartner extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PartnerIDRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HandlaggareIDRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -124,27 +124,27 @@ public class LaggTillEllerBortPartner extends javax.swing.JFrame {
 
     private void LaggTillKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaggTillKnappActionPerformed
         // TODO add your handling code here:
-        LaggTillPartner();
+        LaggTillHandlaggare();
     }//GEN-LAST:event_LaggTillKnappActionPerformed
 
     private void TaBortKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaBortKnappActionPerformed
         // TODO add your handling code here:
-        TaBortPartner();
+        TaBortHandlaggare();
     }//GEN-LAST:event_TaBortKnappActionPerformed
 
-    public void LaggTillPartner(){
+    public void LaggTillHandlaggare(){
         if(ValideringsKlass.textFaltHarVarde(ProjektIDRuta)){
-            if(ValideringsKlass.textFaltHarVarde(PartnerIDRuta)){
+            if(ValideringsKlass.textFaltHarVarde(HandlaggareIDRuta)){
                 if(ValideringsKlass.idKontroll(ProjektIDRuta)){
-                     if(ValideringsKlass.idKontroll(PartnerIDRuta)){
-                         if(ValideringsKlass.KontrolleraPartnerFinns(idb, aid, PartnerIDRuta)){
+                     if(ValideringsKlass.idKontroll(HandlaggareIDRuta)){
                          if(ValideringsKlass.behorighetProjektChefForProjekt(idb, aid, ProjektIDRuta)){
+                            if(ValideringsKlass.KontrolleraHandlaggareFinns(idb, aid, HandlaggareIDRuta)){
                              String projektID = ProjektIDRuta.getText();
-                             String PartnerID = PartnerIDRuta.getText();
+                             String HandlaggareID = HandlaggareIDRuta.getText();
                              try {
-                                 String Fraga = ("Insert into projekt_partner (pid, partner_pid) values ('" + projektID + "', '" + PartnerID + "')");
+                                 String Fraga = ("Insert into ans_proj (pid, aid) values ('" + projektID + "', '" + HandlaggareID + "')");
                                  idb.insert(Fraga);
-                                 JOptionPane.showMessageDialog(null, "Ny partner tillagd!");
+                                 JOptionPane.showMessageDialog(null, "Ny handläggare tillagd!");
                              }
                               catch (InfException ex){
                               System.out.println(ex.getMessage());
@@ -157,19 +157,19 @@ public class LaggTillEllerBortPartner extends javax.swing.JFrame {
         }
     }
     
-    public void TaBortPartner(){
+    public void TaBortHandlaggare(){
         if(ValideringsKlass.textFaltHarVarde(ProjektIDRuta)){
-            if(ValideringsKlass.textFaltHarVarde(PartnerIDRuta)){
+            if(ValideringsKlass.textFaltHarVarde(HandlaggareIDRuta)){
                 if(ValideringsKlass.idKontroll(ProjektIDRuta)){
-                     if(ValideringsKlass.idKontroll(PartnerIDRuta)){
+                     if(ValideringsKlass.idKontroll(HandlaggareIDRuta)){
                          if(ValideringsKlass.behorighetProjektChefForProjekt(idb, aid, ProjektIDRuta)){
                              String projektID = ProjektIDRuta.getText();
-                             String PartnerID = PartnerIDRuta.getText();
-                             if(ValideringsKlass.KontrolleraPartner_ProjektFinns(idb, aid, ProjektIDRuta, PartnerIDRuta)){
+                             String HandlaggareID = HandlaggareIDRuta.getText();
+                             if(ValideringsKlass.KontrolleraAns_ProjektFinns(idb, aid, ProjektIDRuta, HandlaggareIDRuta)){
                              try{
-                             String Fraga = ("Delete from projekt_partner where pid = '" + projektID + "' and partner_pid = '" + PartnerID + "'");
+                             String Fraga = ("Delete from ans_proj where pid = '" + projektID + "' and aid = '" + HandlaggareID + "'");
                              idb.delete(Fraga);
-                             JOptionPane.showMessageDialog(null, "Partner borttagen!");
+                             JOptionPane.showMessageDialog(null, "HandLaggare borttagen!");
                               }
                              catch (InfException ex){
                               System.out.println(ex.getMessage());
@@ -198,14 +198,15 @@ public class LaggTillEllerBortPartner extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LaggTillEllerBortPartner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaggTillEllerBortHandLaggare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LaggTillEllerBortPartner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaggTillEllerBortHandLaggare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LaggTillEllerBortPartner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaggTillEllerBortHandLaggare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LaggTillEllerBortPartner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaggTillEllerBortHandLaggare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -217,8 +218,8 @@ public class LaggTillEllerBortPartner extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField HandlaggareIDRuta;
     private javax.swing.JButton LaggTillKnapp;
-    private javax.swing.JTextField PartnerIDRuta;
     private javax.swing.JTextField ProjektIDRuta;
     private javax.swing.JButton TaBortKnapp;
     private javax.swing.JButton TillbakaKnapp;

@@ -115,6 +115,11 @@ ArrayList<HashMap<String, String>> ProjektChefUppgifter = new ArrayList<>();
         });
 
         HandlaggareKnapp.setText("Lägg till eller ta bort Handläggare");
+        HandlaggareKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HandlaggareKnappActionPerformed(evt);
+            }
+        });
 
         PartnersKnapp.setText("Lägg till eller ta bort partners");
         PartnersKnapp.addActionListener(new java.awt.event.ActionListener() {
@@ -205,6 +210,12 @@ ArrayList<HashMap<String, String>> ProjektChefUppgifter = new ArrayList<>();
         setVisible(false);
         new LaggTillEllerBortPartner(idb, aid).setVisible(true);
     }//GEN-LAST:event_PartnersKnappActionPerformed
+
+    private void HandlaggareKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HandlaggareKnappActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new LaggTillEllerBortHandLaggare(idb, aid).setVisible(true);
+    }//GEN-LAST:event_HandlaggareKnappActionPerformed
 
     private void fyllStatistik()
     {
