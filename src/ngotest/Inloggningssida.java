@@ -182,24 +182,28 @@ public class Inloggningssida extends javax.swing.JFrame {
 
     private void ExitKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitKnappActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        System.exit(0); //Knapp som stänger av systemet.
     }//GEN-LAST:event_ExitKnappActionPerformed
 
     private void LoggaInKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoggaInKnappActionPerformed
-        
+        //Metod vid knapptryck av "Logga in" knappen.
+        //Sätter fälten till strings för att enklare hantera dem.
         String email = EmailText.getText();
         String losenord = LösenordText.getText();
         
+        //Validerar så att båda fälten har ett värde och sedan kontrollerar så att epost fältet har ett korrekt skrivet värde.
         if(ValideringsKlass.textFaltHarVarde(EmailText)){
             if(ValideringsKlass.losenordFaltHarVarde(LösenordText)){
                 if(ValideringsKlass.emailKontroll(EmailText)){
                 
-                    try {
+                    try { //Använder try och catch för att inte få några errors vid fel med SQL basen.
                     String fraga = ("select aid from anstalld where epost = " + "'" + email + "'" + " and losenord = " + "'" + losenord + "'");
                     String aid = idb.fetchSingle(fraga);
                         if (aid != null){
                             new InfoRuta(idb, aid).setVisible(true);
                             setVisible(false);
+                            //Ställer en SQL-fråga där vi hämtar kontrollerar så att email och lösenord stämmer överrens och sedan får in aid som vi skickar tillsammans med idb
+                            //till en helt ny ruta där alla andra funktioner går att nås med.
                         }
                         else{
                             JOptionPane.showMessageDialog(null, "Användaren saknas!");
@@ -210,16 +214,16 @@ public class Inloggningssida extends javax.swing.JFrame {
                         System.out.println(a.getMessage());
     }//GEN-LAST:event_LoggaInKnappActionPerformed
                 }
-                }
+            }
         
         }
     }
+    //Dessa 3 kommande metoder för knappar var ENDAST för oss som programerare att enklare kunna logga in och testa de olika funktionerna vi implementerar.
+    //En är för admin, en är för handläggare och en är för projektchef.
     private void skipInloggKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipInloggKnappActionPerformed
 
         EmailText.setText("maria.g@example.com");
-        LösenordText.setText("password123");
-        
-       
+        LösenordText.setText("password123");   
     }//GEN-LAST:event_skipInloggKnappActionPerformed
 
     private void ickeAdminKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ickeAdminKnappActionPerformed
