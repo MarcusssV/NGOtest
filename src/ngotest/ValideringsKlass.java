@@ -549,11 +549,13 @@ public static boolean finnsPID(InfDB idb, String pid){
                     if(ProjektChefID == null || !ProjektChefID.equals(aid)){
                         JOptionPane.showMessageDialog(null, "Du är inte projektchef för detta projekt ELLER projektet finns ej!");
                         resultat = false;
+                        //Denna If-satsen kontrollerar så att om projektchefid är null eller om projektchefid inte är detsamma som aid så kommer resultat bli false.
                     }
                     else {
 
                         resultat = true;
                         //JOptionPane.showMessageDialog(null, "Du är inte projektchef för detta projekt!");
+                        //Else gör så att allt annat kommer göra resultat blir true. Men i det här fallet kan else bara vara om projektchefid = aid.
                     }
                 }
                 catch (InfException ex){
