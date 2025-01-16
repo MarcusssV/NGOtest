@@ -49,6 +49,7 @@ public class ValideringsKlass {
             String email = rutaAttKolla.getText();
             if(Pattern.compile(regexPattern).matcher(email).matches()){
             resultat = true;
+            //If-satsen kontrollerar så att inmatningen som görs matchar med regex vi bestämde innan. Om det gör det kommer resultatet få värdet true och fortsätta.
             }
             else{
             JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Är ej godkänd Email!"
@@ -56,10 +57,12 @@ public class ValideringsKlass {
                                                 "user_name-123@sub.domain.co.uk\n" +
                                                 "username@domain.org"); 
             resultat = false;
+            //om den inte matchar kommer else i If-satsen fånga det och ge ett meddelande som hjälper användaren med exemple på ett, i det här fallet, korrekt skriven email.
             }
             return resultat;
+            //I slutet så retunerar metoden resultat som antingen kommer vara true eller false.
     }
-        
+    //Nästan alla andra valideringar fungerar på exakt samma sätt bara med olika regex och felmeddelanden.   
         public static boolean namnKontroll(JTextField rutaAttKolla){
             
             boolean resultat;
@@ -202,7 +205,10 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänd tidzon!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänd tidzon!\nTesta följande format:\nTidzon 123\n" +
+                                                    "Tidzon 9999\n" +
+                                                    "Tidzon 0\n" +
+                                                    "Tidzon 42\nOBS! Inmatningen måste innehålla 'Tidzon' i början!");
                 resultat = false;
             }
             return resultat;
@@ -217,7 +223,10 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänd politisk struktur!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänd Politisk Struktur!\nTesta följande format:\nPolitisk Struktur 123\n" +
+                                                    "Politisk Struktur 9999\n" +
+                                                    "Politisk Struktur 0\n" +
+                                                    "Politisk Struktur 42\nOBS! Inmatningen måste innehålla 'Politisk Struktur' i början!");
                 resultat = false;
             }
             return resultat;
@@ -232,7 +241,10 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänd ekonomi!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänd Ekonomi!\nTesta följande format:\nEkonomi 123\n" +
+                                                    "Ekonomi 9999\n" +
+                                                    "Ekonomi 0\n" +
+                                                    "Ekonomi 42\nOBS! Inmatningen måste innehålla 'Ekonomi' i början!");
                 resultat = false;
             }
             return resultat;
@@ -247,31 +259,38 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt Projektnamn!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänt Projektnamn!\nTesta följande format:\nprojektnamn Test Project\n" +
+                                                    "projektnamn 12345\n" +
+                                                    "projektnamn New Project 2025\n" +
+                                                    "projektnamn Example123");
                 resultat = false;
             }
             return resultat;
         }
-            
+        
+        //Metoden nedan skiljer sig från de tidigare metoderna.
         public static boolean behorighet(InfDB idb, String aid){
             
             boolean resultat = false;
             try{
                 String fraga = "Select behorighetsniva FROM admin where aid = " + aid;
                 String behorighetsniva = idb.fetchSingle(fraga);
-    
+                //Denna metod kontrollerar om behörighet med hjälp av en sql-fråga där den kontrollerar om en viss aid finns med i admin listan.
                     if(behorighetsniva == null){
                         //JOptionPane.showMessageDialog(null, "Du har inte behörighet!");
                         resultat = false;
+                        //retunerar sql-frågan null, alltså att användaren inte är med i admin listan, kommer resultatet bli false.
                     }
                     else {
 
                         resultat = true;
+                        //om användaren finns med kommer resultat och bli true.
                     }
                 }
                 catch (InfException ex){
                     System.out.println(ex.getMessage());
                 }
+            //try and catch används för att fånga eventuella problem som kan krascha eller göra annat vid fel inmatning.
             return resultat;
         }
         public static boolean behorighetProjektChef(InfDB idb, String aid){
@@ -299,13 +318,13 @@ public class ValideringsKlass {
         public static boolean kostnadKontroll(JTextField rutaAttKolla){
             
             boolean resultat;
-            String regexPattern = "^\\d+(\\.\\d{1,2})?$";
+            String regexPattern = "^\\d{1,12}(\\.\\d{1,2})?$";
             String inmatning = rutaAttKolla.getText();
             if(Pattern.compile(regexPattern).matcher(inmatning).matches()){
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänd valuta!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "'Ej godkänd kostnad!\nTesta följande format:\n123\n123456789123.12\n123456.1\nOBS! Måste ha 2 decimaler och får inte överstiga 12 siffriga tal.");
                 resultat = false;
             }
             return resultat;
@@ -517,7 +536,8 @@ public static boolean finnsPID(InfDB idb, String pid){
             return false;
 
     }
- 
+            //Denna koden används för att kontrollera om en projektchef är projekchef för ett visst projekt.
+            //Detta validering används när vi ska ändra uppgifter, ta bort eller lägga till gällande projekt för att kontrollera att det är rätt projektchef som gör det.
             public static boolean behorighetProjektChefForProjekt(InfDB idb, String aid, JTextField RutaAttKolla){
             String pid = RutaAttKolla.getText();
             boolean resultat = false;
@@ -526,15 +546,14 @@ public static boolean finnsPID(InfDB idb, String pid){
                 String ProjektChefID = idb.fetchSingle(fraga);
                 
     
-                    if(ProjektChefID.equals(aid)){
-                      //  JOptionPane.showMessageDialog(null, "Du är inte projektchef för detta projekt!");
-                        resultat = true;
+                    if(ProjektChefID == null || !ProjektChefID.equals(aid)){
+                        JOptionPane.showMessageDialog(null, "Du är inte projektchef för detta projekt ELLER projektet finns ej!");
+                        resultat = false;
                     }
-                    
                     else {
 
-                        resultat = false;
-                        JOptionPane.showMessageDialog(null, "Du är inte projektchef för detta projekt!");
+                        resultat = true;
+                        //JOptionPane.showMessageDialog(null, "Du är inte projektchef för detta projekt!");
                     }
                 }
                 catch (InfException ex){
