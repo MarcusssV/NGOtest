@@ -51,7 +51,10 @@ public class ValideringsKlass {
             resultat = true;
             }
             else{
-            JOptionPane.showMessageDialog(null, "Ej godkänd Email!"); 
+            JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Är ej godkänd Email!"
+                                                + "\nTesta följande format:\nexample.email@domain.com\n" +
+                                                "user_name-123@sub.domain.co.uk\n" +
+                                                "username@domain.org"); 
             resultat = false;
             }
             return resultat;
@@ -66,7 +69,9 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt namn!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' är ett ej godkänt namn!\nTesta följande format:\nJohn\n" +
+                                                    "Alice Smith\n" +
+                                                    "Mary Ann Johnson\nOBS! Namnet måste börja med stor bokstav!");
                 resultat = false;
             }
             return resultat;
@@ -81,7 +86,10 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt efternamn!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' är ej godkänt efternamn!\nTesta följande format:\nMcDonald\n" +
+                                                    "Van Helsing\n" +
+                                                    "De La Cruz\n" +
+                                                    "O'Connor\nOBS! Efternamnet måste börja med stor bokstav!");
                 resultat = false;
             }
             return resultat;
@@ -95,7 +103,10 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänd adress!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänd adress!\nTesta följande format:\n123 John Smith, Doe\n" +
+                                                    "123 John\n" +
+                                                    "John 123\n" +
+                                                    "John Smith 123");
                 resultat = false;
             }
             return resultat;
