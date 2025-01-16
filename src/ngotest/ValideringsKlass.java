@@ -518,6 +518,30 @@ public static boolean finnsPID(InfDB idb, String pid){
 
     }
  
+            public static boolean behorighetProjektChefForProjekt(InfDB idb, String aid, JTextField RutaAttKolla){
+            String pid = RutaAttKolla.getText();
+            boolean resultat = false;
+            try{
+                String fraga = "SELECT projektchef from projekt where pid = '" + pid + "'";
+                String ProjektChefID = idb.fetchSingle(fraga);
+                
+    
+                    if(ProjektChefID.equals(aid)){
+                      //  JOptionPane.showMessageDialog(null, "Du är inte projektchef för detta projekt!");
+                        resultat = true;
+                    }
+                    
+                    else {
+
+                        resultat = false;
+                        JOptionPane.showMessageDialog(null, "Du är inte projektchef för detta projekt!");
+                    }
+                }
+                catch (InfException ex){
+                    System.out.println(ex.getMessage());
+                }
+            return resultat;
+        }
  
 }
 

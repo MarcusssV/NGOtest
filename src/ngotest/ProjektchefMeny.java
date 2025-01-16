@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ngotest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
@@ -10,7 +13,7 @@ import oru.inf.InfException;
  * @author Thomas
  */
 public class ProjektchefMeny extends javax.swing.JFrame {
-
+ArrayList<HashMap<String, String>> ProjektChefUppgifter = new ArrayList<>();
     /**
      * Creates new form ProjektchefMeny
      */
@@ -19,6 +22,8 @@ public class ProjektchefMeny extends javax.swing.JFrame {
         this.idb = idb;
         this.aid = aid;
         fyllStatistik();
+        hamtaAllaData();
+        fyllProjektChefTabel();
     }
 
     private static InfDB idb;
@@ -41,7 +46,8 @@ public class ProjektchefMeny extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ProjektchefTabell = new javax.swing.JTable();
+        RedigeraKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,18 +73,44 @@ public class ProjektchefMeny extends javax.swing.JFrame {
 
         jLabel4.setText("Högst kostnad");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ProjektchefTabell.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Projekt ID", "Projektnamn", "Beskrivning", "Startdatum", "Slutdatum", "Kostnad", "Status", "Prioritet", "Land"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(ProjektchefTabell);
+        if (ProjektchefTabell.getColumnModel().getColumnCount() > 0) {
+            ProjektchefTabell.getColumnModel().getColumn(0).setResizable(false);
+            ProjektchefTabell.getColumnModel().getColumn(1).setResizable(false);
+            ProjektchefTabell.getColumnModel().getColumn(2).setResizable(false);
+            ProjektchefTabell.getColumnModel().getColumn(3).setResizable(false);
+            ProjektchefTabell.getColumnModel().getColumn(4).setResizable(false);
+            ProjektchefTabell.getColumnModel().getColumn(5).setResizable(false);
+            ProjektchefTabell.getColumnModel().getColumn(6).setResizable(false);
+            ProjektchefTabell.getColumnModel().getColumn(7).setResizable(false);
+            ProjektchefTabell.getColumnModel().getColumn(8).setResizable(false);
+        }
+
+        RedigeraKnapp.setText("Ändra uppgifter");
+        RedigeraKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RedigeraKnappActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,8 +134,10 @@ public class ProjektchefMeny extends javax.swing.JFrame {
                                     .addComponent(LägstKostnadRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(HögstKostnadRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RedigeraKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,12 +157,12 @@ public class ProjektchefMeny extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(HögstKostnadRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTillbakaKnapp))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel4)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RedigeraKnapp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(jTillbakaKnapp)
                 .addContainerGap())
         );
 
@@ -139,6 +173,12 @@ public class ProjektchefMeny extends javax.swing.JFrame {
         setVisible(false);
         new InfoRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_jTillbakaKnappActionPerformed
+
+    private void RedigeraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedigeraKnappActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new AndraProjektSomChefRuta(idb, aid).setVisible(true);
+    }//GEN-LAST:event_RedigeraKnappActionPerformed
 
     private void fyllStatistik()
     {
@@ -159,6 +199,35 @@ public class ProjektchefMeny extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
     }
+    
+     public void hamtaAllaData(){
+        try{
+            String fraga = ("Select pid, projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, land from projekt where projektchef = '" + aid +"'");
+            ProjektChefUppgifter = idb.fetchRows(fraga);
+        }
+        catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+      public void fyllProjektChefTabel(){
+        
+        DefaultTableModel model1 = (DefaultTableModel) ProjektchefTabell.getModel();
+        model1.setRowCount(0);
+        for(HashMap<String, String> projekt : ProjektChefUppgifter){
+            String[] data = new String [model1.getColumnCount()];
+            data[0] = projekt.get("pid");
+            data[1] = projekt.get("projektnamn");
+            data[2] = projekt.get("beskrivning");
+            data[3] = projekt.get("startdatum");
+            data[4] = projekt.get("slutdatum");
+            data[5] = projekt.get("kostnad");
+            data[6] = projekt.get("status");
+            data[7] = projekt.get("prioritet");
+            data[8] = projekt.get("land");
+            model1.addRow(data);
+        }
+     }
+     
     /**
      * @param args the command line arguments
      */
@@ -198,12 +267,13 @@ public class ProjektchefMeny extends javax.swing.JFrame {
     private javax.swing.JTextField AvgKostnadRuta;
     private javax.swing.JTextField HögstKostnadRuta;
     private javax.swing.JTextField LägstKostnadRuta;
+    private javax.swing.JTable ProjektchefTabell;
+    private javax.swing.JButton RedigeraKnapp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jTillbakaKnapp;
     // End of variables declaration//GEN-END:variables
 }
