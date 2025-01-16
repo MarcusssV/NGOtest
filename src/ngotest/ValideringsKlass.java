@@ -121,7 +121,9 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt telefonnummer!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänt telefonnummer!\nTesta följande format:\n123-456-7890\n" +
+                                                    "987-654-3210\n" +
+                                                    "000-123-4567");
                 resultat = false;
             }
             return resultat;
@@ -136,7 +138,9 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt datum!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänt datum!\nTesta följande format:\2023-01-16\n" +
+                                                    "1999-12-31\n" +
+                                                    "2025-07-04");
                 resultat = false;
             }
             return resultat;
@@ -151,7 +155,9 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt id!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänt id!\nTesta följande format:\n12345\n" +
+                                                    "9876543210\n" +
+                                                    "0");
                 resultat = false;
             }
             return resultat;
@@ -166,7 +172,7 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänt språk!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänt språk!\nTesta följande format:\nEngelska\nSvenska\nJapanska\nOBS! Måste börja på stor bokstav!");
                 resultat = false;
             }
             return resultat;
@@ -181,7 +187,7 @@ public class ValideringsKlass {
                 resultat = true;
             }
             else {
-                JOptionPane.showMessageDialog(null, "Ej godkänd valuta!");
+                JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' Ej godkänd valuta!\nTesta följande format:\n123\n12345.1\n1.12\n123456.123\n123.1234");
                 resultat = false;
             }
             return resultat;
