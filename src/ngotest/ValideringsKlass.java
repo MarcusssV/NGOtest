@@ -655,6 +655,60 @@ public static boolean finnsPID(InfDB idb, String pid){
                     }
                 return resultat;
             }
+             
+             public static boolean partnerTelefonKontroll(JTextField rutaAttKolla){
+                boolean resultat;
+                String regexPattern = "^\\+\\d{10}$";
+                String namn = rutaAttKolla.getText();
+                    if(Pattern.compile(regexPattern).matcher(namn).matches()){
+                        resultat = true;
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' är ej godkänt telefonnummer!\nTesta följande format:\n+1234567890\n" +
+                                                            "+1234567890\n" +
+                                                            "+9876543210\n" +
+                                                            "+9876543210\nOBS! telefonnumret måste börja på + följt av 10 siffror!");
+                        resultat = false;
+                    }
+                return resultat;
+            }
+             
+            
+            public static boolean branchNamnKontroll(JTextField rutaAttKolla){
+                boolean resultat;
+                String regexPattern = "^[A-Za-z]{1,255}(\\s[A-Za-z]{1,255})?$";
+                String namn = rutaAttKolla.getText();
+                    if(Pattern.compile(regexPattern).matcher(namn).matches()){
+                        resultat = true;
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' är ej godkänt branchnamn!\nTesta följande format:\nRen energi\n" +
+                                                            "Opensky\n" +
+                                                            "Green field\n" +
+                                                            "Simpletest\n" +
+                                                            "Sun shine\nOBS! Branchnamnet måste innehålla en eller två namn/ord.");
+                        resultat = false;
+                    }
+                return resultat;
+            }
+            
+            public static boolean namnOchEfternamnKontroll(JTextField rutaAttKolla){
+                boolean resultat;
+                String regexPattern = "^^[A-Za-z]+(?: [A-Za-z]+)+$";
+                String namn = rutaAttKolla.getText();
+                    if(Pattern.compile(regexPattern).matcher(namn).matches()){
+                        resultat = true;
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "'" + rutaAttKolla.getText() + "' är ej godkänt namn och efternamn!\nTesta följande format:\nJohn Doe\n" +
+                                                            "Jane Smith\n" +
+                                                            "John Jacob Smith\n" +
+                                                            "Anna Marie Lee\n" +
+                                                            "John Paul George Ringo\nOBS! Branchnamnet måste innehålla en eller två namn/ord.");
+                        resultat = false;
+                    }
+                return resultat;
+            }
 }
 
 

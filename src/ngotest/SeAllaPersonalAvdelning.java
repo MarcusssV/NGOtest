@@ -33,7 +33,7 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
     }
         public void hamtaAvdelningsData(){
         try{
-            String avdelningsFraga = ("Select avdelning from anstalld where aid = " + aid);
+            String avdelningsFraga = ("Select avdelning from anstalld where aid = '" + aid + "'");
             avdelning = idb.fetchSingle(avdelningsFraga);
         }
         catch (InfException ex) {
@@ -70,7 +70,7 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
         
                 String namn = jInmatningsRuta.getText();
                 try{
-                    String fraga = ("select anstalld.aid, fornamn, efternamn, anstalld.adress, anstalld.epost, anstalld.telefon from anstalld join handlaggare on handlaggare.aid = anstalld.aid join avdelning on avdelning.avdid = anstalld.avdelning where anstalld.avdelning = '" + avdelning + "' and fornamn = '" + namn + "'");
+                    String fraga = ("select anstalld.aid, fornamn, efternamn, anstalld.adress, anstalld.epost, anstalld.telefon from anstalld join avdelning on avdelning.avdid = anstalld.avdelning where anstalld.avdelning = '"+avdelning+"' and fornamn = '"+namn+"'");
                     handlaggareInfo = idb.fetchRows(fraga);
                 }
                 catch (InfException ex) {
@@ -78,10 +78,10 @@ public class SeAllaPersonalAvdelning extends javax.swing.JFrame {
             }                
     }
     public void hamtaHandlaggareDataEpost(){
-        
+                
                 String epost = jInmatningsRuta.getText();
                 try{
-                    String fraga = ("select anstalld.aid, fornamn, efternamn, anstalld.adress, anstalld.epost, anstalld.telefon from anstalld join handlaggare on handlaggare.aid = anstalld.aid join avdelning on avdelning.avdid = anstalld.avdelning where anstalld.avdelning = '" + avdelning + "' and anstalld.epost = '" + epost + "'");
+                    String fraga = ("select anstalld.aid, fornamn, efternamn, anstalld.adress, anstalld.epost, anstalld.telefon from anstalld join avdelning on avdelning.avdid = anstalld.avdelning where anstalld.avdelning = '"+avdelning+"' and anstalld.epost = '"+epost+"'");
                     handlaggareInfo = idb.fetchRows(fraga);
                 }
                 catch (InfException ex) {
@@ -392,6 +392,7 @@ public void laggTillAnstalld(){
                 }
                 if(alternativ.equals("Epost")){
                     if(ValideringsKlass.emailKontroll(jInmatningsRuta)){
+                        
                         hamtaHandlaggareDataEpost();
                         fyllTabelHandlaggare();
                         jInfoTillbakaKnapp.setVisible(true);

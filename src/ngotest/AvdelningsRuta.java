@@ -22,6 +22,7 @@ ArrayList<HashMap<String, String>> avdelningsUppgifter = new ArrayList<>();
         this.aid = aid;
         hamtaAvdelningsData();
         fyllAvdelningsTabel();
+        synlighetAdmin();
     }
 
     private static InfDB idb;
@@ -275,6 +276,15 @@ public void redigeraAvdelning() {
         JOptionPane.showMessageDialog(null, "Ett fel inträffade: " + ex.getMessage());
     }
 }
+    
+    private void synlighetAdmin(){
+        laggaTillKnapp.setVisible(false);
+        redigeraKnapp.setVisible(false);
+        if(ValideringsKlass.behorighet(idb, aid)){
+            laggaTillKnapp.setVisible(true);
+            redigeraKnapp.setVisible(true);
+        }
+    }
         
         
         

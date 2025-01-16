@@ -35,7 +35,7 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
 
     public void hamtaPartners() {
         try {
-            String fraga = "SELECT * from partner";
+            String fraga = "select * from partner where pid = (select pid from ans_proj where aid = '"+aid+"')";
             partnerUppgifter = idb.fetchRows(fraga);
         } catch (InfException ex) {
             System.out.println(ex.getMessage());
@@ -84,38 +84,40 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
     try {
         String pid = JOptionPane.showInputDialog(this, "Ange partnerns id:");
             if(ValideringsKlass.idKontroll(new JTextField(pid))){
-        String namn = JOptionPane.showInputDialog(this, "Ange partnerns namn:");
-            if(ValideringsKlass.namnKontroll(new JTextField(namn))){
-        String kontaktperson = JOptionPane.showInputDialog(this, "Ange partnerns kontaktperson:");
-        
-        String kontaktepost = JOptionPane.showInputDialog(this, "Ange partnerns kontaktepost:");
-            if(ValideringsKlass.emailKontroll(new JTextField(kontaktepost))){
-        String telefon = JOptionPane.showInputDialog(this, "Ange partnerns telefonnummer:");
-            if(ValideringsKlass.telefonnummerKontroll(new JTextField(telefon))){
-        String adress = JOptionPane.showInputDialog(this, "Ange partnerns adress:");
-            if(ValideringsKlass.adressKontroll(new JTextField(adress))){
-        String branch = JOptionPane.showInputDialog(this, "Ange partnerns branch:");
-        
-        String stad = JOptionPane.showInputDialog(this, "Ange partnerns stad:");
-            if(ValideringsKlass.idKontroll((new JTextField(stad)))){
+                String namn = JOptionPane.showInputDialog(this, "Ange partnerns namn:");
+                    if(ValideringsKlass.namnKontroll(new JTextField(namn))){
+                        String kontaktperson = JOptionPane.showInputDialog(this, "Ange partnerns kontaktperson:");
+                            if(ValideringsKlass.namnOchEfternamnKontroll(new JTextField(kontaktperson))){
+                                String kontaktepost = JOptionPane.showInputDialog(this, "Ange partnerns kontaktepost:");
+                                    if(ValideringsKlass.emailKontroll(new JTextField(kontaktepost))){
+                                        String telefon = JOptionPane.showInputDialog(this, "Ange partnerns telefonnummer:");
+                                            if(ValideringsKlass.partnerTelefonKontroll(new JTextField(telefon))){
+                                                String adress = JOptionPane.showInputDialog(this, "Ange partnerns adress:");
+                                                    if(ValideringsKlass.adressKontroll(new JTextField(adress))){
+                                                        String branch = JOptionPane.showInputDialog(this, "Ange partnerns branch:");
+                                                            if(ValideringsKlass.branchNamnKontroll(new JTextField(branch))){
+                                                                String stad = JOptionPane.showInputDialog(this, "Ange partnerns stad:");
+                                                                    if(ValideringsKlass.idKontroll((new JTextField(stad)))){
 
-        if (ValideringsKlass.valideraPartner(pid, namn, kontaktperson, kontaktepost, telefon, adress, branch, stad)) {
-            String sql = "INSERT INTO partner (pid, namn, kontaktperson, kontaktepost, telefon, adress, branch, stad) VALUES ('"
-                + pid + "', '" + namn + "', '" + kontaktperson + "', '" + kontaktepost + "', '"
-                + telefon + "', '" + adress + "', '" + branch + "', '" + stad + "')";
-            idb.insert(sql);
-            JOptionPane.showMessageDialog(this, "Partnern har lagts till i databasen!");
+                                                                        if (ValideringsKlass.valideraPartner(pid, namn, kontaktperson, kontaktepost, telefon, adress, branch, stad)) {
+                                                                            String sql = "INSERT INTO partner (pid, namn, kontaktperson, kontaktepost, telefon, adress, branch, stad) VALUES ('"
+                                                                                            + pid + "', '" + namn + "', '" + kontaktperson + "', '" + kontaktepost + "', '"
+                                                                                            + telefon + "', '" + adress + "', '" + branch + "', '" + stad + "')";
+                                                                            idb.insert(sql);
+                                                                            JOptionPane.showMessageDialog(this, "Partnern har lagts till i databasen!");
+                                                                        }
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                            }
+                    }
+            }
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
         }
-            }
-            }
-            }
-            }
-            }
-            }
-    } catch (InfException ex) {
-        JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
     }
-}
    public void taBortPartner() {
     Behorighet();
 
@@ -152,23 +154,23 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
         );
        
        String[] kolumner = {"namn", "kontaktperson", "kontaktpost", "telefon", "adress", "branch", "stad"};
-        String nyttVarde = JOptionPane.showInputDialog(this, "Ange nytt värde för " + kolumner[val] + ":");
+       String nyttVarde = JOptionPane.showInputDialog(this, "Ange nytt värde för " + kolumner[val] + ":");
             if(nyttVarde.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Inget värde angavs. GÖr om.");
                 return;
             }
             
             // Stad är foreign key måste ändra i stad tabellen  
-            if (kolumner.equals("stad")) { 
+        if (kolumner.equals("stad")) { 
             String stadSQL = "update stad set sid  = '" + nyttVarde + "'";
             idb.update(stadSQL);
             String sql = "update partner set " + kolumner[val] + " = '" + nyttVarde + "' where pid = '" + pid + "'";
             idb.update(sql);
         }
         
-            String sql = "update partner set " + kolumner[val] + " = '" + nyttVarde + "' where pid = '" + pid + "'";
-            idb.update(sql);
-            JOptionPane.showMessageDialog(this, "Uppdateringen lyckades");
+        String sql = "update partner set " + kolumner[val] + " = '" + nyttVarde + "' where pid = '" + pid + "'";
+        idb.update(sql);
+        JOptionPane.showMessageDialog(this, "Uppdateringen lyckades");
    }catch (InfException ex) {
         JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
    }
@@ -231,7 +233,7 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Våra Partner");
+        jLabel1.setText("Partner i dina projekt");
 
         jTillbakaKnapp.setText("Tillbaka");
         jTillbakaKnapp.addActionListener(new java.awt.event.ActionListener() {
@@ -259,7 +261,7 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
                         .addComponent(laggTillPartner)
                         .addGap(57, 57, 57)
                         .addComponent(taBortPartner)
-                        .addGap(0, 34, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
