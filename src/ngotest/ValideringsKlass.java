@@ -399,5 +399,109 @@ public static boolean finnsPID(InfDB idb, String pid){
             return false;
 
     }
+
+ public static boolean harBehorighet(int aid, InfDB idb) {
+        try {
+            String fraga = "SELECT behorighetsniva FROM admin WHERE aid = " + aid;
+            String behorighetsniva = idb.fetchSingle(fraga);
+
+            return behorighetsniva != null;
+        } catch (InfException ex) {
+            System.out.println("Fel vid kontroll av behörighet: " + ex.getMessage());
+            return false; 
+        }
+    }
+ 
+ public static boolean valideraAvdelning(String avdid, String namn, String beskrivning, String adress, String epost, String telefon, String stad, String chef) {
+    boolean resultat = true;
+
+    if (avdid == null || avdid.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Avdelnings-ID får inte vara tomt!");
+        resultat = false;
+    }
+    if (namn == null || namn.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Namn får inte vara tomt!");
+        resultat = false;
+    }
+    if (beskrivning == null || beskrivning.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Beskrivning får inte vara tomt!");
+        resultat = false;
+    }
+    if (adress == null || adress.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Adress får inte vara tomt!");
+        resultat = false;
+    }
+    if (epost == null || epost.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "E-post får inte vara tomt!");
+        resultat = false;
+    }
+    if (telefon == null || telefon.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Telefonnummer får inte vara tomt!");
+        resultat = false;
+    }
+    if (stad == null || stad.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Stad får inte vara tomt!");
+        resultat = false;
+    }
+    if (chef == null || chef.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Chefens ID får inte vara tomt!");
+        resultat = false;
+    }
+
+    return resultat;
 }
+ public static boolean chefExisterar(String chef, InfDB idb) {
+     boolean chefresultat = false;
+    try {
+        String chefsql = "SELECT * FROM anstalld WHERE aid = '" + chef + "'";
+        String resultat = idb.fetchSingle(chefsql);
+        if(resultat != null)
+            chefresultat = true;
+        else{
+            JOptionPane.showMessageDialog(null, "Det ID:t fanns inte i databasen. Försök igen.");
+        }
+    } catch (InfException O){
+                    JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+                    System.out.println(O.getMessage());
+        }
+        return chefresultat;
+    }
+ public static boolean stadExisterar(String stad, InfDB idb) {
+    boolean stadresultat = false;
+    try {
+        String stadsql = "SELECT * FROM stad WHERE sid = '" + stad + "'";
+        String resultat = idb.fetchSingle(stadsql);
+        if (resultat != null)
+            stadresultat = true;
+        else {
+            JOptionPane.showMessageDialog(null, "Stadens ID fanns inte i databasen. Försök igen.");
+        }
+    } catch (InfException O) {
+        JOptionPane.showMessageDialog(null, "Något blev fel med databasen!");
+        System.out.println(O.getMessage());
+        }
+        return stadresultat;
+       }
+ 
+ public static boolean finnsAVDID(InfDB idb, String avdid){
+    try {
+        String sql = "select avdid from avdelning where avdid = '" + avdid + "'";
+        String resultat = idb.fetchSingle(sql);
+        
+        if(resultat == null){
+            JOptionPane.showMessageDialog(null, "Det angivna avdid finns inte. Välj ett annat ID.");
+            return false;
+        } else if (resultat.equals(avdid)) {
+            return true;
+        }
+    }catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Ett fel inträffade vid kontrollen: " + e.getMessage());
+        }
+            return false;
+
+    }
+ 
+ 
+}
+
 
