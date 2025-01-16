@@ -8,6 +8,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Marcu
@@ -38,6 +39,8 @@ ArrayList<HashMap<String, String>> avdelningsUppgifter = new ArrayList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         AvdelningsTabell = new javax.swing.JTable();
         jTillbakaKnapp = new javax.swing.JButton();
+        laggaTillKnapp = new javax.swing.JButton();
+        redigeraKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,11 +52,11 @@ ArrayList<HashMap<String, String>> avdelningsUppgifter = new ArrayList<>();
 
             },
             new String [] {
-                "Namn", "Beskrivning", "Adress", "Epost", "Telefon", "Chef"
+                "Avdelnings ID", "Namn", "Beskrivning", "Adress", "Epost", "Telefon", "Stad", "Chef"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                true, false, false, false, true, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -64,16 +67,31 @@ ArrayList<HashMap<String, String>> avdelningsUppgifter = new ArrayList<>();
         jScrollPane1.setViewportView(AvdelningsTabell);
         if (AvdelningsTabell.getColumnModel().getColumnCount() > 0) {
             AvdelningsTabell.getColumnModel().getColumn(0).setResizable(false);
-            AvdelningsTabell.getColumnModel().getColumn(2).setResizable(false);
+            AvdelningsTabell.getColumnModel().getColumn(1).setResizable(false);
             AvdelningsTabell.getColumnModel().getColumn(3).setResizable(false);
             AvdelningsTabell.getColumnModel().getColumn(4).setResizable(false);
             AvdelningsTabell.getColumnModel().getColumn(5).setResizable(false);
+            AvdelningsTabell.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jTillbakaKnapp.setText("Tillbaka");
         jTillbakaKnapp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTillbakaKnappActionPerformed(evt);
+            }
+        });
+
+        laggaTillKnapp.setText("Lägg till en ny avdelning");
+        laggaTillKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laggaTillKnappActionPerformed(evt);
+            }
+        });
+
+        redigeraKnapp.setText("Redigera ");
+        redigeraKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redigeraKnappActionPerformed(evt);
             }
         });
 
@@ -87,8 +105,13 @@ ArrayList<HashMap<String, String>> avdelningsUppgifter = new ArrayList<>();
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jTillbakaKnapp))
+                            .addComponent(jTillbakaKnapp)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(245, 245, 245)
+                                .addComponent(laggaTillKnapp)
+                                .addGap(79, 79, 79)
+                                .addComponent(redigeraKnapp)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -96,10 +119,13 @@ ArrayList<HashMap<String, String>> avdelningsUppgifter = new ArrayList<>();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(laggaTillKnapp)
+                    .addComponent(redigeraKnapp))
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jTillbakaKnapp)
                 .addContainerGap())
         );
@@ -113,9 +139,36 @@ ArrayList<HashMap<String, String>> avdelningsUppgifter = new ArrayList<>();
         new InfoRuta(idb,aid).setVisible(true);
     }//GEN-LAST:event_jTillbakaKnappActionPerformed
 
+    private void laggaTillKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggaTillKnappActionPerformed
+        // TODO add your handling code here:
+        laggTillAvdelning();
+    }//GEN-LAST:event_laggaTillKnappActionPerformed
+
+    private void redigeraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigeraKnappActionPerformed
+        // TODO add your handling code here:
+        redigeraAvdelning();
+    }//GEN-LAST:event_redigeraKnappActionPerformed
+
+    
+    public void Behorighet(){
+    try{
+    String fraga = "Select behorighetsniva FROM admin where aid = " + aid;
+    String behorighetsniva = idb.fetchSingle(fraga);
+    
+    if(behorighetsniva == null){
+        JOptionPane.showMessageDialog(this, "Du har inte behörighet att redigera partners.");
+    }
+    else {
+         JOptionPane.showMessageDialog(this, "Du har behörighet att redigera partners.");
+    }
+   } catch (InfException ex){
+            System.out.println(ex.getMessage());
+    }
+    }
+    
         public void hamtaAvdelningsData (){
         try{
-        String fraga = ("Select avdelning.namn, beskrivning, avdelning.adress, avdelning.epost, avdelning.telefon, concat(fornamn, ' ', efternamn) as chef from avdelning join stad on avdelning.stad = sid join anstalld on chef = aid");
+        String fraga = ("Select avdelning.avdid, avdelning.namn, beskrivning, avdelning.adress, avdelning.epost, avdelning.telefon, avdelning.stad, concat(fornamn, ' ', efternamn) as chef from avdelning join stad on avdelning.stad = sid join anstalld on chef = aid");
         avdelningsUppgifter = idb.fetchRows(fraga);
         }
         catch (InfException ex){
@@ -130,15 +183,104 @@ ArrayList<HashMap<String, String>> avdelningsUppgifter = new ArrayList<>();
         model1.setRowCount(0);
         for(HashMap<String, String> avdelning : avdelningsUppgifter){
             String[] data = new String [model1.getColumnCount()];
-            data[0] = avdelning.get("namn");
-            data[1] = avdelning.get("beskrivning");
-            data[2] = avdelning.get("adress");
-            data[3] = avdelning.get("epost");
-            data[4] = avdelning.get("telefon");
-            data[5] = avdelning.get("chef");
+            data[0] = avdelning.get("avdid");
+            data[1] = avdelning.get("namn");
+            data[2] = avdelning.get("beskrivning");
+            data[3] = avdelning.get("adress");
+            data[4] = avdelning.get("epost");
+            data[5] = avdelning.get("telefon");
+            data[6] = avdelning.get("stad");
+            data[7] = avdelning.get("chef");
             model1.addRow(data);
         }
      }
+        
+        public void laggTillAvdelning() {
+    try {
+        String avdid = JOptionPane.showInputDialog(null, "Ange avdelningens id:");
+        String namn = JOptionPane.showInputDialog(null, "Ange avdelningens namn:");
+        String beskrivning = JOptionPane.showInputDialog(null, "Ange avdelningens beskrivning:");
+        String adress = JOptionPane.showInputDialog(null, "Ange avdelningens adress:");
+        String epost = JOptionPane.showInputDialog(null, "Ange avdelningens e-post:");
+        String telefon = JOptionPane.showInputDialog(null, "Ange avdelningens telefonnummer:");
+        String stad = JOptionPane.showInputDialog(null, "Ange stadens id:");
+        String chef = JOptionPane.showInputDialog(null, "Ange chefens id:");
+
+        if (ValideringsKlass.valideraAvdelning(avdid, namn, beskrivning, adress, epost, telefon, stad, chef)) {
+            if(ValideringsKlass.chefExisterar(chef, idb)&& ValideringsKlass.stadExisterar(stad, idb)){
+            String sql = "INSERT INTO avdelning (avdid, namn, beskrivning, adress, epost, telefon, stad, chef) VALUES ('"
+                + avdid + "', '" + namn + "', '" + beskrivning + "', '" + adress + "', '" + epost + "', '"
+                + telefon + "', '" + stad + "', '" + chef + "')";
+            idb.insert(sql);
+            JOptionPane.showMessageDialog(null, "Avdelningen har lagts till i databasen!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Chefens ID existerar inte i tabellen anstalld.");
+        }
+    } 
+}catch (InfException ex) {
+        JOptionPane.showMessageDialog(null, "Ett fel inträffade: " + ex.getMessage());
+    }
+}
+        
+public void redigeraAvdelning() {
+    try {
+        String avdid = JOptionPane.showInputDialog(null, "Ange avdelnings-ID för den avdelning du vill redigera:");
+        if (!ValideringsKlass.finnsAVDID(idb, avdid)) {
+            JOptionPane.showMessageDialog(null, "Avdelnings-ID: " + avdid + " finns inte i databasen.");
+            return;
+        }
+
+        int val = JOptionPane.showOptionDialog(
+            null,
+            "Vilken information vill du redigera?",
+            "Redigera Avdelning",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            new String[]{"Namn", "Beskrivning", "Adress", "Epost", "Telefon", "Stad", "Chef"},
+            "Namn"
+        );
+
+        String[] kolumner = {"namn", "beskrivning", "adress", "epost", "telefon", "stad", "chef"};
+        String nyttVarde = JOptionPane.showInputDialog(null, "Ange nytt värde för " + kolumner[val] + ":");
+        if (nyttVarde == null || nyttVarde.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Inget värde angavs. Försök igen.");
+            return;
+        }
+
+        if (kolumner[val].equals("stad")) {
+            if (!ValideringsKlass.stadExisterar(nyttVarde, idb)) {
+                String stadSQL = "update stad set sid  = '" + nyttVarde + "'";
+            idb.update(stadSQL);
+            String sql = "update avdelning set " + kolumner[val] + " = '" + nyttVarde + "' where avdid = '" + avdid + "'";
+            idb.update(sql);
+                return;
+            }
+        } 
+        
+        if (kolumner[val].equals("chef")) {
+            if (!ValideringsKlass.chefExisterar(nyttVarde, idb)) {
+               String chefSQL = "update anstalld set aid  = '" + nyttVarde + "'";
+            idb.update(chefSQL);
+            String sql = "update avdelning set " + kolumner[val] + " = '" + nyttVarde + "' where avdid = '" + avdid + "'";
+            idb.update(sql);
+                return;
+            }
+        }
+
+        String sql = "UPDATE avdelning SET " + kolumner[val] + " = '" + nyttVarde + "' WHERE avdid = '" + avdid + "'";
+        idb.update(sql);
+        JOptionPane.showMessageDialog(null, "Uppdateringen lyckades.");
+    } catch (InfException ex) {
+        JOptionPane.showMessageDialog(null, "Ett fel inträffade: " + ex.getMessage());
+    }
+}
+        
+        
+        
+        
+       
+        
     /**
      * @param args the command line arguments
      */
@@ -179,5 +321,7 @@ ArrayList<HashMap<String, String>> avdelningsUppgifter = new ArrayList<>();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jTillbakaKnapp;
+    private javax.swing.JButton laggaTillKnapp;
+    private javax.swing.JButton redigeraKnapp;
     // End of variables declaration//GEN-END:variables
 }
