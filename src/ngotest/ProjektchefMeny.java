@@ -48,6 +48,8 @@ ArrayList<HashMap<String, String>> ProjektChefUppgifter = new ArrayList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         ProjektchefTabell = new javax.swing.JTable();
         RedigeraKnapp = new javax.swing.JButton();
+        HandlaggareKnapp = new javax.swing.JButton();
+        PartnersKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,14 +114,24 @@ ArrayList<HashMap<String, String>> ProjektChefUppgifter = new ArrayList<>();
             }
         });
 
+        HandlaggareKnapp.setText("Lägg till eller ta bort Handläggare");
+
+        PartnersKnapp.setText("Lägg till eller ta bort partners");
+        PartnersKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PartnersKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTillbakaKnapp)
@@ -133,11 +145,16 @@ ArrayList<HashMap<String, String>> ProjektChefUppgifter = new ArrayList<>();
                                     .addComponent(AvgKostnadRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(LägstKostnadRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(HögstKostnadRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
+                        .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RedigeraKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(RedigeraKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(HandlaggareKnapp)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(PartnersKnapp)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +177,10 @@ ArrayList<HashMap<String, String>> ProjektChefUppgifter = new ArrayList<>();
                             .addComponent(jLabel4)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RedigeraKnapp)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RedigeraKnapp)
+                    .addComponent(HandlaggareKnapp)
+                    .addComponent(PartnersKnapp))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(jTillbakaKnapp)
                 .addContainerGap())
@@ -179,6 +199,12 @@ ArrayList<HashMap<String, String>> ProjektChefUppgifter = new ArrayList<>();
         setVisible(false);
         new AndraProjektSomChefRuta(idb, aid).setVisible(true);
     }//GEN-LAST:event_RedigeraKnappActionPerformed
+
+    private void PartnersKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PartnersKnappActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new LaggTillEllerBortPartner(idb, aid).setVisible(true);
+    }//GEN-LAST:event_PartnersKnappActionPerformed
 
     private void fyllStatistik()
     {
@@ -265,8 +291,10 @@ ArrayList<HashMap<String, String>> ProjektChefUppgifter = new ArrayList<>();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AvgKostnadRuta;
+    private javax.swing.JButton HandlaggareKnapp;
     private javax.swing.JTextField HögstKostnadRuta;
     private javax.swing.JTextField LägstKostnadRuta;
+    private javax.swing.JButton PartnersKnapp;
     private javax.swing.JTable ProjektchefTabell;
     private javax.swing.JButton RedigeraKnapp;
     private javax.swing.JLabel jLabel1;
