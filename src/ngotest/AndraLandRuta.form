@@ -28,11 +28,14 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jHjalpRuta" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jValAvAndring" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jInmatningsFalt" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jHjalpRuta" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jTillbakaKnapp" min="-2" max="-2" attributes="0"/>
@@ -46,7 +49,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jIdRuta" min="-2" pref="73" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="226" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -118,7 +121,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jHjalpRuta">
       <Properties>
-        <Property name="text" type="java.lang.String" value="F&#xf6;rnamnet m&#xe5;ste b&#xf6;rja p&#xe5; en stor bokstav och f&#xe5;r inte inneh&#xe5;lla n&#xe5;gra specialtecken eller nummer."/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="text" type="java.lang.String" value="Namnet m&#xe5;ste b&#xf6;rja p&#xe5; en stor bokstav och f&#xe5;r inte inneh&#xe5;lla n&#xe5;gra specialtecken eller nummer."/>
+        <Property name="horizontalTextPosition" type="int" value="10"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jIdRuta">
