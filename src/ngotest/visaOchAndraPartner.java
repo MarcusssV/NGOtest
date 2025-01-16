@@ -9,6 +9,7 @@ import oru.inf.InfException;
 import java.util.HashMap;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -82,13 +83,21 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
 
     try {
         String pid = JOptionPane.showInputDialog(this, "Ange partnerns id:");
+            if(ValideringsKlass.idKontroll(new JTextField(pid))){
         String namn = JOptionPane.showInputDialog(this, "Ange partnerns namn:");
+            if(ValideringsKlass.namnKontroll(new JTextField(namn))){
         String kontaktperson = JOptionPane.showInputDialog(this, "Ange partnerns kontaktperson:");
+        
         String kontaktepost = JOptionPane.showInputDialog(this, "Ange partnerns kontaktepost:");
+            if(ValideringsKlass.emailKontroll(new JTextField(kontaktepost))){
         String telefon = JOptionPane.showInputDialog(this, "Ange partnerns telefonnummer:");
+            if(ValideringsKlass.telefonnummerKontroll(new JTextField(telefon))){
         String adress = JOptionPane.showInputDialog(this, "Ange partnerns adress:");
+            if(ValideringsKlass.adressKontroll(new JTextField(adress))){
         String branch = JOptionPane.showInputDialog(this, "Ange partnerns branch:");
+        
         String stad = JOptionPane.showInputDialog(this, "Ange partnerns stad:");
+            if(ValideringsKlass.idKontroll((new JTextField(stad)))){
 
         if (ValideringsKlass.valideraPartner(pid, namn, kontaktperson, kontaktepost, telefon, adress, branch, stad)) {
             String sql = "INSERT INTO partner (pid, namn, kontaktperson, kontaktepost, telefon, adress, branch, stad) VALUES ('"
@@ -97,6 +106,12 @@ public class visaOchAndraPartner extends javax.swing.JFrame {
             idb.insert(sql);
             JOptionPane.showMessageDialog(this, "Partnern har lagts till i databasen!");
         }
+            }
+            }
+            }
+            }
+            }
+            }
     } catch (InfException ex) {
         JOptionPane.showMessageDialog(this, "Ett fel inträffade: " + ex.getMessage());
     }

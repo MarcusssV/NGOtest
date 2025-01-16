@@ -63,7 +63,10 @@ public class AndraLandRuta extends javax.swing.JFrame {
             }
         });
 
-        jHjalpRuta.setText("Förnamnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
+        jHjalpRuta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jHjalpRuta.setText("Namnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
+        jHjalpRuta.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jHjalpRuta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jLabel1.setText("ID för land");
 
@@ -76,11 +79,13 @@ public class AndraLandRuta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jHjalpRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jValAvAndring, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jInmatningsFalt))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jHjalpRuta)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTillbakaKnapp)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -90,7 +95,7 @@ public class AndraLandRuta extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jIdRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 226, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -119,25 +124,31 @@ public class AndraLandRuta extends javax.swing.JFrame {
 
     private void jValAvAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jValAvAndringActionPerformed
 
-                //String alternativ = jValAvAndring.getSelectedItem().toString();
-        //if(alternativ.equals("Förnamn")){
-            //jHjalpRuta.setText("Förnamnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
-        //}
-        //if(alternativ.equals("Efternamn")){
-            //jHjalpRuta.setText("Efteramnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
-        //}
-        //if(alternativ.equals("Adress")){
-            //jHjalpRuta.setText("Adressen måste skrivas på följande sätt: 123 text text, text | 123 text | text 123. Måste även börja på stor bokstav.");
-        //}
-        //if(alternativ.equals("Telefon Nmr")){
-        //    jHjalpRuta.setText("Telefonnumret måste skrivas på följande sätt: XXX-XXX-XXXX. Notera att bindesträcken måste vara med.");
-        //}
-        //if(alternativ.equals("Epost")){
-        //    jHjalpRuta.setText("Eposten måste innehålla ett @ och en domän.com (kan vara se, com, co.uk. ru mm). ");
-        //}
-        //if(alternativ.equals("Lösenord")){
-        //    jHjalpRuta.setText("Lösenordet har inga krav.");
-        //}
+        String alternativ = jValAvAndring.getSelectedItem().toString();
+        if(alternativ.equals("Namn")){
+            jHjalpRuta.setText("Namnet måste börja på en stor bokstav och får inte innehålla några specialtecken eller nummer.");
+        }
+        if(alternativ.equals("Sprak")){
+            jHjalpRuta.setText("<html>Första bokstaven ska vara en stor bokstav.<br>" +
+                                " Resten av ordet ska bestå av bokstäver (kan vara både stora och små).<br>" +
+                                " Det får inte finnas några siffror, symboler eller mellanslag.<br>" +
+                                " Språknamnet måste vara minst en bokstav långt och får inte vara tomt.<html>");
+        }
+        if(alternativ.equals("Valuta")){
+            jHjalpRuta.setText("<html>Heltal: Skriv ett heltal med en eller flera siffror, t.ex. 100, 2500.<br>" +
+                                "Decimaler: Om du använder decimaler, skriv en punkt följd av 1 till 4 siffror, t.ex. 100.99 eller 5.1234.<br>" +
+                                "Valfri decimaldel: Det är valfritt att använda decimaler, så 500 utan punkt är också giltigt.<hmtl>");
+        }
+        if(alternativ.equals("Politisk Struktur")){
+            jHjalpRuta.setText("<html>Börja med ordet \"Politisk Struktur\".<br>" +
+                                "Följ med ett mellanslag.<br>" +
+                                "Avsluta med ett tal (en eller flera siffror).<html>");
+        }
+        if(alternativ.equals("Ekonomi")){
+            jHjalpRuta.setText("<html>Börja med ordet \"Ekonomi\".<br>" +
+                                "Följ med ett mellanslag.<br>" +
+                                "Avsluta med ett tal (en eller flera siffror).<html>");
+        }
     }//GEN-LAST:event_jValAvAndringActionPerformed
 
     private void jTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTillbakaKnappActionPerformed
