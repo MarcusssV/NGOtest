@@ -641,7 +641,7 @@ public static boolean finnsPID(InfDB idb, String pid){
                     String AID = idb.fetchSingle(Fraga);
                     if (AID == null){
                         resultat = false;
-                        JOptionPane.showMessageDialog(null, "Detta projekt har ingen handläggares med detta ID!");
+                        JOptionPane.showMessageDialog(null, "Detta projekt har ingen handläggare med detta ID!");
                         
                     }
                     
